@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Buddy Ai Wingman</string>
+	<string>SparkdAI</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>buddy_ai_wingman</string>
+	<string>sparkd</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -21,9 +21,30 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<string>15</string>
+	<key>GIDClientID</key>
+	<string>168772655786-nlrshdq8ihg9u80vo0d9aig9nb9p19sp.apps.googleusercontent.com</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.168772655786-nlrshdq8ihg9u80vo0d9aig9nb9p19sp</string>
+			</array>
+		</dict>
+	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Buddy requires access to the camera to allow users to take and upload profile photos. This access is only used to enable image uploads within the app.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Buddy requires access to your photo library to allow users to upload photos from their gallery for their profile or within the app. This is only used for facilitating image uploads.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Buddy requires access to your Apple Music to provide a personalized music experience within the app. This access is used solely for enhancing your app experience and is not shared or stored.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Buddy would like to use Face ID for secure authentication, ensuring that only you can access your account. This data is not stored or shared.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -41,9 +62,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>ASAuthorizationAppleID</key>
+	<array>
+		<string>com.app.buddy</string>
+	</array>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 </dict>
 </plist>
