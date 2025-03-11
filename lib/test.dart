@@ -4,10 +4,8 @@ import 'dart:io';
 import 'package:buddy_ai_wingman/api_repository/loading.dart';
 import 'package:buddy_ai_wingman/core/constants/helper.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:sizer/sizer.dart';
 
 
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
