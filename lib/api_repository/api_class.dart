@@ -50,7 +50,7 @@ class HttpUtil {
   static String filePath = "filePath";
   static String messageId = "message_id";
   static String isManually = "is_manually";
-  static String isSparkDLine = "is_sparkd_line";
+  static String isbuddy_ai_wingmanLine = "is_buddy_ai_wingman_line";
   static const String previousSuggestions = "previous_suggestions";
   static const String giftFor = "gift_for";
   static const String partnershipStage = "partnership_stage";
