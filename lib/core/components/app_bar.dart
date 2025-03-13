@@ -46,8 +46,8 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-class SparkdAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SparkdAppBar({
+class buddy_ai_wingmanAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const buddy_ai_wingmanAppBar({
     super.key,
     this.title,
     this.backgroundColor,
@@ -82,8 +82,8 @@ class SparkdAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-class SparkdAppBarBeforePayment extends StatelessWidget implements PreferredSizeWidget {
-  const SparkdAppBarBeforePayment({
+class buddy_ai_wingmanAppBarBeforePayment extends StatelessWidget implements PreferredSizeWidget {
+  const buddy_ai_wingmanAppBarBeforePayment({
     super.key,
     this.title,
     this.backgroundColor,
