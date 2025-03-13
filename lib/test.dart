@@ -59,7 +59,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final Set<String> _productIds = {'com.app.sparkd.premium.monthly'};
+  final Set<String> _productIds = {'com.app.buddy_ai_wingman.premium.monthly'};
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 
   @override
