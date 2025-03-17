@@ -1,0 +1,4 @@
+enum ChatResponse {
+  good,
+  neutral,
+}
