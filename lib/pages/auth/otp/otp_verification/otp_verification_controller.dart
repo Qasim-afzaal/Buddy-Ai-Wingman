@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:buddy_ai_wingman/api_repository/api_class.dart';
 import 'package:buddy_ai_wingman/api_repository/api_function.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/main.dart';
 import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
 
 import '../../../../models/error_response.dart';
@@ -13,8 +11,6 @@ import '../../../../models/error_response.dart';
 class OtpVerificationController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final PaymentPlanController _paymentPlanController =
-      getPaymentPlanController();
   String? selectedGender;
   String? selectedAgeRange;
   String? selectedPersonality;
