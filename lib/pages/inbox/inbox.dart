@@ -102,7 +102,6 @@ class InboxPage extends StatelessWidget {
 
 class _Container extends StatelessWidget {
   const _Container({
-    super.key,
     required this.mainData,
     required this.index,
   });
@@ -178,7 +177,6 @@ class _Container extends StatelessWidget {
 
 class _InboxType extends StatelessWidget {
   const _InboxType({
-    super.key,
     required this.type,
     this.selectedType,
     required this.onTap,
