@@ -51,7 +51,7 @@ class ChatController extends GetxController {
         HttpUtil.personalityType: personalityType,
       };
       Map chatmsg = {
-        "name": "${HttpUtil.email ?? ""} Manual Chat chat  list getting"
+        "name": "${HttpUtil.email} Manual Chat chat  list getting"
       };
       Constants.socket!.emit("logEvent", chatmsg);
       printAction(
