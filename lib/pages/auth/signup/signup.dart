@@ -9,7 +9,6 @@ import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/pages/auth/signup/signup_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
-import 'package:buddy_ai_wingman/widgets/custom_rich_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -68,7 +67,6 @@ class SignupPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   SB.h(25),
                   CustomTextField(
                     controller: controller.userNameController,
@@ -95,9 +93,6 @@ class SignupPage extends StatelessWidget {
                   CustomButton(
                     buttonText: "Sign in",
                     onTap: () async {
-                         
-
-
                       // Check connectivity status before proceeding
                       var connectivityResult =
                           await Connectivity().checkConnectivity();
@@ -107,7 +102,7 @@ class SignupPage extends StatelessWidget {
 
                       if (connectivityResult != ConnectivityResult.none) {
                         // If internet is available, proceed with the API call
-                      await  controller.emailVerification();
+                        await controller.emailVerification();
                       } else {
                         // No internet connection, show snackbar and stop further execution
                         Get.snackbar(
@@ -119,34 +114,7 @@ class SignupPage extends StatelessWidget {
                       }
                     },
                   ),
-
-                  // AppButton.primary(
-                  //   title: AppStrings.signUp,
-                  //   onPressed: () async {
-                  //     // Check connectivity status before proceeding
-                  //     var connectivityResult =
-                  //         await Connectivity().checkConnectivity();
-
-                  //     // Print the result for debugging
-                  //     print('Connectivity Result: $connectivityResult');
-
-                  //     if (connectivityResult != ConnectivityResult.none) {
-                  //       // If internet is available, proceed with the API call
-                  //       controller.emailVerifi();
-                  //     } else {
-                  //       // No internet connection, show snackbar and stop further execution
-                  //       Get.snackbar(
-                  //         "No Internet",
-                  //         "Please check your internet connection and try again.",
-                  //         snackPosition: SnackPosition.BOTTOM,
-                  //       );
-                  //       return; // Prevent the API call by returning here
-                  //     }
-                  //   },
-                  // ),
-
                   SB.h(context.height * 0.03),
-
                   Row(
                     children: [
                       const Expanded(child: Divider()),
@@ -166,89 +134,12 @@ class SignupPage extends StatelessWidget {
                     ],
                   ),
                   SB.h(12),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     AppButton.borderIcon(
-                  //       onTap: () async {
-                  //         // Check connectivity status before proceeding
-                  //         var connectivityResult =
-                  //             await Connectivity().checkConnectivity();
-
-                  //         // Print the result for debugging
-                  //         print('Connectivity Result: $connectivityResult');
-
-                  //         if (connectivityResult != ConnectivityResult.none) {
-                  //           // If internet is available, proceed with Google login
-                  //           controller.loginWithGoogle(context);
-                  //         } else {
-                  //           // No internet connection, show snackbar and stop further execution
-                  //           Get.snackbar(
-                  //             "No Internet",
-                  //             "Please check your internet connection and try again.",
-                  //             snackPosition: SnackPosition.BOTTOM,
-                  //           );
-                  //           return; // Prevent the API call by returning here
-                  //         }
-                  //       },
-                  //       icon: Assets.icons.google.svg(),
-                  //     ),
-                  //     if (Platform.isIOS) ...[
-                  //       SB.w(15),
-                  //       AppButton.borderIcon(
-                  //         onTap: () async {
-                  //           // Check connectivity status before proceeding
-                  //           var connectivityResult =
-                  //               await Connectivity().checkConnectivity();
-
-                  //           // Print the result for debugging
-                  //           print('Connectivity Result: $connectivityResult');
-
-                  //           if (connectivityResult != ConnectivityResult.none) {
-                  //             // If internet is available, proceed with the Apple sign-in
-                  //             controller.signInWithApple(context);
-                  //           } else {
-                  //             // No internet connection, show snackbar and stop further execution
-                  //             Get.snackbar(
-                  //               "No Internet",
-                  //               "Please check your internet connection and try again.",
-                  //               snackPosition: SnackPosition.BOTTOM,
-                  //             );
-                  //             return; // Prevent the API call by returning here
-                  //           }
-                  //         },
-                  //         icon: Assets.icons.apple.svg(),
-                  //       ),
-                  //     ]
-                  //   ],
-                  // ),
-
                   Row(
                     children: [
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                               Get.offNamed(Routes.PAYMENT_PLAN);
-
-                            // // Check connectivity status before proceeding
-                            // var connectivityResult =
-                            //     await Connectivity().checkConnectivity();
-
-                            // // Print the result for debugging
-                            // print('Connectivity Result: $connectivityResult');
-
-                            // if (connectivityResult != ConnectivityResult.none) {
-                            //   // If internet is available, proceed with Google login
-                            //   controller.loginWithGoogle(context);
-                            // } else {
-                            //   // No internet connection, show snackbar and stop further execution
-                            //   Get.snackbar(
-                            //     "No Internet",
-                            //     "Please check your internet connection and try again.",
-                            //     snackPosition: SnackPosition.BOTTOM,
-                            //   );
-                            //   return; // Prevent the API call by returning here
-                            // }
+                            Get.offNamed(Routes.PAYMENT_PLAN);
                           },
                           child: Container(
                             alignment: Alignment.center,
@@ -286,27 +177,7 @@ class SignupPage extends StatelessWidget {
                         Expanded(
                           child: GestureDetector(
                             onTap: () async {
-                               Get.offNamed(Routes.PAYMENT_PLAN);
-                              // // Check connectivity status before proceeding
-                              // var connectivityResult =
-                              //     await Connectivity().checkConnectivity();
-
-                              // // Print the result for debugging
-                              // print('Connectivity Result: $connectivityResult');
-
-                              // if (connectivityResult !=
-                              //     ConnectivityResult.none) {
-                              //   // If internet is available, proceed with the signInWithApple method
-                              //   controller.signInWithApple(context);
-                              // } else {
-                              //   // No internet connection, show snackbar and stop further execution
-                              //   Get.snackbar(
-                              //     "No Internet",
-                              //     "Please check your internet connection and try again.",
-                              //     snackPosition: SnackPosition.BOTTOM,
-                              //   );
-                              //   return; // Prevent the method call by returning here
-                              // }
+                              Get.offNamed(Routes.PAYMENT_PLAN);
                             },
                             child: Container(
                               height: 50,
@@ -344,14 +215,7 @@ class SignupPage extends StatelessWidget {
                       Get.offNamed(Routes.LOGIN);
                     },
                   ),
-
                   SB.h(context.height * 0.05),
-                  // CustomRichText(
-                  //   text: AppStrings.alreadyHaveAccount,
-                  //   highlightedText: AppStrings.login,
-                  //   onTap: controller.onLogin,
-                  // ),
-                  // SB.h(context.height * 0.05),
                 ],
               ).paddingAll(context.paddingDefault),
             ),
