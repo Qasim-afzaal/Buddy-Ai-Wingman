@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
-import 'package:buddy_ai_wingman/core/components/custom_button.dart';
 import 'package:buddy_ai_wingman/core/components/custom_button2.dart';
 import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
@@ -10,7 +7,6 @@ import 'package:buddy_ai_wingman/pages/home/home_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
 import 'package:buddy_ai_wingman/widgets/lines_widget.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,8 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  bool _hasReviewed = false;
-  int _appUsageTime = 0;
   bool _isDisposed = false;
 
   String? imagePath;
@@ -41,18 +35,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _checkIfAlreadyReviewed() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (!_isDisposed) {
       setState(() {
-        _hasReviewed = prefs.getBool('hasReviewed') ?? false;
       });
     }
   }
 
-  Future<void> _setHasReviewed() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('hasReviewed', true);
-  }
 
 
 
