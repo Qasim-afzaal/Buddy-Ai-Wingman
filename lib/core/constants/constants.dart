@@ -1,7 +1,7 @@
-import 'package:buddy_ai_wingman/core/constants/get_storage.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import 'package:buddy_ai_wingman/core/constants/get_storage.dart';
+import 'package:buddy_ai_wingman/core/constants/helper.dart';
 
 GetStorageData getStorageData = GetStorageData();
 Utils utils = Utils();
@@ -9,7 +9,7 @@ Utils utils = Utils();
 class Constants {
   /// Socket
   static IO.Socket? socket;
-  static const String socketBaseUrl = "";
+  static const String socketBaseUrl = "http://18.190.30.218:3004/";
 
   /// Socket emit event
   static const String sendMessage = 'sendMessage';
@@ -25,7 +25,7 @@ class Constants {
   static const String error = 'Error';
 
   /// API
-  static const String baseUrl = '';
+  static const String baseUrl = 'http://3.92.114.189:3005/api/';
 
   /// Users API end point
   static const String signUp = 'users/register';
@@ -43,10 +43,10 @@ class Constants {
   /// Chat API end point
   static const String withFile = 'chat/with-file';
   static const String uploadFile = 'chat/upload-file';
-  static const String buddy_ai_wingmanLines = 'chat/buddy_ai_wingman-lines';
+  static const String sparkdLines = 'chat/sparkd-lines';
   static const String archiveChat = 'chat/archive-chat';
   static const String chatList = 'chat/chat-list/';
   static const String deleteSingle = 'chat/single/';
   static const String clearAll = 'chat/clear-all';
-    static const String deleteUser = 'users/';
+  static const String deleteUser = 'users/';
 }
