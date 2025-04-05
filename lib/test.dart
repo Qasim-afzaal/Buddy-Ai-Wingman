@@ -1,25 +1,24 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:buddy_ai_wingman/api_repository/loading.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-
+import 'package:buddy/api_repository/loading.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Loading();
   Utils.screenPortrait();
-  runApp( MyApp());
+  runApp(MyApp());
 }
+
 /*
 
 class MyApp extends StatelessWidget {
@@ -52,22 +51,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final Set<String> _productIds = {'com.app.buddy_ai_wingman.premium.monthly'};
+  final Set<String> _productIds = {'com.app.sparkd.premium.monthly'};
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 
   @override
   void initState() {
     super.initState();
     _initiatePurchaseStream();
-
-
   }
 
   @override
@@ -78,14 +74,15 @@ class _HomePageState extends State<HomePage> {
 
   void _initiatePurchaseStream() {
     final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-    final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
+    final Stream<List<PurchaseDetails>> purchaseUpdated =
+        _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen(
-          (purchaseDetailsList) {
-            print("listern $purchaseDetailsList");
+      (purchaseDetailsList) {
+        print("listern $purchaseDetailsList");
         _handlePurchaseUpdates(purchaseDetailsList);
       },
-      onDone:() {
-    print("Stream done");
+      onDone: () {
+        print("Stream done");
       },
       onError: (error) {
         print("Stream error: $error");
@@ -105,25 +102,30 @@ class _HomePageState extends State<HomePage> {
       }
 
       if (Platform.isIOS) {
-        var iosPlatformAddition = _inAppPurchase.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+        var iosPlatformAddition = _inAppPurchase
+            .getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
         await iosPlatformAddition.setDelegate(ExamplePaymentQueueDelegate());
       }
 
-      ProductDetailsResponse productDetailResponse = await _inAppPurchase.queryProductDetails(_productIds);
+      ProductDetailsResponse productDetailResponse =
+          await _inAppPurchase.queryProductDetails(_productIds);
       if (productDetailResponse.error != null) {
-        _showErrorDialog("Product Query Error: ${productDetailResponse.error!.message}");
+        _showErrorDialog(
+            "Product Query Error: ${productDetailResponse.error!.message}");
         return;
       } else if (productDetailResponse.productDetails.isEmpty) {
         _showErrorDialog("Product not Found");
         return;
       }
 
-      final ProductDetails productDetails = productDetailResponse.productDetails[0];
+      final ProductDetails productDetails =
+          productDetailResponse.productDetails[0];
       final PurchaseParam purchaseParam = Platform.isIOS
           ? PurchaseParam(productDetails: productDetails)
           : GooglePlayPurchaseParam(productDetails: productDetails);
 
-      bool purchaseSuccess = await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      bool purchaseSuccess =
+          await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       if (purchaseSuccess) {
         print("Purchase initiated successfully");
       } else {
@@ -133,7 +135,6 @@ class _HomePageState extends State<HomePage> {
       _showErrorDialog("Payment Failed: ${e.toString()}");
     }
   }
-
 
   void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) async {
     for (var purchaseDetails in purchaseDetailsList) {
@@ -163,6 +164,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
   }
+
   Future<void> clearTransactionsIos() async {
     if (Platform.isIOS) {
       final transactions = await SKPaymentQueueWrapper().transactions();
@@ -171,6 +173,7 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
     // Implement your purchase verification logic here
     return true; // For demo purposes, we assume the purchase is always valid
@@ -238,7 +241,8 @@ class _HomePageState extends State<HomePage> {
 
 class ExamplePaymentQueueDelegate implements SKPaymentQueueDelegateWrapper {
   @override
-  bool shouldContinueTransaction(SKPaymentTransactionWrapper transaction, SKStorefrontWrapper storefront) {
+  bool shouldContinueTransaction(
+      SKPaymentTransactionWrapper transaction, SKStorefrontWrapper storefront) {
     return true;
   }
 
