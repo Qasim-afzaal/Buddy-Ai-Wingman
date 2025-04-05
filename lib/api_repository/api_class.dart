@@ -1,15 +1,14 @@
 import 'dart:async';
 
-import 'package:buddy_ai_wingman/api_repository/loading.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
-import '../core/constants/helper.dart';
-
+import 'package:buddy_ai_wingman/api_repository/loading.dart';
+import 'package:buddy_ai_wingman/core/constants/constants.dart';
+import 'package:buddy_ai_wingman/core/constants/helper.dart';
 
 class HttpUtil {
   // Body params name ->
@@ -50,7 +49,7 @@ class HttpUtil {
   static String filePath = "filePath";
   static String messageId = "message_id";
   static String isManually = "is_manually";
-  static String isbuddy_ai_wingmanLine = "is_buddy_ai_wingman_line";
+  static String isSparkDLine = "is_sparkd_line";
   static const String previousSuggestions = "previous_suggestions";
   static const String giftFor = "gift_for";
   static const String partnershipStage = "partnership_stage";
