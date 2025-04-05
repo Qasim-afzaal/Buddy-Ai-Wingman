@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy_ai_wingman/gen/assets.gen.dart';
 
 mixin SocialSignIn {
   Widget socialButton(BuildContext context) => Row(
