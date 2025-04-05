@@ -4,7 +4,7 @@ class AppStrings {
   static const String accountInformation = "Account Information";
   static const String add = "Add";
   static const String addUser = "Add user";
-  static const String appName = "buddy_ai_wingman";
+  static const String appName = "SparkD";
   static const String alreadyHaveAccount = "Are you already a member? ";
 
   static const String back = "Back";
@@ -24,7 +24,7 @@ class AppStrings {
   static const String createAccount = "Create Account";
   static const String createAccountDescription = "To save your information\nyou need to create an account";
   static const String date = "Date";
-  static const String infinitebuddy_ai_wingman = "Infinite buddy_ai_wingmanAI";
+  static const String infiniteSparkd = "Infinite SparkdAI";
   static const String delete = "Delete";
   static const String deleteChat = "Delete Chat";
   static const String deleteChatDescription = "Are you sure you want to delete this chat?";
@@ -33,7 +33,7 @@ class AppStrings {
 
   static const String email = "Email";
   static const String tapToStop = "Tap to stop recording";
-  static const String everythingSetup = "Everything is set up,\nLet’s start a buddy_ai_wingman!";
+  static const String everythingSetup = "Everything is set up,\nLet’s start a sparkd!";
   static const String forgotPassword = "Forgot Password";
   static const String fullName = "Full Name";
 
@@ -54,7 +54,7 @@ class AppStrings {
 
   static const String usePin = "Use PIN";
   static const String touchTheFingerPrint = "Touch the fingerprint sensor";
-  static const String loginTobuddy_ai_wingman = "Login to buddy_ai_wingman";
+  static const String loginToSparkd = "Login to Sparkd";
   static const String confirmYourIdentity = "Confirm your identity";
 
   static const String notMember = "Not a member yet?";
@@ -67,11 +67,11 @@ class AppStrings {
   static const String pinCreated = "PIN created";
   static const String pinCreatedSuccess = "PIN created successfully";
   static const String paymentConfirmation = "We received\nyour payment!";
-  static const String paymentConfirmationDescription = "Let’s start your buddy_ai_wingman!";
+  static const String paymentConfirmationDescription = "Let’s start your sparkd!";
   static const String confirmPassword = "Confirm password";
   static const String selectDate = "Select Date";
   static const String knowThePerson = "Let me get to know the person";
-  static const String knowThePersonDescription = "To start your buddy_ai_wingman\nwe need more information";
+  static const String knowThePersonDescription = "To start your sparkd\nwe need more information";
   static const String signUp = "Sign up";
   static const String signUpDescription = "Fill in details to sign up";
   static const String submit = "Submit";
@@ -118,10 +118,10 @@ class AppStrings {
   static const String yourPersonalityHeading = 'What is your\npersonality type?';
 
   static const String or = 'or';
-  static const String startAbuddy_ai_wingman = 'Start a buddy_ai_wingman';
-  static const String getbuddy_ai_wingmanLines = 'Pickup Line';
-  static const String buddy_ai_wingmanLines = 'buddy_ai_wingman lines';
-  static const String letstartAbuddy_ai_wingman = "Lets Start!";
+  static const String startASparkd = 'Start a sparkd';
+  static const String getSparkdLines = 'Pickup Line';
+  static const String sparkdLines = 'Sparkd lines';
+  static const String letstartASparkd = "Lets Start!";
 
   static const String enterManually = "Manual Text";
 
@@ -130,13 +130,13 @@ class AppStrings {
   static const String createNewPin = "Create a new PIN";
   static const String backToHome = "Back to home";
   static const String bioAuth = "Biometric Authentication";
-  static const String bioAuthDescription = "Login to your buddy_ai_wingmans using your phone’s biometric credentials";
+  static const String bioAuthDescription = "Login to your sparkds using your phone’s biometric credentials";
   static const String bioAuthSetup = "Biometric Authentication\nis now set up";
   static const String bioAuthSetupDescription = "Turn off anytime from settings";
   static const String enableBio = "Enable Biometrics";
   static const String enableBioLogin = "Enable biometric login";
   static const String useBiometricVerification = "Use Biometric";
-  static const String getMybuddy_ai_wingman = "Create Chat";
+  static const String getMySparkd = "Create Chat";
   static const String name = "Name";
   static const String enterYourText = "Enter your text";
   static const String enterYourPin = "Enter your pin";
