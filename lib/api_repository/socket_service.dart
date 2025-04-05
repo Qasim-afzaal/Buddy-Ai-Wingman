@@ -1,11 +1,13 @@
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:get/get.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import 'package:buddy_ai_wingman/core/constants/constants.dart';
+import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class SocketService extends GetxService {
   late IO.Socket socket;
-  final String serverUrl = Constants.socketBaseUrl; // Replace with your server's URL
+  final String serverUrl =
+      Constants.socketBaseUrl; // Replace with your server's URL
 
   @override
   Future<void> onInit() async {
@@ -16,13 +18,16 @@ class SocketService extends GetxService {
 
   void _initializeSocket() {
     // Set up socket options and connect
-    socket = IO.io(serverUrl, IO.OptionBuilder()
-        .setTransports(['websocket'])
-        .enableAutoConnect()
-        .enableReconnection() // Enable auto-reconnect
-        .setReconnectionAttempts(5) // Attempt to reconnect 5 times
-        .setReconnectionDelay(2000) // Wait 2 seconds between reconnect attempts
-        .build());
+    socket = IO.io(
+        serverUrl,
+        IO.OptionBuilder()
+            .setTransports(['websocket'])
+            .enableAutoConnect()
+            .enableReconnection() // Enable auto-reconnect
+            .setReconnectionAttempts(5) // Attempt to reconnect 5 times
+            .setReconnectionDelay(
+                2000) // Wait 2 seconds between reconnect attempts
+            .build());
 
     // Socket event listeners
     socket.onConnect((_) {
