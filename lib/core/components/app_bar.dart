@@ -1,10 +1,10 @@
-
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
 import 'package:buddy_ai_wingman/gen/assets.gen.dart';
 import 'package:buddy_ai_wingman/pages/profile/profile.dart';
 import 'package:buddy_ai_wingman/pages/profile_before_payment/profile_before_payment.dart';
 import 'package:buddy_ai_wingman/pages/settings/settings.dart';
+import 'package:buddy_ai_wingman/routes/app_pages.dart';
 
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SimpleAppBar({
@@ -35,10 +35,12 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(color: context.primary),
       actions: actions,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
-        color: Theme.of(context).primaryColor,
-        onPressed: onPressed ?? () => Get.back(),
-      ),
+          icon: Icon(Icons.arrow_back),
+          color: Theme.of(context).primaryColor,
+          onPressed: onPressed ??
+              () => Get.offNamed(
+                    Routes.HOME,
+                  )),
     );
   }
 
@@ -46,8 +48,8 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-class buddy_ai_wingmanAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const buddy_ai_wingmanAppBar({
+class SparkdAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const SparkdAppBar({
     super.key,
     this.title,
     this.backgroundColor,
@@ -67,12 +69,18 @@ class buddy_ai_wingmanAppBar extends StatelessWidget implements PreferredSizeWid
       centerTitle: true,
       iconTheme: IconThemeData(color: context.primary),
       leadingWidth: context.paddingDefault + 32,
-      leading: InkWell(onTap: () => Get.to(() => const SettingsPage()), child: Assets.icons.settings.svg().paddingOnly(left: context.paddingDefault)),
+      leading: InkWell(
+          onTap: () => Get.to(() => const SettingsPage()),
+          child: Assets.icons.settings
+              .svg()
+              .paddingOnly(left: context.paddingDefault)),
       actions: actions ??
           [
             InkWell(
               onTap: () => Get.to(() => const ProfilePage()),
-              child: Assets.icons.accountCircle.svg().paddingOnly(right: context.paddingDefault),
+              child: Assets.icons.accountCircle
+                  .svg()
+                  .paddingOnly(right: context.paddingDefault),
             ),
           ],
     );
@@ -82,8 +90,9 @@ class buddy_ai_wingmanAppBar extends StatelessWidget implements PreferredSizeWid
   Size get preferredSize => const Size.fromHeight(60);
 }
 
-class buddy_ai_wingmanAppBarBeforePayment extends StatelessWidget implements PreferredSizeWidget {
-  const buddy_ai_wingmanAppBarBeforePayment({
+class SparkdAppBarBeforePayment extends StatelessWidget
+    implements PreferredSizeWidget {
+  const SparkdAppBarBeforePayment({
     super.key,
     this.title,
     this.backgroundColor,
@@ -99,20 +108,28 @@ class buddy_ai_wingmanAppBarBeforePayment extends StatelessWidget implements Pre
     return AppBar(
       backgroundColor: backgroundColor,
       elevation: 0,
-      title: title == null ?   Image.asset(
-                        "assets/images/Logi.png",
-                        width: 80,
-                        height: 80,
-                      ) : null,
+      title: title == null
+          ? Image.asset(
+              "assets/images/Logi.png",
+              width: 80,
+              height: 80,
+            )
+          : null,
       centerTitle: true,
       iconTheme: IconThemeData(color: context.primary),
       leadingWidth: context.paddingDefault + 32,
-      leading: InkWell(onTap: () => Get.to(() => const SettingsPage()), child: Assets.icons.settings.svg().paddingOnly(left: context.paddingDefault)),
+      leading: InkWell(
+          onTap: () => Get.to(() => const SettingsPage()),
+          child: Assets.icons.settings
+              .svg()
+              .paddingOnly(left: context.paddingDefault)),
       actions: actions ??
           [
             InkWell(
               onTap: () => Get.to(() => const ProfilePageBeforePayment()),
-              child: Assets.icons.accountCircle.svg().paddingOnly(right: context.paddingDefault),
+              child: Assets.icons.accountCircle
+                  .svg()
+                  .paddingOnly(right: context.paddingDefault),
             ),
           ],
     );
