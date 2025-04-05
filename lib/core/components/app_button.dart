@@ -1,7 +1,7 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 
+import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
 
 const double _defaultButtonHeight = 49.0;
 
@@ -35,7 +35,7 @@ class AppButton extends StatelessWidget {
         super(key: key);
 
   AppButton.primary({
-    Key? key,
+    super.key,
     final double? height,
     final double? width,
     final double? elevation,
@@ -48,7 +48,7 @@ class AppButton extends StatelessWidget {
     final BoxConstraints? constraints,
     final BorderRadius? borderRadius,
     final String? title,
-  })  : _child = _PrimaryButton(
+  }) : _child = _PrimaryButton(
           height: height,
           width: width,
           elevation: elevation,
@@ -60,8 +60,7 @@ class AppButton extends StatelessWidget {
           borderRadius: borderRadius,
           title: title,
           child: child,
-        ),
-        super(key: key);
+        );
 
   AppButton.socialIcon({
     Key? key,
@@ -346,7 +345,7 @@ class _OutlineButton extends StatelessWidget {
       child: OutlinedButton(
         style: ButtonStyle(
           side: MaterialStateProperty.all(
-                  BorderSide(color: borderColor??context.primary, width: 1.5)),
+              BorderSide(color: borderColor ?? context.primary, width: 1.5)),
           padding: padding == null ? null : MaterialStateProperty.all(padding),
           elevation: MaterialStateProperty.all(elevation),
           backgroundColor: background == null
@@ -369,7 +368,8 @@ class _OutlineButton extends StatelessWidget {
                   child: Text(
                     title ?? '',
                     style: context.titleMedium?.copyWith(
-                        color: borderColor??context.primary, fontWeight: FontWeight.w700),
+                        color: borderColor ?? context.primary,
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
       ),
