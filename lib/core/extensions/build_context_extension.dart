@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
 
 extension BuildContextEntension<T> on BuildContext {
   bool get isMobile => MediaQuery.of(this).size.width <= 500.0;
 
-  bool get isTablet => MediaQuery.of(this).size.width < 1024.0 && MediaQuery.of(this).size.width >= 650.0;
+  bool get isTablet =>
+      MediaQuery.of(this).size.width < 1024.0 &&
+      MediaQuery.of(this).size.width >= 650.0;
 
-  bool get isSmallTablet => MediaQuery.of(this).size.width < 650.0 && MediaQuery.of(this).size.width > 500.0;
+  bool get isSmallTablet =>
+      MediaQuery.of(this).size.width < 650.0 &&
+      MediaQuery.of(this).size.width > 500.0;
 
   bool get isDesktop => MediaQuery.of(this).size.width >= 1024.0;
 
-  bool get isSmall => MediaQuery.of(this).size.width < 850.0 && MediaQuery.of(this).size.width >= 560.0;
+  bool get isSmall =>
+      MediaQuery.of(this).size.width < 850.0 &&
+      MediaQuery.of(this).size.width >= 560.0;
 
   double get width => MediaQuery.of(this).size.width;
 
@@ -48,13 +56,19 @@ extension BuildContextEntension<T> on BuildContext {
 
   TextStyle? get titleTextStyle => Theme.of(this).appBarTheme.titleTextStyle;
 
-  TextStyle? get bodyExtraSmall => bodySmall?.copyWith(fontSize: 10, height: 1.6, letterSpacing: .5);
+  TextStyle? get bodyExtraSmall =>
+      bodySmall?.copyWith(fontSize: 10, height: 1.6, letterSpacing: .5);
 
   TextStyle? get bodyLarge => Theme.of(this).textTheme.bodyLarge;
 
-  TextStyle? get dividerTextSmall => bodySmall?.copyWith(letterSpacing: 0.5, fontWeight: FontWeight.w700, fontSize: 12.0);
+  TextStyle? get dividerTextSmall => bodySmall?.copyWith(
+      letterSpacing: 0.5, fontWeight: FontWeight.w700, fontSize: 12.0);
 
-  TextStyle? get dividerTextLarge => bodySmall?.copyWith(letterSpacing: 1.5, fontWeight: FontWeight.w700, fontSize: 13.0, height: 1.23);
+  TextStyle? get dividerTextLarge => bodySmall?.copyWith(
+      letterSpacing: 1.5,
+      fontWeight: FontWeight.w700,
+      fontSize: 13.0,
+      height: 1.23);
 
   // colors
 
@@ -85,16 +99,21 @@ extension BuildContextEntension<T> on BuildContext {
   Color get scaffoldBackgroundColor => Theme.of(this).scaffoldBackgroundColor;
 
   // extensions
-  Gradient get vertical => Theme.of(this).extension<AppThemeExtension>()!.vertical;
+  Gradient get vertical =>
+      Theme.of(this).extension<AppThemeExtension>()!.vertical;
 
-  Gradient get horizontal => Theme.of(this).extension<AppThemeExtension>()!.horizontal;
+  Gradient get horizontal =>
+      Theme.of(this).extension<AppThemeExtension>()!.horizontal;
 
-  Color get extraLightGrey => Theme.of(this).extension<AppThemeExtension>()!.extraLightGrey;
+  Color get extraLightGrey =>
+      Theme.of(this).extension<AppThemeExtension>()!.extraLightGrey;
 
-  Color get lightGrey => Theme.of(this).extension<AppThemeExtension>()!.lightGrey;
+  Color get lightGrey =>
+      Theme.of(this).extension<AppThemeExtension>()!.lightGrey;
 
   Color get grey => Theme.of(this).extension<AppThemeExtension>()!.grey;
-  Color get chatBubbleColor => Theme.of(this).extension<AppThemeExtension>()!.chatBubbleColor;
+  Color get chatBubbleColor =>
+      Theme.of(this).extension<AppThemeExtension>()!.chatBubbleColor;
 
   Future<T?> showBottomSheet(
     Widget child, {
@@ -137,7 +156,8 @@ extension BuildContextEntension<T> on BuildContext {
 // }
 }
 
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(String message) {
+ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+    String message) {
   return ScaffoldMessenger.of(Get.context!).showSnackBar(
     SnackBar(
       content: Text(message),
