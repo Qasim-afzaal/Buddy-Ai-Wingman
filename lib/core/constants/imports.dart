@@ -3,7 +3,7 @@ export 'package:flutter/material.dart';
 export 'package:buddy_ai_wingman/core/constants/app_strings.dart';
 export 'package:buddy_ai_wingman/core/components/sb.dart';
 export 'package:buddy_ai_wingman/gen/assets.gen.dart';
-export 'package:buddy_ai_wingman/core/constants/app_strings.dart';
+
 export 'package:buddy_ai_wingman/core/components/app_button.dart';
 export 'package:buddy_ai_wingman/core/components/app_bar.dart';
 export 'package:buddy_ai_wingman/core/components/app_text_field.dart';
@@ -29,4 +29,3 @@ export 'package:flutter_svg/flutter_svg.dart';
 
 export 'package:buddy_ai_wingman/core/constants/constants.dart';
 export 'package:buddy_ai_wingman/pages/dashboard/dashboard.dart';
-
