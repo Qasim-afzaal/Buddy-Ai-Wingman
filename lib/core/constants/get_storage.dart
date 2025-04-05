@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
+import 'package:buddy_ai_wingman/routes/app_pages.dart';
 
 /// <<< To store data in phone storage --------- >>>
 class GetStorageData {
@@ -69,10 +70,12 @@ class GetStorageData {
     saveString(userName, value.data?.name);
     saveString(userEmailId, value.data?.email);
   }
- String? getUserId() {
+
+  String? getUserId() {
     final box = GetStorage();
     return box.read(userIdKey);
   }
+
   LoginResponse readLoginData() {
     if (containKey(loginData)) {
       final box = GetStorage();
