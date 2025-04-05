@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:buddy_ai_wingman/api_repository/api_class.dart';
+import 'package:buddy_ai_wingman/core/constants/constants.dart';
 
 import '../core/constants/imports.dart';
 
 class APIFunction {
-  
   Future<dynamic> apiCall({
     required String apiName,
     Object? withOutFormData,
@@ -66,7 +66,6 @@ class APIFunction {
     }
   }
 
-
   Future<dynamic> patchApiCall({
     required String apiName,
     FormData? data,
@@ -91,43 +90,43 @@ class APIFunction {
     }
   }
 
-Future<dynamic> sendPatchRequest(
-  dynamic requestData,
-  String port,
-  String url,
-  String? authToken,
-) async {
-  String apiUrl = Constants.baseUrl + port + url;
+  Future<dynamic> sendPatchRequest(
+    dynamic requestData,
+    String port,
+    String url,
+    String? authToken,
+  ) async {
+    String apiUrl = Constants.baseUrl + port + url;
 
-  try {
-    http.Response response = await http
-        .patch(
-          Uri.parse(apiUrl),
-          headers: authToken != null
-              ? {
-                  HttpHeaders.contentTypeHeader: 'application/json',
-                  HttpHeaders.authorizationHeader: "Bearer $authToken",
-                }
-              : {HttpHeaders.contentTypeHeader: 'application/json'},
-          body: json.encode(requestData),
-        )
-        .timeout(const Duration(seconds: 30));
+    try {
+      http.Response response = await http
+          .patch(
+            Uri.parse(apiUrl),
+            headers: authToken != null
+                ? {
+                    HttpHeaders.contentTypeHeader: 'application/json',
+                    HttpHeaders.authorizationHeader: "Bearer $authToken",
+                  }
+                : {HttpHeaders.contentTypeHeader: 'application/json'},
+            body: json.encode(requestData),
+          )
+          .timeout(const Duration(seconds: 30));
 
-    return json.decode(response.body);
-  } on TimeoutException {
-    return {
-      "statusCode": 500,
-      "message": "Request Timeout",
-    };
-  } catch (error) {
-    return {
-      "statusCode": 400,
-      "message": "No internet connection",
-    };
+      return json.decode(response.body);
+    } on TimeoutException {
+      return {
+        "statusCode": 500,
+        "message": "Request Timeout",
+      };
+    } catch (error) {
+      return {
+        "statusCode": 400,
+        "message": "No internet connection",
+      };
+    }
   }
-}
 
-   Future<dynamic> sendPostRequest(
+  Future<dynamic> sendPostRequest(
     dynamic requestData,
     String port,
     String url,
