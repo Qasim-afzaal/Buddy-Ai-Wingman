@@ -1,8 +1,9 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import 'package:buddy_ai_wingman/core/components/sb.dart';
 import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -32,6 +33,7 @@ class CustomTextField extends StatefulWidget {
     this.hintText,
     this.textInputAction,
     this.maxLength,
+    this.validator, // Added validator parameter
   });
 
   final String? title, hintText;
@@ -55,6 +57,7 @@ class CustomTextField extends StatefulWidget {
   final bool isRequiredField;
   final TextInputAction? textInputAction;
   final int? maxLength;
+  final FormFieldValidator<String>? validator; // New validator field
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -95,9 +98,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
         TextFormField(
           onTap: widget.onTap,
-          // style: context.bodyLarge?.copyWith(
-          //   color: context.primary,
-          // ),
           style: GoogleFonts.interTight(
               textStyle: const TextStyle(
             color: AppColors.blackColor,
@@ -120,6 +120,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           obscureText:
               widget.isPasswordField ? _hidePassword : widget.isPasswordField,
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: widget.validator, // Applied validator
           decoration: InputDecoration(
             prefixIcon: widget.prefixIcon,
             suffixIcon: widget.isPasswordField
