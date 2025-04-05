@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:buddy_ai_wingman/gen/assets.gen.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:buddy_ai_wingman/gen/assets.gen.dart';
 
 class AppImage extends StatelessWidget {
   final Widget _child;
