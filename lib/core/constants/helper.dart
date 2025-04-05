@@ -2,22 +2,25 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 // import 'package:media_picker_widget/media_picker_widget.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
+import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
+import 'package:buddy_ai_wingman/core/constants/constants.dart';
+import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class Utils {
   static const String languageCodeEn = 'en';
@@ -61,79 +64,77 @@ class Utils {
     }
   }
 
-
-
-
 // Function to request permissions
-Future<bool> requestPermissions() async {
-  if (Platform.isAndroid) {
-    PermissionStatus storageStatus = await Permission.storage.request();
-    return storageStatus.isGranted;
-  } else if (Platform.isIOS) {
-    PermissionStatus photosStatus = await Permission.photos.request();
-    return photosStatus.isGranted || photosStatus.isLimited;
+  Future<bool> requestPermissions() async {
+    if (Platform.isAndroid) {
+      PermissionStatus storageStatus = await Permission.storage.request();
+      return storageStatus.isGranted;
+    } else if (Platform.isIOS) {
+      PermissionStatus photosStatus = await Permission.photos.request();
+      return photosStatus.isGranted || photosStatus.isLimited;
+    }
+    return false;
   }
-  return false;
-}
 
 // Function to open image picker using wechat_assets_picker
-void openImagePicker(BuildContext context, {required void Function(List<String>) onPicked}) async {
-  // Check permissions
-  // bool permissionsGranted = await requestPermissions();
+  void openImagePicker(BuildContext context,
+      {required void Function(List<String>) onPicked}) async {
+    // Check permissions
+    // bool permissionsGranted = await requestPermissions();
 
-  // // If permissions are denied, notify the user and exit
-  // if (!permissionsGranted) {
-  //   showPermissionDeniedDialog(context);
-  //   return;
-  // }
+    // // If permissions are denied, notify the user and exit
+    // if (!permissionsGranted) {
+    //   showPermissionDeniedDialog(context);
+    //   return;
+    // }
 
-  // Pick assets using wechat_assets_picker package
-   List<AssetEntity>? result = await AssetPicker.pickAssets(
-        context,
-        pickerConfig: const AssetPickerConfig(
-          requestType: RequestType.all,
-          maxAssets: 1,
-        ),
-      );
+    // Pick assets using wechat_assets_picker package
+    List<AssetEntity>? result = await AssetPicker.pickAssets(
+      context,
+      pickerConfig: const AssetPickerConfig(
+        requestType: RequestType.all,
+        maxAssets: 1,
+      ),
+    );
 
-  // Convert AssetEntity to file path
-  if (result != null && result.isNotEmpty) {
-    List<String> paths = [];
-    for (var asset in result) {
-      final file = await asset.file;
-      if (file != null) {
-        paths.add(file.path);
+    // Convert AssetEntity to file path
+    if (result != null && result.isNotEmpty) {
+      List<String> paths = [];
+      for (var asset in result) {
+        final file = await asset.file;
+        if (file != null) {
+          paths.add(file.path);
+        }
       }
+      onPicked(paths);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No image selected.')),
+      );
     }
-    onPicked(paths);
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('No image selected.')),
+  }
+
+  void showPermissionDeniedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          content: const Text(
+            'Please allow SparkdAI to access your album in "Settings" > "Privacy" > "Photos".',
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
-}
-
-void showPermissionDeniedDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return CupertinoAlertDialog(
-        content: const Text(
-          'Please allow buddy_ai_wingmanAI to access your album in "Settings" > "Privacy" > "Photos".',
-          textAlign: TextAlign.center,
-        ),
-        actions: [
-          CupertinoDialogAction(
-            child: const Text("OK"),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
 /*  static forceUpdateDialogue({required String currentVersion}) {
     if (Platform.isIOS) {
       showDialog(
@@ -325,7 +326,8 @@ void showPermissionDeniedDialog(BuildContext context) {
 
   Future<ByteData> textToByteData(String text, {double fontSize = 20}) async {
     final recorder = ui.PictureRecorder();
-    final canvas = Canvas(recorder, Rect.fromPoints(const Offset(0.0, 0.0), const Offset(100.0, 100.0)));
+    final canvas = Canvas(recorder,
+        Rect.fromPoints(const Offset(0.0, 0.0), const Offset(100.0, 100.0)));
 
     final textPainter = TextPainter(
       text: TextSpan(
@@ -341,7 +343,8 @@ void showPermissionDeniedDialog(BuildContext context) {
     textPainter.paint(canvas, const Offset(0.0, 0.0));
 
     final picture = recorder.endRecording();
-    final img = await picture.toImage(100, 100); // Adjust width and height as needed
+    final img =
+        await picture.toImage(100, 100); // Adjust width and height as needed
     final byteData = await img.toByteData(format: ui.ImageByteFormat.png);
 
     return byteData!;
@@ -386,9 +389,12 @@ void showPermissionDeniedDialog(BuildContext context) {
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   static int currentSdk = 0;
@@ -454,18 +460,28 @@ void showPermissionDeniedDialog(BuildContext context) {
   //   return info;
   // }
 
-  flutterDatePicker({String? dateFormat, DateTime? initialTime, DateTime? firstDate, DateTime? lastDate}) async {
+  flutterDatePicker(
+      {String? dateFormat,
+      DateTime? initialTime,
+      DateTime? firstDate,
+      DateTime? lastDate}) async {
     print("initialTime ${initialTime}");
     DateTime? pickedDate = await showDatePicker(
       context: Get.context!,
       keyboardType: TextInputType.text,
-      initialDate: initialTime ?? DateTime(DateTime.now().year - 18, DateTime.now().month, DateTime.now().day - 1),
+      initialDate: initialTime ??
+          DateTime(DateTime.now().year - 18, DateTime.now().month,
+              DateTime.now().day - 1),
       // get today's date
       confirmText: (languageCodeDefault == "en") ? "OK" : "POTVRDI",
 
       firstDate: firstDate ?? DateTime(1900),
-      lastDate: lastDate ?? DateTime(DateTime.now().year - 18, DateTime.now().month, DateTime.now().day - 1),
-      locale: Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null),
+      lastDate: lastDate ??
+          DateTime(DateTime.now().year - 18, DateTime.now().month,
+              DateTime.now().day - 1),
+      locale: Locale.fromSubtags(
+          languageCode: languageCodeDefault,
+          scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
@@ -486,18 +502,31 @@ void showPermissionDeniedDialog(BuildContext context) {
     );
     String? formattedDate;
     if (pickedDate != null) {
-      formattedDate = DateFormat(dateFormat ?? "yyyy-MM-dd", Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString()).format(pickedDate);
+      formattedDate = DateFormat(
+              dateFormat ?? "yyyy-MM-dd",
+              Locale.fromSubtags(
+                      languageCode: languageCodeDefault,
+                      scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+                  .toString())
+          .format(pickedDate);
     }
     return formattedDate;
   }
 
-  String convertLocalToUtc(String? inputDateTime, String? inputDateFormat, String? outputDateFormat) {
+  String convertLocalToUtc(String? inputDateTime, String? inputDateFormat,
+      String? outputDateFormat) {
     if (!utils.isValidationEmpty(
       inputDateTime,
     )) {
       inputDateTime = concatenateSec(inputDateTime);
       // Parse the UTC datetime string
-      final utcDateTime = DateFormat(inputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString()).parse(inputDateTime);
+      final utcDateTime = DateFormat(
+              inputDateFormat,
+              Locale.fromSubtags(
+                      languageCode: languageCodeDefault,
+                      scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+                  .toString())
+          .parse(inputDateTime);
 
       // Convert to local timezone
       final localDateTime = utcDateTime.toUtc();
@@ -518,7 +547,8 @@ void showPermissionDeniedDialog(BuildContext context) {
     if (!utils.isValidationEmpty(DateTime.now().toString())) {
       // inputDateTime = concatenateSec(DateTime.now().toString());
       // Parse the UTC datetime string
-      final utcDateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(concatenateSec(DateTime.now().toString()));
+      final utcDateTime = DateFormat("yyyy-MM-dd HH:mm:ss")
+          .parse(concatenateSec(DateTime.now().toString()));
 
       // Convert to local timezone
       final localDateTime = utcDateTime.toUtc();
@@ -541,11 +571,18 @@ void showPermissionDeniedDialog(BuildContext context) {
     return inputDateTime;
   }
 
-  String convertUtcToLocal(String? inputDateTime, String? inputDateFormat, String? outputDateFormat) {
+  String convertUtcToLocal(String? inputDateTime, String? inputDateFormat,
+      String? outputDateFormat) {
     if (!utils.isValidationEmpty(inputDateTime)) {
       printAction("test_convertUtcToLocal: inputDateTime ${inputDateTime}");
 
-      final utcDateTime = DateFormat(inputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString()).parseUtc(
+      final utcDateTime = DateFormat(
+              inputDateFormat,
+              Locale.fromSubtags(
+                      languageCode: languageCodeDefault,
+                      scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+                  .toString())
+          .parseUtc(
         inputDateTime!,
       );
 
@@ -553,9 +590,15 @@ void showPermissionDeniedDialog(BuildContext context) {
       final localDateTime = utcDateTime.toLocal();
 
       // Format the local datetime string
-      final formatter = DateFormat(outputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString());
+      final formatter = DateFormat(
+          outputDateFormat,
+          Locale.fromSubtags(
+                  languageCode: languageCodeDefault,
+                  scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+              .toString());
       final localDateTimeString = formatter.format(localDateTime);
-      printAction("test_convertUtcToLocal: localDateTimeString: $localDateTimeString");
+      printAction(
+          "test_convertUtcToLocal: localDateTimeString: $localDateTimeString");
       return localDateTimeString;
     } else {
       return "";
@@ -577,13 +620,16 @@ void showPermissionDeniedDialog(BuildContext context) {
     final int daysInMilli = hoursInMilli * 24;
 
     final int elapsedDays = difference.inMilliseconds ~/ daysInMilli;
-    difference = Duration(milliseconds: difference.inMilliseconds % daysInMilli);
+    difference =
+        Duration(milliseconds: difference.inMilliseconds % daysInMilli);
 
     final int elapsedHours = difference.inMilliseconds ~/ hoursInMilli;
-    difference = Duration(milliseconds: difference.inMilliseconds % hoursInMilli);
+    difference =
+        Duration(milliseconds: difference.inMilliseconds % hoursInMilli);
 
     final int elapsedMinutes = difference.inMilliseconds ~/ minutesInMilli;
-    difference = Duration(milliseconds: difference.inMilliseconds % minutesInMilli);
+    difference =
+        Duration(milliseconds: difference.inMilliseconds % minutesInMilli);
 
     final int elapsedSeconds = difference.inMilliseconds ~/ secondsInMilli;
 
@@ -595,9 +641,11 @@ void showPermissionDeniedDialog(BuildContext context) {
       }
     } else if (elapsedDays >= 7) {
       if (elapsedDays > 360) {
-        convTime = customDateTimeFormat(endDate.toString(), "yyyy-MM-dd HH:mm:ss", "dd MMM yyyy");
+        convTime = customDateTimeFormat(
+            endDate.toString(), "yyyy-MM-dd HH:mm:ss", "dd MMM yyyy");
       } else if (elapsedDays > 30) {
-        convTime = customDateTimeFormat(endDate.toString(), "yyyy-MM-dd HH:mm:ss", "dd MMM yyyy");
+        convTime = customDateTimeFormat(
+            endDate.toString(), "yyyy-MM-dd HH:mm:ss", "dd MMM yyyy");
         // convTime = '${elapsedDays ~/ 30} Mo ago'; // month
       } else {
         convTime = '${elapsedDays ~/ 7} Wk ago'; // week
@@ -618,10 +666,16 @@ void showPermissionDeniedDialog(BuildContext context) {
     return convTime;
   }
 
-  DateTime getDateTimeFromCustomDateTimeFormat(String? inputDateTime, String? inputDateFormat) {
+  DateTime getDateTimeFromCustomDateTimeFormat(
+      String? inputDateTime, String? inputDateFormat) {
     printAction("test_inputDateTime: $inputDateTime");
     if (!isValidationEmpty(inputDateTime)) {
-      var inputFormat = DateFormat(inputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString());
+      var inputFormat = DateFormat(
+          inputDateFormat,
+          Locale.fromSubtags(
+                  languageCode: languageCodeDefault,
+                  scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+              .toString());
       var inputDate = inputFormat.parse(inputDateTime!);
       printAction("test_inputDate: $inputDate");
 
@@ -631,13 +685,24 @@ void showPermissionDeniedDialog(BuildContext context) {
     }
   }
 
-  String customDateTimeFormat(String? inputDateTime, String? inputDateFormat, String? outputDateFormat) {
+  String customDateTimeFormat(String? inputDateTime, String? inputDateFormat,
+      String? outputDateFormat) {
     if (!isValidationEmpty(inputDateTime)) {
-      var inputFormat = DateFormat(inputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString());
+      var inputFormat = DateFormat(
+          inputDateFormat,
+          Locale.fromSubtags(
+                  languageCode: languageCodeDefault,
+                  scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+              .toString());
       var inputDate = inputFormat.parse(inputDateTime!);
       printAction("test_inputDate: $inputDate");
 
-      var outputFormat = DateFormat(outputDateFormat, Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null).toString());
+      var outputFormat = DateFormat(
+          outputDateFormat,
+          Locale.fromSubtags(
+                  languageCode: languageCodeDefault,
+                  scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null)
+              .toString());
       var outputDate = outputFormat.format(inputDate);
       printAction("test_outputDate: $outputDate");
 
@@ -649,8 +714,10 @@ void showPermissionDeniedDialog(BuildContext context) {
 
   String formatTimeOfDay(TimeOfDay timeOfDay, Locale locale) {
     final now = DateTime.now();
-    final dateTime = DateTime(now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
-    DateFormat dateFormat = DateFormat.Hm(locale.toString()); // "Hm" for Hour:Minute format
+    final dateTime = DateTime(
+        now.year, now.month, now.day, timeOfDay.hour, timeOfDay.minute);
+    DateFormat dateFormat =
+        DateFormat.Hm(locale.toString()); // "Hm" for Hour:Minute format
     return dateFormat.format(dateTime);
   }
 
@@ -676,9 +743,12 @@ void showPermissionDeniedDialog(BuildContext context) {
           ),
           child: Localizations.override(
             context: context,
-            locale: Locale.fromSubtags(languageCode: languageCodeDefault, scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null),
+            locale: Locale.fromSubtags(
+                languageCode: languageCodeDefault,
+                scriptCode: (languageCodeDefault == 'sr') ? 'Latn' : null),
             child: MediaQuery(
-              data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+              data:
+                  MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
               child: child!,
             ),
           ),
@@ -688,8 +758,10 @@ void showPermissionDeniedDialog(BuildContext context) {
 
     if (pickedTime != null) {
       final now = DateTime.now();
-      final dateTime = DateTime(now.year, now.month, now.day, pickedTime.hour, pickedTime.minute);
-      return DateFormat(languageCodeDefault == 'sr' ? "HH:mm" : "hh:mm aa").format(dateTime);
+      final dateTime = DateTime(
+          now.year, now.month, now.day, pickedTime.hour, pickedTime.minute);
+      return DateFormat(languageCodeDefault == 'sr' ? "HH:mm" : "hh:mm aa")
+          .format(dateTime);
     } else {
       print("Time is not selected");
       return null;
@@ -700,8 +772,10 @@ void showPermissionDeniedDialog(BuildContext context) {
   static void lightStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppColors.transparent,
-      statusBarIconBrightness: (Platform.isAndroid) ? Brightness.dark : Brightness.light,
-      statusBarBrightness: (Platform.isAndroid) ? Brightness.dark : Brightness.light,
+      statusBarIconBrightness:
+          (Platform.isAndroid) ? Brightness.dark : Brightness.light,
+      statusBarBrightness:
+          (Platform.isAndroid) ? Brightness.dark : Brightness.light,
       systemNavigationBarColor: AppColors.white,
       systemNavigationBarDividerColor: AppColors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
@@ -747,7 +821,8 @@ void showPermissionDeniedDialog(BuildContext context) {
 
   /// <<< To check email valid or not --------- >>>
   bool emailValidator(String email) {
-    String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
     RegExp regExp = RegExp(p);
     if (regExp.hasMatch(email)) {
       return true;
@@ -777,7 +852,11 @@ void showPermissionDeniedDialog(BuildContext context) {
 
   /// <<< To check data, string, list, object are empty or not --------- >>>
   bool isValidationEmpty(String? val) {
-    if (val == null || val.isEmpty || val == "null" || val == "" || val == "NULL") {
+    if (val == null ||
+        val.isEmpty ||
+        val == "null" ||
+        val == "" ||
+        val == "NULL") {
       return true;
     } else {
       return false;
@@ -845,14 +924,16 @@ void showPermissionDeniedDialog(BuildContext context) {
     String month = DateFormat.M().format(DateTime.now().toUtc());
     String day = DateFormat.d().format(DateTime.now().toUtc());
     String time = DateFormat.Hm().format(DateTime.now().toUtc());
-    String timeDate = '${DateFormat.y().format(DateTime.now().toUtc())}-${month.length == 1 ? '0$month' : month}-${day.length == 1 ? '0$day' : day} $time';
+    String timeDate =
+        '${DateFormat.y().format(DateTime.now().toUtc())}-${month.length == 1 ? '0$month' : month}-${day.length == 1 ? '0$day' : day} $time';
     return timeDate;
   }
 
   /// <<< To get current date --------- >>>
   String currentDate(String outputFormat) {
     var now = DateTime.now().toUtc();
-    var formatter = DateFormat(outputFormat); // OutPutFormat =  ('yMd' = 6/25/2022),('dd/MM/yyyy' = 25/06/2022),('MM/dd/yyyy' = 06/25/2022)
+    var formatter = DateFormat(
+        outputFormat); // OutPutFormat =  ('yMd' = 6/25/2022),('dd/MM/yyyy' = 25/06/2022),('MM/dd/yyyy' = 06/25/2022)
     String formattedDate = formatter.format(now);
 
     return formattedDate;
@@ -887,13 +968,16 @@ void showPermissionDeniedDialog(BuildContext context) {
   /// Time Ago Since Date --------- >>>
   String timeAgoSinceDate(String dateString, {bool numericDates = true}) {
     DateTime dateUtc = DateTime.parse(dateString);
-    var dateTime = DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateUtc.toString(), true);
+    var dateTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(dateUtc.toString(), true);
     DateTime date = dateTime.toLocal();
     final date2 = DateTime.now();
     final difference = date2.difference(date);
 
     if ((difference.inDays / 365).floor() >= 2) {
-      return (numericDates) ? '${(difference.inDays / 365).floor()} Y' : '${(difference.inDays / 365).floor()} Years ago';
+      return (numericDates)
+          ? '${(difference.inDays / 365).floor()} Y'
+          : '${(difference.inDays / 365).floor()} Years ago';
     } else if ((difference.inDays / 365).floor() >= 1) {
       return (numericDates) ? '1 Y' : 'Last year';
     } else if ((difference.inDays / 30).floor() >= 2) {
@@ -901,11 +985,15 @@ void showPermissionDeniedDialog(BuildContext context) {
     } else if ((difference.inDays / 30).floor() >= 1) {
       return (numericDates) ? '1 M' : 'Last Month';
     } else if ((difference.inDays / 7).floor() >= 2) {
-      return (numericDates) ? '${(difference.inDays / 7).floor()} w' : '${(difference.inDays / 7).floor()} Weeks ago';
+      return (numericDates)
+          ? '${(difference.inDays / 7).floor()} w'
+          : '${(difference.inDays / 7).floor()} Weeks ago';
     } else if ((difference.inDays / 7).floor() >= 1) {
       return (numericDates) ? '1 w' : 'Last week';
     } else if (difference.inDays >= 2) {
-      return (numericDates) ? '${difference.inDays} d' : '${difference.inDays} Days ago';
+      return (numericDates)
+          ? '${difference.inDays} d'
+          : '${difference.inDays} Days ago';
     } else if (difference.inDays >= 1) {
       return (numericDates) ? '1 d' : 'Yesterday';
     } else if (difference.inHours >= 2) {
@@ -962,7 +1050,10 @@ void showPermissionDeniedDialog(BuildContext context) {
     var diff = date.difference(now);
     var time = '';
 
-    if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
+    if (diff.inSeconds <= 0 ||
+        diff.inSeconds > 0 && diff.inMinutes == 0 ||
+        diff.inMinutes > 0 && diff.inHours == 0 ||
+        diff.inHours > 0 && diff.inDays == 0) {
       time = format.format(date);
     } else {
       if (diff.inDays == 1) {
