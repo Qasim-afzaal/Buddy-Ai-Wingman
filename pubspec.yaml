@@ -61,6 +61,7 @@ dependencies:
   connectivity_plus: ^2.3.0
   in_app_purchase: ^3.2.0
   image_picker: ^0.8.6
+  flutter_markdown: ^0.7.7
 
 dev_dependencies:
   build_runner: null
