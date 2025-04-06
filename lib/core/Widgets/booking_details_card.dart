@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
+
 import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
 import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import '../Utils/assets_util.dart';
 
+import '../Utils/assets_util.dart';
 
 class BookingDetailsCard extends StatelessWidget {
   final String bookingNumber;
@@ -11,18 +11,24 @@ class BookingDetailsCard extends StatelessWidget {
   final String startDate;
   final String endDate;
   final String renter;
-  const BookingDetailsCard({super.key, required this.bookingNumber, required this.carName, required this.startDate, required this.endDate, required this.renter});
+  const BookingDetailsCard(
+      {super.key,
+      required this.bookingNumber,
+      required this.carName,
+      required this.startDate,
+      required this.endDate,
+      required this.renter});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
           color: AppColors.whiteColor,
-          border:const Border(
-              bottom: BorderSide(
-            color: AppColors.fieldBackgroundColor,
-            width: 2,
-          ),
+          border: const Border(
+            bottom: BorderSide(
+              color: AppColors.fieldBackgroundColor,
+              width: 2,
+            ),
             left: BorderSide(
               color: AppColors.fieldBackgroundColor,
               width: 2,
@@ -36,8 +42,7 @@ class BookingDetailsCard extends StatelessWidget {
               width: 6,
             ),
           ),
-        borderRadius: BorderRadius.circular(10)
-      ),
+          borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
         child: Column(
@@ -58,30 +63,36 @@ class BookingDetailsCard extends StatelessWidget {
                 ),
               ],
             ),
-
-            const SizedBox(height: 10,),
-
+            const SizedBox(
+              height: 10,
+            ),
             Column(
               children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(startDate, style: bodyTextStyle(size: 10, color: AppColors.grayColor),),
-                  Text(endDate, style: bodyTextStyle(size: 10, color: AppColors.grayColor),),
-                ],
-              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      startDate,
+                      style:
+                          bodyTextStyle(size: 10, color: AppColors.grayColor),
+                    ),
+                    Text(
+                      endDate,
+                      style:
+                          bodyTextStyle(size: 10, color: AppColors.grayColor),
+                    ),
+                  ],
+                ),
                 Slider.adaptive(
-                  activeColor: AppColors.blackColor,
-                  inactiveColor: AppColors.fieldBackgroundColor,
-                  allowedInteraction: SliderInteraction.slideOnly,
+                    activeColor: AppColors.blackColor,
+                    inactiveColor: AppColors.fieldBackgroundColor,
+                    allowedInteraction: SliderInteraction.slideOnly,
                     min: 1,
                     max: 3,
-                    value: 2, onChanged: (newValue){}
-                )
+                    value: 2,
+                    onChanged: (newValue) {})
               ],
             ),
-
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -106,7 +117,8 @@ class BookingDetailsCard extends StatelessWidget {
                   width: 26,
                   child: IconButton.filledTonal(
                       onPressed: () {},
-                      style: IconButton.styleFrom(backgroundColor: AppColors.blackColor),
+                      style: IconButton.styleFrom(
+                          backgroundColor: AppColors.blackColor),
                       icon: const Icon(
                         Icons.arrow_forward_ios_outlined,
                         color: AppColors.whiteColor,
@@ -121,4 +133,3 @@ class BookingDetailsCard extends StatelessWidget {
     );
   }
 }
-
