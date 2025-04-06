@@ -1,5 +1,6 @@
-import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
 import 'package:flutter/material.dart';
+
+import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
 
 abstract class AppTheme {
   MaterialColor get primarySwatch;
