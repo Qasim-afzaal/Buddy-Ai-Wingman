@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:buddy_ai_wingman/core/Utils/assets_util.dart';
 import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
 import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
@@ -10,6 +11,7 @@ import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 import '../../../api_repository/api_class.dart';
 import '../../../routes/app_pages.dart';
+
 import 'login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -25,7 +27,9 @@ class LoginPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,7 +75,7 @@ class LoginPage extends StatelessWidget {
                   CustomTextField(
                     controller: controller.emailController,
                     // title: AppStrings.email,
-                    prefixIcon:Icon(Icons.email) ,
+                    prefixIcon: Icon(Icons.email),
                     hintText: AppStrings.enterEmail,
                     keyboardType: TextInputType.emailAddress,
                     textCapitalization: TextCapitalization.none,
@@ -79,7 +83,7 @@ class LoginPage extends StatelessWidget {
                   CustomTextField(
                     controller: controller.passwordController,
                     // title: AppStrings.password,
-                      prefixIcon:Icon(Icons.password) ,
+                    prefixIcon: Icon(Icons.password),
                     hintText: AppStrings.enterPassword,
                     textInputAction: TextInputAction.done,
                     isPasswordField: true,
@@ -128,22 +132,24 @@ class LoginPage extends StatelessWidget {
                     },
                   ),
                   SB.h(context.height * 0.03),
-                 Row(
-                            children: [
-                              const Expanded(child: Divider()),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                "OR CONTINUE WITH",
-                                style: GoogleFonts.interTight(textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 10)),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              const Expanded(child: Divider()),
-                            ],
-                          ),
+                  Row(
+                    children: [
+                      const Expanded(child: Divider()),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "OR CONTINUE WITH",
+                        style: GoogleFonts.interTight(
+                            textStyle: const TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 10)),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      const Expanded(child: Divider()),
+                    ],
+                  ),
                   SB.h(12),
                   Row(
                     children: [
@@ -254,7 +260,7 @@ class LoginPage extends StatelessWidget {
                       ]
                     ],
                   ),
-                    SB.h(context.height * 0.1),
+                  SB.h(context.height * 0.1),
                   TextButton(
                     child: Text("Don’t have an account?",
                         style: headingTextStyle(
