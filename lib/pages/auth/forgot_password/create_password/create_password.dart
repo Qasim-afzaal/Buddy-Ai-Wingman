@@ -1,4 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:buddy_ai_wingman/core/components/custom_button.dart';
 import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
@@ -88,7 +89,9 @@ class CreatePasswordPage extends StatelessWidget {
                                 // onTap: () {
                                 //   Get.offNamed(Routes.PAYMENT_PLAN);
                                 // },
-                                onTap: () => controller.isForgetPin ? controller.changePin : controller.changePassword,
+                                onTap: () => controller.isForgetPin
+                                    ? controller.changePin
+                                    : controller.changePassword,
                                 buttonText: 'Done',
                                 backGroundColor: AppColors.blackColor,
                                 textColor: AppColors.whiteColor,
