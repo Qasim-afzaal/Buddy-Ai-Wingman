@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import 'package:buddy_ai_wingman/pages/auth/login/login_controller.dart';
 
 import '../../payment/payment_plan/payment_plan_controller.dart';
