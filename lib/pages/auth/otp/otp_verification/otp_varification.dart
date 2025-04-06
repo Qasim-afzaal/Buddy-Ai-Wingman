@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
 import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
 import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/pages/auth/otp/otp_verification/otp_verification_controller.dart';
