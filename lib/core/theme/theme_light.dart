@@ -1,8 +1,8 @@
+// import 'package:sparkd/gen/fonts.gen.dart';
+import 'package:flutter/material.dart';
+
 import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
 import 'package:buddy_ai_wingman/core/theme/app_theme.dart';
-
-// import 'package:buddy_ai_wingman/gen/fonts.gen.dart';
-import 'package:flutter/material.dart';
 
 class ThemeLight extends AppTheme {
   ThemeData get theme => ThemeData(
@@ -47,27 +47,24 @@ class ThemeLight extends AppTheme {
   Color get errorColor => Colors.red;
 
   @override
-  TextTheme get textTheme => const TextTheme(
-
-  );
+  TextTheme get textTheme => const TextTheme();
 
   @override
   AppThemeExtension get extension => AppThemeExtension(
-        extraLightGrey: Colors.grey.withOpacity(0.3),
-        lightGrey: Colors.grey.withOpacity(0.7),
-        vertical: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [primary, secondary],
-        ),
-        horizontal: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [primary, secondary],
-        ),
-        grey: grey,
-    chatBubbleColor: chatBubbleColor
-      );
+      extraLightGrey: Colors.grey.withOpacity(0.3),
+      lightGrey: Colors.grey.withOpacity(0.7),
+      vertical: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [primary, secondary],
+      ),
+      horizontal: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [primary, secondary],
+      ),
+      grey: grey,
+      chatBubbleColor: chatBubbleColor);
 
   @override
   MaterialColor createMaterialColor(Color color) {
