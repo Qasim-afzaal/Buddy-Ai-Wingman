@@ -1,16 +1,20 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/main.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
+import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../../models/error_response.dart';
 
 class OtpVerificationController extends GetxController {
   TextEditingController otpController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final PaymentPlanController _paymentPlanController =
+      getPaymentPlanController();
   String? selectedGender;
   String? selectedAgeRange;
   String? selectedPersonality;
@@ -38,16 +42,16 @@ class OtpVerificationController extends GetxController {
   void handleNavigation() {
     print("i am here");
     // _paymentPlanController.isUserSubscribedToProduct((p0) {
-      // if (p0 == true) {
-        // if (mainModel!.data!.isProfileComplete == false) {
-        //   Get.offNamed(Routes.ON_BOARDING);
-        // } else {
-          print("i am in dahsboatd");
-          Get.offNamed(Routes.HOME);
-        // }
-      // } else {
-      //   Get.offNamed(Routes.PAYMENT_PLAN);
-      // }
+    // if (p0 == true) {
+    // if (mainModel!.data!.isProfileComplete == false) {
+    //   Get.offNamed(Routes.ON_BOARDING);
+    // } else {
+    print("i am in dahsboatd");
+    Get.offNamed(Routes.HOME);
+    // }
+    // } else {
+    //   Get.offNamed(Routes.PAYMENT_PLAN);
+    // }
     // });
   }
 
@@ -66,7 +70,7 @@ class OtpVerificationController extends GetxController {
 
   Future<void> onSignup() async {
     var json = {
-      HttpUtil.firstName: firstName,
+      HttpUtil.name: firstName,
       HttpUtil.authProvider: authprovider,
       HttpUtil.email: email,
       HttpUtil.password: password,
@@ -74,7 +78,7 @@ class OtpVerificationController extends GetxController {
       HttpUtil.profileImageUrl: "",
     };
     final data = await APIFunction().apiCall(
-      apiName: "users/create-user",
+      apiName: "users/register",
       // apiName: Constants.signUp,
       withOutFormData: jsonEncode(json),
     );
@@ -89,7 +93,7 @@ class OtpVerificationController extends GetxController {
         //   getStorageData.saveLoginData(mainModel!);
         //   handleNavigation();
         // } else {
-          utils.showToast(message: mainModel!.message!);
+        utils.showToast(message: mainModel!.message!);
         // }
       }
     } catch (e) {
