@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:buddy_ai_wingman/core/Widgets/detail_page_tracking_circle.dart';
 
 class DetailPageTrackingList extends StatelessWidget {
@@ -12,21 +12,35 @@ class DetailPageTrackingList extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DetailPageTrackingCircle(isActive: pageNumber == 1 ? true : false, isCompleted: pageNumber > 1 ? true : false, circleText: "1", label: "Company\nDetails"),
-        Expanded(child: Padding(
+        DetailPageTrackingCircle(
+            isActive: pageNumber == 1 ? true : false,
+            isCompleted: pageNumber > 1 ? true : false,
+            circleText: "1",
+            label: "Company\nDetails"),
+        Expanded(
+            child: Padding(
           padding: const EdgeInsets.only(top: 15.0),
           child: Divider(
             color: pageNumber > 1 ? Colors.black : null,
           ),
         )),
-        DetailPageTrackingCircle(isActive: pageNumber == 2 ? true : false, isCompleted: pageNumber >  2 ? true : false, circleText: "2", label: "Banking &\nPayments"),
-        Expanded(child: Padding(
+        DetailPageTrackingCircle(
+            isActive: pageNumber == 2 ? true : false,
+            isCompleted: pageNumber > 2 ? true : false,
+            circleText: "2",
+            label: "Banking &\nPayments"),
+        Expanded(
+            child: Padding(
           padding: const EdgeInsets.only(top: 15.0),
           child: Divider(
             color: pageNumber > 2 ? Colors.black : null,
           ),
         )),
-        DetailPageTrackingCircle(isActive: pageNumber == 3 ? true : false, isCompleted: pageNumber == 3 ? false : false, circleText: "3", label: "Know Your\nCompany"),
+        DetailPageTrackingCircle(
+            isActive: pageNumber == 3 ? true : false,
+            isCompleted: pageNumber == 3 ? false : false,
+            circleText: "3",
+            label: "Know Your\nCompany"),
       ],
     );
   }
