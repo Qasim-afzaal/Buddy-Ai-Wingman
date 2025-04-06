@@ -16,7 +16,9 @@ class PinVerificationPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Assets.icons.logoBlack.svg().paddingSymmetric(vertical: context.paddingDefault),
+                  Assets.icons.logoBlack
+                      .svg()
+                      .paddingSymmetric(vertical: context.paddingDefault),
                   Text(
                     "${AppStrings.welcomeBack}\n ${getStorageData.readString(getStorageData.userName)}",
                     textAlign: TextAlign.center,
@@ -98,7 +100,7 @@ class _BiometricWidget extends StatelessWidget {
           children: [
             SB.h(10),
             Text(
-              AppStrings.loginTobuddy_ai_wingman,
+              AppStrings.loginToSparkd,
               style: context.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
