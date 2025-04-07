@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy/core/Utils/assets_util.dart';
-import 'package:buddy/core/Utils/custom_text_styles.dart';
-import 'package:buddy/core/Widgets/custom_button.dart';
-import 'package:buddy/core/constants/app_colors.dart';
-import 'package:buddy/core/constants/imports.dart';
-import 'package:buddy/pages/auth/signup/signup_controller.dart';
-import 'package:buddy/routes/app_pages.dart';
-import 'package:buddy/widgets/custom_rich_text.dart';
+import 'package:buddy_ai_wingman/core/Utils/assets_util.dart';
+import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
+import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
+import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
+import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy_ai_wingman/pages/auth/signup/signup_controller.dart';
+import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy_ai_wingman/widgets/custom_rich_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
