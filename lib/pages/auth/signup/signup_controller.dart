@@ -5,16 +5,18 @@ import 'package:flutter/material.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:buddy_ai_wingman/core/constants/app_globals.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/app_strings.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_controller.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/app_globals.dart';
+import 'package:buddy/core/constants/app_strings.dart';
+import 'package:buddy/core/constants/constants.dart';
+import 'package:buddy/pages/auth/login/login_controller.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
+import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../main.dart';
 import '../../../models/error_response.dart';
@@ -22,6 +24,7 @@ import '../../../models/error_response.dart';
 class SignupController extends GetxController {
   RxString otp = "".obs;
   //  final _auth = FirebaseAuth.instance;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController userNameController = TextEditingController();
   TextEditingController lastName = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -90,40 +93,41 @@ class SignupController extends GetxController {
   // }
 
   Future<void> onSignup() async {
-    if (isSignUpValidation()) {
-      var json = {
-        HttpUtil.firstName: userNameController.text.trim(),
-        HttpUtil.lastName: lastName.text.trim(),
-        HttpUtil.authProvider: "",
-        HttpUtil.email: emailController.text.trim(),
-        HttpUtil.password: passwordController.text.trim(),
-        HttpUtil.profileImageUrl: "",
-      };
-      final data = await APIFunction().apiCall(
-        apiName: "users/create-user",
-        // apiName: Constants.signUp,
-        withOutFormData: jsonEncode(json),
-      );
+    // if (isSignUpValidation()) {
+    var json = {
+      HttpUtil.name: userNameController.text.trim(),
+      HttpUtil.authProvider: "",
+      HttpUtil.email: emailController.text.trim(),
+      HttpUtil.password: passwordController.text.trim(),
+      HttpUtil.profileImageUrl: "",
+    };
 
-      try {
-        mainModel = LoginResponse.fromJson(data);
+    print(json);
+    final data = await APIFunction().apiCall(
+      apiName: "users/register",
+      // apiName: Constants.signUp,
+      withOutFormData: jsonEncode(json),
+    );
 
-        if (mainModel!.success!) {
-          getStorageData.saveLoginData(mainModel!);
-          handleNavigation();
-        } else {
-          // if (mainModel!.data!.isProfileComplete == false) {
-          //   getStorageData.saveLoginData(mainModel!);
-          //   handleNavigation();
-          // } else {
-          utils.showToast(message: mainModel!.message!);
-          // }
-        }
-      } catch (e) {
-        ErrorResponse errorModel = ErrorResponse.fromJson(data);
+    try {
+      mainModel = LoginResponse.fromJson(data);
 
-        utils.showToast(message: errorModel.message!);
+      if (mainModel!.success!) {
+        getStorageData.saveLoginData(mainModel!);
+        handleNavigation();
+      } else {
+        // if (mainModel!.data!.isProfileComplete == false) {
+        //   getStorageData.saveLoginData(mainModel!);
+        //   handleNavigation();
+        // } else {
+        utils.showToast(message: mainModel!.message!);
+        // }
       }
+    } catch (e) {
+      ErrorResponse errorModel = ErrorResponse.fromJson(data);
+
+      utils.showToast(message: errorModel.message!);
+      // }
     }
   }
 
@@ -188,12 +192,14 @@ class SignupController extends GetxController {
       utils.showToast(message: AppStrings.errorValidEmail);
       return false;
     } else if (utils.isValidationEmpty(passwordController.text)) {
+      print(passwordController.text);
       utils.showToast(message: AppStrings.errorEmptyPassword);
       return false;
     }
     return true;
   }
 
+  GoogleSignInAccount? _currentUser;
   RxString appleId = "".obs;
   RxString userName = "".obs;
   RxString userEmail = "".obs;
@@ -248,4 +254,110 @@ class SignupController extends GetxController {
       utils.showToast(message: errorModel.message!);
     }
   }
+
+  // Future<UserCredential?> loginWithGoogle(BuildContext context) async {
+  //   try {
+  //     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //     if (googleUser != null) {
+  //       final googleAuth = await googleUser.authentication;
+  //       final idToken = googleAuth.idToken;
+  //       final Map<String, dynamic> payload = parseJwt(idToken!);
+  //       final firstName = payload['given_name'] ?? '';
+  //       final lastName = payload['family_name'] ?? '';
+
+  //       SocialLoginModel socialLoginModel = SocialLoginModel(
+  //         emailID: googleUser.email,
+  //         firstName: firstName,
+  //         lastName: lastName,
+  //         authProvider: "GOOGLE",
+  //         profile_image_url: googleUser.photoUrl ?? "",
+  //       );
+  //       await socialLogin(socialLoginModel);
+  //       // await socialLogin(socialLoginModel);
+  //       update();
+  //     } else {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text("Google Sign-In was cancelled by the user")),
+  //       );
+  //     }
+  //     await GoogleSignIn().signOut();
+  //   } catch (e) {
+  //     print("Google Sign-In failed: $e");
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text("Google Sign-In failed: $e")),
+  //     );
+  //     return null;
+  //   }
+  //   return null;
+  // }
+
+  // Map<String, dynamic> parseJwt(String token) {
+  //   final parts = token.split('.');
+  //   if (parts.length != 3) {
+  //     throw Exception('Invalid token');
+  //   }
+  //   final payload = parts[1];
+  //   final normalized = base64Url.normalize(payload);
+  //   final resp = utf8.decode(base64Url.decode(normalized));
+  //   final payloadMap = json.decode(resp);
+  //   if (payloadMap is! Map<String, dynamic>) {
+  //     throw Exception('Invalid payload');
+  //   }
+  //   return payloadMap;
+  // }
+
+  // Future<void> signInWithApple(BuildContext context) async {
+  //   try {
+  //     final AuthorizationCredentialAppleID credential =
+  //         await SignInWithApple.getAppleIDCredential(
+  //       scopes: [
+  //         AppleIDAuthorizationScopes.email,
+  //         AppleIDAuthorizationScopes.fullName,
+  //       ],
+  //     );
+
+  //     final oAuthProvider = OAuthProvider("apple.com");
+  //     final authCredential = oAuthProvider.credential(
+  //       idToken: credential.identityToken,
+  //       accessToken: credential.authorizationCode,
+  //     );
+
+  //     final userCredential = await _auth.signInWithCredential(authCredential);
+
+  //     // Extract email and name from Apple credential (available only on first login)
+  //     String email = credential.email ?? userCredential.user?.email ?? "";
+  //     String firstName = credential.givenName ?? "";
+  //     String lastName = credential?.familyName ?? "";
+
+  //     // Check if the user is new and handle data accordingly
+  //     bool isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
+
+  //     if (isNewUser) {
+  //       // Optionally update Firebase user's display name
+  //       String displayName = '${firstName} ${lastName}'.trim();
+  //       if (displayName.isNotEmpty) {
+  //         await userCredential.user?.updateDisplayName(displayName);
+  //       }
+  //     } else {
+  //       // For returning users, fetch stored data from your backend or Firebase
+  //       // Example: Split display name if not stored separately
+  //       String storedName = userCredential.user?.displayName ?? "";
+  //       List<String> names = storedName.split(" ");
+  //       firstName = names.isNotEmpty ? names.first : "";
+  //       lastName = names.length > 1 ? names.sublist(1).join(" ") : "";
+  //     }
+
+  //     SocialLoginModel socialLoginModel = SocialLoginModel(
+  //       emailID: email,
+  //       firstName: firstName,
+  //       lastName: lastName,
+  //       authProvider: "APPLE",
+  //       profile_image_url: "", // Apple doesn't provide a profile image
+  //     );
+
+  //     await socialLogin(socialLoginModel);
+  //   } catch (e) {
+  //     throw "Apple Sign-In Error: $e";
+  //   }
+  // }
 }
