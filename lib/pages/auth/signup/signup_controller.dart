@@ -8,15 +8,15 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-import 'package:buddy/api_repository/api_class.dart';
-import 'package:buddy/api_repository/api_function.dart';
-import 'package:buddy/core/constants/app_globals.dart';
-import 'package:buddy/core/constants/app_strings.dart';
-import 'package:buddy/core/constants/constants.dart';
-import 'package:buddy/pages/auth/login/login_controller.dart';
-import 'package:buddy/pages/auth/login/login_response.dart';
-import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
-import 'package:buddy/routes/app_pages.dart';
+import 'package:buddy_ai_wingman/api_repository/api_class.dart';
+import 'package:buddy_ai_wingman/api_repository/api_function.dart';
+import 'package:buddy_ai_wingman/core/constants/app_globals.dart';
+import 'package:buddy_ai_wingman/core/constants/app_strings.dart';
+import 'package:buddy_ai_wingman/core/constants/constants.dart';
+import 'package:buddy_ai_wingman/pages/auth/login/login_controller.dart';
+import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
+import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan_controller.dart';
+import 'package:buddy_ai_wingman/routes/app_pages.dart';
 
 import '../../../main.dart';
 import '../../../models/error_response.dart';
