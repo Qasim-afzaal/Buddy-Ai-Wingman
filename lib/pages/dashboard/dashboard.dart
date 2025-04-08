@@ -1,10 +1,10 @@
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines.dart';
-import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd.dart';
 import 'package:flutter/material.dart';
+
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/pages/home/home.dart';
 import 'package:buddy_ai_wingman/pages/inbox/inbox.dart';
-
+import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines.dart';
+import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd.dart';
 import 'package:buddy_ai_wingman/widgets/custom_navbar.dart';
 import 'package:buddy_ai_wingman/widgets/lazy_stackindex.dart';
 
@@ -31,10 +31,9 @@ class _DashboardPageState extends State<DashboardPage> {
         index: currentTab,
         children: [
           HomePage(),
-           InboxPage(),
-          Startbuddy_ai_wingmanPage(),
-          buddy_ai_wingmanLinesPage(),
-         
+          InboxPage(),
+          StartSparkdPage(),
+          SparkdLinesPage(),
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
