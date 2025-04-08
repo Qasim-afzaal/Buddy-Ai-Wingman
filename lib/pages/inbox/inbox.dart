@@ -1,9 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
-import 'package:buddy_ai_wingman/widgets/CustomDropDown.dart';
-import 'package:buddy_ai_wingman/widgets/confirmation_widget.dart';
+
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/routes/app_pages.dart';
+import 'package:buddy/widgets/CustomDropDown.dart';
+import 'package:buddy/widgets/confirmation_widget.dart';
 
 class InboxPage extends StatelessWidget {
   const InboxPage({super.key});
@@ -14,7 +15,7 @@ class InboxPage extends StatelessWidget {
     List<String> inboxList = ['Test1', 'Test2'];
 
     return Scaffold(
-      appBar: const buddy_ai_wingmanAppBar(),
+      appBar: const SparkdAppBar(),
       body: SafeArea(
         child: Column(
           children: [
@@ -56,7 +57,10 @@ class InboxPage extends StatelessWidget {
                       );
                     }
                   },
-                  child: Icon(Icons.abc,color: Colors.white,),
+                  child: Icon(
+                    Icons.abc,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
@@ -102,6 +106,7 @@ class InboxPage extends StatelessWidget {
 
 class _Container extends StatelessWidget {
   const _Container({
+    super.key,
     required this.mainData,
     required this.index,
   });
@@ -121,7 +126,8 @@ class _Container extends StatelessWidget {
           Get.toNamed(
             Routes.CHAT,
             arguments: {
-              HttpUtil.conversationId: index.toString(), // Dummy data for conversationId
+              HttpUtil.conversationId:
+                  index.toString(), // Dummy data for conversationId
               HttpUtil.name: mainData,
               HttpUtil.isManually: false,
             },
@@ -167,7 +173,7 @@ class _Container extends StatelessWidget {
                   }
                 },
                 dropDownList: [] // No dropdown options as per your request
-            )
+                )
           ],
         ),
       ),
@@ -177,6 +183,7 @@ class _Container extends StatelessWidget {
 
 class _InboxType extends StatelessWidget {
   const _InboxType({
+    super.key,
     required this.type,
     this.selectedType,
     required this.onTap,
@@ -193,7 +200,8 @@ class _InboxType extends StatelessWidget {
       child: Text(
         type.name,
         style: context.headlineMedium?.copyWith(
-          color: selectedType == type ? context.primary : const Color(0xFFA6907F),
+          color:
+              selectedType == type ? context.primary : const Color(0xFFA6907F),
           fontWeight: FontWeight.w400,
         ),
       ).paddingAll(10),
