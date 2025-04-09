@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import 'package:buddy_ai_wingman/api_repository/api_class.dart';
 import 'package:buddy_ai_wingman/api_repository/loading.dart';
 import 'package:buddy_ai_wingman/core/constants/helper.dart';
@@ -51,7 +52,7 @@ class ChatController extends GetxController {
         HttpUtil.personalityType: personalityType,
       };
       Map chatmsg = {
-        "name": "${HttpUtil.email} Manual Chat chat  list getting"
+        "name": "${HttpUtil.email ?? ""} Manual Chat chat  list getting"
       };
       Constants.socket!.emit("logEvent", chatmsg);
       printAction(
@@ -83,34 +84,34 @@ class ChatController extends GetxController {
         GetMessageListResponse sendMessageResponse =
             GetMessageListResponse.fromJson(data);
         List<MessageModel> list = [];
-        for (int i = 0;
-            i < sendMessageResponse.formattedMessages!.length;
-            i++) {
-          list.add(MessageModel(
-              message:
-                  sendMessageResponse.formattedMessages![i].msgType == "title"
-                      ? null
-                      : sendMessageResponse.formattedMessages![i].msgType ==
-                              "Extracted-Data"
-                          ? sendMessageResponse.formattedMessages![i].fileUrl!
-                          : sendMessageResponse.formattedMessages![i].content!,
-              messageType: sendMessageResponse.formattedMessages![i].msgType ==
-                      "Extracted-Data"
-                  ? MessageType.image
-                  : MessageType.text,
-              isReceived: sendMessageResponse.formattedMessages![i].senderId !=
-                  getStorageData.readString(getStorageData.userIdKey),
-              headline: sendMessageResponse.formattedMessages![i].msgType ==
-                      "Extracted-Data"
-                  ? null
-                  : sendMessageResponse.formattedMessages![i].msgType,
-              messageId: sendMessageResponse.formattedMessages![i].id!,
-              mainText:
-                  sendMessageResponse.formattedMessages![i].msgType == "title"
-                      ? sendMessageResponse.formattedMessages![i].content!
-                      : null));
-        }
-        chatList.insertAll(0, list);
+        // for (int i = 0;
+        //     i < sendMessageResponse.formattedMessages!.length;
+        //     i++) {
+        //   list.add(MessageModel(
+        //       message:
+        //           sendMessageResponse.formattedMessages![i].msgType == "title"
+        //               ? null
+        //               : sendMessageResponse.formattedMessages![i].msgType ==
+        //                       "Extracted-Data"
+        //                   ? sendMessageResponse.formattedMessages![i].fileUrl!
+        //                   : sendMessageResponse.formattedMessages![i].content!,
+        //       messageType: sendMessageResponse.formattedMessages![i].msgType ==
+        //               "Extracted-Data"
+        //           ? MessageType.image
+        //           : MessageType.text,
+        //       isReceived: sendMessageResponse.formattedMessages![i].senderId !=
+        //           getStorageData.readString(getStorageData.userIdKey),
+        //       headline: sendMessageResponse.formattedMessages![i].msgType ==
+        //               "Extracted-Data"
+        //           ? null
+        //           : sendMessageResponse.formattedMessages![i].msgType,
+        //       messageId: sendMessageResponse.formattedMessages![i].id!,
+        //       mainText:
+        //           sendMessageResponse.formattedMessages![i].msgType == "title"
+        //               ? sendMessageResponse.formattedMessages![i].content!
+        //               : null));
+        // }
+        // chatList.insertAll(0, list);
         totalItems.value = sendMessageResponse.totalCount!;
         isLoading.value = false;
         update();
@@ -124,19 +125,19 @@ class ChatController extends GetxController {
         List<SendMessageResponse> sendMessageResponse = [];
         sendMessageResponse.addAll((data as List<dynamic>)
             .map((json) => SendMessageResponse.fromJson(json)));
-        for (var list in sendMessageResponse) {
-          chatList.add(
-            MessageModel(
-              message: list.content!,
-              messageType: MessageType.text,
-              isReceived: true,
-              messageId: list.id!,
-              headline: list.msgType,
-            ),
-          );
-          Loading.dismiss();
-          update();
-        }
+        // for (var list in sendMessageResponse) {
+        //   chatList.add(
+        //     MessageModel(
+        //       message: list.content!,
+        //       messageType: MessageType.text,
+        //       isReceived: true,
+        //       messageId: list.id!,
+        //       headline: list.msgType,
+        //     ),
+        //   );
+        //   Loading.dismiss();
+        //   update();
+        // }
       },
     );
     Constants.socket!.on(
@@ -147,17 +148,17 @@ class ChatController extends GetxController {
         List<SendMessageResponse> sendMessageResponse = [];
         sendMessageResponse.addAll((data as List<dynamic>)
             .map((json) => SendMessageResponse.fromJson(json)));
-        for (var list in sendMessageResponse) {
-          chatList[indexRegenerate] = MessageModel(
-            message: list.content!,
-            messageType: MessageType.text,
-            isReceived: true,
-            messageId: list.id!,
-            headline: list.msgType,
-          );
-          Loading.dismiss();
-          update();
-        }
+        // for (var list in sendMessageResponse) {
+        //   chatList[indexRegenerate] = MessageModel(
+        //     message: list.content!,
+        //     messageType: MessageType.text,
+        //     isReceived: true,
+        //     messageId: list.id!,
+        //     headline: list.msgType,
+        //   );
+        //   Loading.dismiss();
+        //   update();
+        // }
       },
     );
 
@@ -169,19 +170,19 @@ class ChatController extends GetxController {
         List<SendMessageResponse> sendMessageResponse = [];
         sendMessageResponse.addAll((data as List<dynamic>)
             .map((json) => SendMessageResponse.fromJson(json)));
-        for (var list in sendMessageResponse) {
-          conversationId = list.conversationId;
-          chatList.add(MessageModel(
-            mainText: list.content!,
-            messageType: MessageType.text,
-            isReceived: true,
-            messageId: list.id!,
-            headline: list.msgType,
-            message: '',
-          ));
-          Loading.dismiss();
-          update();
-        }
+        // for (var list in sendMessageResponse) {
+        //   conversationId = list.conversationId;
+        //   chatList.add(MessageModel(
+        //     mainText: list.content!,
+        //     messageType: MessageType.text,
+        //     isReceived: true,
+        //     messageId: list.id!,
+        //     headline: list.msgType,
+        //     message: '',
+        //   ));
+        //   Loading.dismiss();
+        //   update();
+        // }
       },
     );
     Constants.socket!.on(
@@ -228,18 +229,18 @@ class ChatController extends GetxController {
   }
 
   regenerateMessage(MessageModel tempList) {
-    indexRegenerate =
-        chatList.indexWhere((item) => item.messageId == tempList.messageId);
+    // indexRegenerate =
+    //     chatList.indexWhere((item) => item.messageId == tempList.messageId);
     print("this is index of regenrate data$indexRegenerate");
-    var data = {
-      HttpUtil.userId: getStorageData.readString(getStorageData.userIdKey),
-      HttpUtil.conversationId: conversationId,
-      HttpUtil.messageId: tempList.messageId,
-      HttpUtil.content: tempList.headline ?? "Smooth",
-    };
-    printAction(
-        "<<< ======= Log Socket getSuggestionAgain emit ======= >>> ${jsonEncode(data)}");
-    Constants.socket!.emit(Constants.getSuggestionAgain, data);
+    // var data = {
+    //   HttpUtil.userId: getStorageData.readString(getStorageData.userIdKey),
+    //   HttpUtil.conversationId: conversationId,
+    //   HttpUtil.messageId: tempList.messageId,
+    //   HttpUtil.content: tempList.headline ?? "Smooth",
+    // };
+    // printAction(
+    // "<<< ======= Log Socket getSuggestionAgain emit ======= >>> ${jsonEncode("data")}");
+    Constants.socket!.emit(Constants.getSuggestionAgain, "data");
     Loading.show();
     update();
   }
@@ -278,15 +279,15 @@ class ChatController extends GetxController {
     try {
       FileUploadResponse model = FileUploadResponse.fromJson(data);
       if (model.success!) {
-        chatList.add(
-          MessageModel(
-            message: imagePath,
-            fileData: true,
-            messageType: MessageType.image,
-            isReceived: false,
-            messageId: "",
-          ),
-        );
+        // chatList.add(
+        //   MessageModel(
+        //     message: imagePath,
+        //     fileData: true,
+        //     messageType: MessageType.image,
+        //     isReceived: false,
+        //     messageId: "",
+        //   ),
+        // );
         Loading.show();
         update();
         sendMessage("", model.data);
