@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/widgets/age_widget.dart';
 import 'package:buddy_ai_wingman/widgets/gender_widget.dart';
@@ -68,10 +69,7 @@ class _GatherNewChatInfoPageState extends State<GatherNewChatInfoPage> {
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SB.h(25),
-            NameWidget()
-            ],
+            children: [SB.h(25), NameWidget()],
           ),
         ),
       ),
