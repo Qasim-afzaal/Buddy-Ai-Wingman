@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
-// import 'package:buddy_ai_wingman/widgets/name_widget.dart';
+// import 'package:sparkd/widgets/name_widget.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/gather_new_chat_info_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
 
-class NewGatherChatPage extends StatefulWidget {  // Change class name here
-   NewGatherChatPage({super.key});  // Change constructor name here
+class NewGatherChatPage extends StatefulWidget {
+  // Change class name here
+  NewGatherChatPage({super.key}); // Change constructor name here
 
   @override
-  _NewGatherChatPageState createState() => _NewGatherChatPageState();  // Change state class name here
+  _NewGatherChatPageState createState() =>
+      _NewGatherChatPageState(); // Change state class name here
 }
 
-class _NewGatherChatPageState extends State<NewGatherChatPage> {  // Change state class name here
+class _NewGatherChatPageState extends State<NewGatherChatPage> {
+  // Change state class name here
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -67,10 +70,7 @@ class _NewGatherChatPageState extends State<NewGatherChatPage> {  // Change stat
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SB.h(25),
-              NameWidget2()
-            ],
+            children: [SB.h(25), NameWidget2()],
           ),
         ),
       ),
@@ -82,7 +82,7 @@ class NameWidget2 extends StatelessWidget {
   // You can initialize the controller here or use a service to retrieve it
   // final GatherNewChatInfoController controller = GatherNewChatInfoController();
 
-   NameWidget2({super.key});
+  NameWidget2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,8 @@ class NameWidget2 extends StatelessWidget {
         Text(
           AppStrings.allSetDescription,
           textAlign: TextAlign.center,
-          style: context.bodyLarge?.copyWith(fontWeight: FontWeight.w400, height: 1),
+          style: context.bodyLarge
+              ?.copyWith(fontWeight: FontWeight.w400, height: 1),
         ),
         SB.h(40),
         CustomTextField(
@@ -109,10 +110,9 @@ class NameWidget2 extends StatelessWidget {
         ),
         SB.h(25),
         AppButton.primary(
-          title: AppStrings.getMybuddy_ai_wingman,
-          onPressed:(){
-            Get.toNamed(
-            Routes.NEW2);
+          title: AppStrings.getMySparkd,
+          onPressed: () {
+            Get.toNamed(Routes.NEW2);
           },
         )
       ],
