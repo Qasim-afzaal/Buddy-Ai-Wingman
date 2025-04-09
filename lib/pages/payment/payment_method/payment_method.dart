@@ -21,7 +21,8 @@ class PaymentMethodPage extends StatelessWidget {
                   return _Container(
                     data: controller.paymentMethodsList[index],
                     selectedPaymentMethod: controller.selectedPaymentMethod,
-                    onPaymentMethodSelection: controller.onPaymentMethodSelection,
+                    onPaymentMethodSelection:
+                        controller.onPaymentMethodSelection,
                   );
                 },
                 separatorBuilder: (context, index) {
@@ -72,7 +73,6 @@ class _Container extends StatelessWidget {
       child: InkWell(
         onTap: () => onPaymentMethodSelection(data.title),
         child: Container(
-
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
