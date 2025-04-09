@@ -85,7 +85,12 @@ class _Tile extends StatelessWidget {
                     ],
                   ),
                 ),
-                CupertinoSwitch(value: isSelected.value, onChanged: onTap, activeColor: context.primary, trackColor: context.chatBubbleColor,),
+                CupertinoSwitch(
+                  value: isSelected.value,
+                  onChanged: onTap,
+                  activeColor: context.primary,
+                  trackColor: context.chatBubbleColor,
+                ),
               ],
             ).paddingAll(15),
           ),
