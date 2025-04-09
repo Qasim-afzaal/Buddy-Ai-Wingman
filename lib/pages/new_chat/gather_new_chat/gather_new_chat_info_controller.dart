@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+
 import 'package:buddy_ai_wingman/api_repository/api_class.dart';
 import 'package:buddy_ai_wingman/api_repository/api_function.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
@@ -25,17 +26,22 @@ class GatherNewChatInfoController extends GetxController {
 
   @override
   void onInit() {
-    if (Get.arguments != null) {
-      message = Get.arguments[HttpUtil.message];
-      if (message == null) {
-        isManually = Get.arguments[HttpUtil.isManually];
-        if (!isManually) {
-          filePath = Get.arguments[HttpUtil.filePath];
-          print(" this is file path $filePath");
-        }
-      }
-    }
+    // if (Get.arguments != null) {
+    //   message = Get.arguments[HttpUtil.message];
+    //   if (message == null) {
+    //     isManually = Get.arguments[HttpUtil.isManually];
+    //     if (!isManually) {
+    //       filePath = Get.arguments[HttpUtil.filePath];
+    //       print(" this is file path $filePath");
+    //     }
+    //   }
+    // }
     super.onInit();
+  }
+
+  void onButtonPressed() async {
+    Get.toNamed(Routes.MANUAL_CHAT,
+        arguments: {HttpUtil.name: nameController.text});
   }
 
   void onGenderSelection(Genders gender) {
@@ -78,7 +84,7 @@ class GatherNewChatInfoController extends GetxController {
     );
   }
 
-  Future<void> getbuddy_ai_wingman() async {
+  Future<void> getSparkd() async {
     if (isManually) {
       if (validate()) {
         Get.offNamed(
@@ -89,7 +95,8 @@ class GatherNewChatInfoController extends GetxController {
             HttpUtil.objective: selectedObjective,
             HttpUtil.gender: genderValue(selectedGender!),
             HttpUtil.age: selectedAgeRange,
-            HttpUtil.personalityType: personalityTypeValue(selectedPersonality!),
+            HttpUtil.personalityType:
+                personalityTypeValue(selectedPersonality!),
           },
         );
       }
@@ -114,7 +121,7 @@ class GatherNewChatInfoController extends GetxController {
           SparkLineResponse mainModel = SparkLineResponse.fromJson(data);
           if (mainModel.success!) {
             Get.offNamed(
-              Routes.buddy_ai_wingman_LINES_RESPONSE,
+              Routes.SPARKD_LINES_RESPONSE,
               arguments: {
                 HttpUtil.conversationId: mainModel.data?[0].conversationId,
                 HttpUtil.message: message,
@@ -136,7 +143,8 @@ class GatherNewChatInfoController extends GetxController {
             HttpUtil.objective: selectedObjective,
             HttpUtil.gender: genderValue(selectedGender!),
             HttpUtil.age: selectedAgeRange,
-            HttpUtil.personalityType: personalityTypeValue(selectedPersonality!),
+            HttpUtil.personalityType:
+                personalityTypeValue(selectedPersonality!),
           });
           printAction("<<<<< ImagePath >>>>> $filePath");
           if (filePath != null) {
@@ -174,48 +182,48 @@ class GatherNewChatInfoController extends GetxController {
       }
     }
   }
-Future<void> handleMessage(String? message) async {
-  if (message != null) {
-    var json = {
-      HttpUtil.conversationId: "",
-      HttpUtil.messageId: "",
-      HttpUtil.message: message ?? "",
-      HttpUtil.name: nameController.text.trim(),
-      HttpUtil.objective: selectedObjective ?? "",
-      HttpUtil.gender: genderValue(selectedGender),
-      HttpUtil.age: selectedAgeRange ?? "",
-      HttpUtil.personalityType: personalityTypeValue(selectedPersonality),
-    };
 
-    print("this is data$json");
+  Future<void> handleMessage(String? message) async {
+    if (message != null) {
+      var json = {
+        HttpUtil.conversationId: "",
+        HttpUtil.messageId: "",
+        HttpUtil.message: message ?? "",
+        HttpUtil.name: nameController.text.trim(),
+        HttpUtil.objective: selectedObjective ?? "",
+        HttpUtil.gender: genderValue(selectedGender),
+        HttpUtil.age: selectedAgeRange ?? "",
+        HttpUtil.personalityType: personalityTypeValue(selectedPersonality),
+      };
 
-    final data = await APIFunction().patchApiCall(
-      apiName: Constants.buddy_ai_wingmanLines,
-      withOutFormData: jsonEncode(json),
-    );
+      print("this is data$json");
 
-    try {
-      SparkLineResponse mainModel = SparkLineResponse.fromJson(data);
-      if (mainModel.success!) {
-        Get.toNamed(
-          Routes.buddy_ai_wingman_LINES_RESPONSE,
-          arguments: {
-            HttpUtil.conversationId: mainModel.data?[0].conversationId,
-            HttpUtil.message: message,
-            HttpUtil.name: nameController.text.trim(),
-          },
-        );
-        update();
-      } else {
-        utils.showToast(message: mainModel.message!);
+      final data = await APIFunction().patchApiCall(
+        apiName: Constants.buddy_ai_wingmanLines,
+        withOutFormData: jsonEncode(json),
+      );
+
+      try {
+        SparkLineResponse mainModel = SparkLineResponse.fromJson(data);
+        if (mainModel.success!) {
+          Get.toNamed(
+            Routes.SPARKD_LINES_RESPONSE,
+            arguments: {
+              HttpUtil.conversationId: mainModel.data?[0].conversationId,
+              HttpUtil.message: message,
+              HttpUtil.name: nameController.text.trim(),
+            },
+          );
+          update();
+        } else {
+          utils.showToast(message: mainModel.message!);
+        }
+      } catch (e) {
+        ErrorResponse errorModel = ErrorResponse.fromJson(data);
+        utils.showToast(message: errorModel.message!);
       }
-    } catch (e) {
-      ErrorResponse errorModel = ErrorResponse.fromJson(data);
-      utils.showToast(message: errorModel.message!);
     }
   }
-}
-
 
   bool validate() {
     utils.hideKeyboard();
