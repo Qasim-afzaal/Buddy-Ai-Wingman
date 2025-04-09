@@ -17,24 +17,24 @@ class PaymentPlanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final List<String> randomTextItems = [
-    "First random text",
-    "Second random text",
-    "Another line of text",
-    "Yet another random text item",
-  ];
+    final List<String> randomTextItems = [
+      "First random text",
+      "Second random text",
+      "Another line of text",
+      "Yet another random text item",
+    ];
 
     print("Screen Height: ${MediaQuery.of(context).size.height}");
     return GetBuilder(
       init: PaymentPlanController(inAppPurchaseSource: Get.find()),
       builder: (controller) {
         return Scaffold(
-          appBar: const buddy_ai_wingmanAppBarBeforePayment(),
+
           body: SafeArea(
             child: Column(
               children: [
                 // Text(
-                //   AppStrings.infinitebuddy_ai_wingman,
+                //   AppStrings.infiniteSparkd,
                 //   textAlign: TextAlign.center,
                 //   style: context.headlineMedium?.copyWith(
                 //     color: context.primary,
@@ -42,34 +42,35 @@ class PaymentPlanPage extends StatelessWidget {
                 //   ),
                 // ).paddingSymmetric(vertical: context.height * 0.02),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20,20,10,0),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 10, 0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: randomTextItems.map((text) {
+                      return Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: randomTextItems.map((text) {
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(
-                                Icons.check, // Check icon
-                                color: Colors.green, // Icon color
-                                size: 18, // Icon size
-                              ),
-                              const SizedBox(width: 8), // Space between icon and text
-                              Expanded(
-                                child: Text(
-                  text,
-                  style: GoogleFonts.interTight(
-                    textStyle: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
+                        children: [
+                          const Icon(
+                            Icons.check, // Check icon
+                            color: Colors.green, // Icon color
+                            size: 18, // Icon size
+                          ),
+                          const SizedBox(
+                              width: 8), // Space between icon and text
+                          Expanded(
+                            child: Text(
+                              text,
+                              style: GoogleFonts.interTight(
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
                                 ),
                               ),
-                            ],
-                          );
-                        }).toList(),
-                      ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }).toList(),
+                  ),
                 ),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,16 +92,16 @@ class PaymentPlanPage extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                  SB.h(context.height * 0.06),
+                SB.h(context.height * 0.06),
                 Text(
                   "Unlimited Content \nWhenever you need it.",
                   textAlign: TextAlign.center,
-                   style: GoogleFonts.interTight(
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 24,
-                                ),
-                              ),
+                  style: GoogleFonts.interTight(
+                    textStyle: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 5,
@@ -108,34 +109,37 @@ class PaymentPlanPage extends StatelessWidget {
                 Text(
                   "Choose Plan",
                   textAlign: TextAlign.center,
-                 style: GoogleFonts.interTight(
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                              ),
+                  style: GoogleFonts.interTight(
+                    textStyle: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 5,
                 ),
-              
+
                 Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SubscriptionBox(
-                plan: "Basic",
-                price: "€9,99",
-                description:
-                    "5 AI-powered replies per week and unlimited AI-powered Opening lines.", isSelected: true, onSelect: () {  },
-              ),
-              SubscriptionBox(
-                isSelected: true, onSelect: () {  },
-                plan: "Pro",
-                price: "€14,99",
-                description: "Unlimited use of features.",
-              ),
-            ],
-          ),
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SubscriptionBox(
+                      plan: "Basic",
+                      price: "€9,99",
+                      description:
+                          "5 AI-powered replies per week and unlimited AI-powered Opening lines.",
+                      isSelected: true,
+                      onSelect: () {},
+                    ),
+                    SubscriptionBox(
+                      isSelected: true,
+                      onSelect: () {},
+                      plan: "Pro",
+                      price: "€14,99",
+                      description: "Unlimited use of features.",
+                    ),
+                  ],
+                ),
                 // Stack(
                 //   clipBehavior: Clip.none,
                 //   children: [
@@ -236,19 +240,19 @@ class PaymentPlanPage extends StatelessWidget {
                 //     ),
                 //   ],
                 // ).paddingSymmetric(horizontal: context.paddingDefault),
-               SB.h(20),
+                SB.h(20),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: AppButton.primary(
-                              title: AppStrings.unlockFreeTrial,
-                              onPressed: () {
-                                if (controller.isLoading.value == false) {
-                                  controller.onSubscriptionPressed();
-                                } else {
-                                  null;
-                                }
-                              },
-                            ),
+                    title: AppStrings.unlockFreeTrial,
+                    onPressed: () {
+                      if (controller.isLoading.value == false) {
+                        controller.onSubscriptionPressed();
+                      } else {
+                        null;
+                      }
+                    },
+                  ),
                 ),
                 SB.h(10),
                 Text(
@@ -287,7 +291,7 @@ class PaymentPlanPage extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () async{
+                        onTap: () async {
                           controller.onRestorePurchased((p0) {
                             print("Verification Api Called Status::$p0");
                             Map msg = {
