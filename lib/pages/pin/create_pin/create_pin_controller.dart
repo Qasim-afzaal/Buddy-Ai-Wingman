@@ -60,7 +60,8 @@ class CreatePinController extends GetxController {
       try {
         LoginResponse mainModel = LoginResponse.fromJson(data);
         if (mainModel.success!) {
-          getStorageData.saveBoolean(key: getStorageData.isPinCreated, value: true);
+          getStorageData.saveBoolean(
+              key: getStorageData.isPinCreated, value: true);
           utils.showToast(message: mainModel.message!);
           Get.offNamed(Routes.PIN_SUCCESS);
         } else {
