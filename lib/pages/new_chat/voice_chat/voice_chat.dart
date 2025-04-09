@@ -27,12 +27,15 @@ class VoiceChatPage extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: context.chatBubbleColor,
                     ),
-                    child: Center(child: Assets.icons.voiceBar.image(
-                      width: context.width * 0.5
-                    )),
+                    child: Center(
+                        child: Assets.icons.voiceBar
+                            .image(width: context.width * 0.5)),
                   ),
                   SB.h(20),
-                  Text(AppStrings.listening, style: context.bodyLarge,)
+                  Text(
+                    AppStrings.listening,
+                    style: context.bodyLarge,
+                  )
                 ],
               ),
               Row(
@@ -40,7 +43,6 @@ class VoiceChatPage extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
-
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: context.chatBubbleColor,
@@ -49,12 +51,14 @@ class VoiceChatPage extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(10),
-
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: context.primary,
                     ),
-                    child: Icon(Icons.clear, color: context.scaffoldBackgroundColor,),
+                    child: Icon(
+                      Icons.clear,
+                      color: context.scaffoldBackgroundColor,
+                    ),
                   ),
                 ],
               )
