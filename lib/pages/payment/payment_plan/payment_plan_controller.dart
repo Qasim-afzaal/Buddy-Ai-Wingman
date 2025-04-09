@@ -13,7 +13,6 @@ import 'package:buddy_ai_wingman/pages/payment/payment_method/payment_method.dar
 import 'package:buddy_ai_wingman/pages/settings/inapp_purchase_source.dart';
 
 class PaymentPlanController extends GetxController {
-
   var selectedPlan = ''.obs; // To track the selected subscription plan
 
   void selectPlan(String plan) {
@@ -30,6 +29,7 @@ class PaymentPlanController extends GetxController {
       print("No plan selected!");
     }
   }
+
   InAppPurchaseSource inAppPurchaseSource;
   var isLoading = false.obs;
   var isProductSubscribed = false;
@@ -55,11 +55,9 @@ class PaymentPlanController extends GetxController {
     }
   }
 
-  void onRestorePurchased(
-    Function(bool) callBack,
-      {bool loadingRequired = true}
-  ) async {
-     _subscriptionCompleter = Completer<void>();
+  void onRestorePurchased(Function(bool) callBack,
+      {bool loadingRequired = true}) async {
+    _subscriptionCompleter = Completer<void>();
     try {
       Map msg = {"name": " i am in restore ....."};
       Constants.socket!.emit("logEvent", msg);
