@@ -24,7 +24,9 @@ class _PaymentPlanPageState extends State<PaymentPlanPage> {
   }
 
   void onSubscription() {
-   Get.offNamed(Routes.DASHBOARD,);
+    Get.offNamed(
+      Routes.DASHBOARD,
+    );
   }
 
   @override
@@ -37,7 +39,7 @@ class _PaymentPlanPageState extends State<PaymentPlanPage> {
     ];
 
     return Scaffold(
-      appBar: const buddy_ai_wingmanAppBarBeforePayment(),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -170,18 +172,16 @@ class _PaymentPlanPageState extends State<PaymentPlanPage> {
                         fontWeight: FontWeight.w500,
                         height: 1,
                         color: Theme.of(context).colorScheme.primary,
-                        fontSize:
-                            MediaQuery.of(context).size.height >= 667.0 &&
-                                    MediaQuery.of(context).size.height <= 710.0
-                                ? 14
-                                : 15,
+                        fontSize: MediaQuery.of(context).size.height >= 667.0 &&
+                                MediaQuery.of(context).size.height <= 710.0
+                            ? 14
+                            : 15,
                       ),
                     ),
                   ),
                   InkWell(
                     onTap: () async {
-                      const url =
-                          'https://fancy-bubblegum-216efa.netlify.app/';
+                      const url = 'https://fancy-bubblegum-216efa.netlify.app/';
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
