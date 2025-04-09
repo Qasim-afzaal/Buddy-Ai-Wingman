@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class ChatPage2 extends StatefulWidget {
@@ -29,7 +30,8 @@ class _ChatPage2State extends State<ChatPage2> {
     setState(() {
       isLoading = false; // Hide loader
       messages.add({
-        "message": "Sounds perfect. Let’s make it a date to remember. What time works for you?",
+        "message":
+            "Sounds perfect. Let’s make it a date to remember. What time works for you?",
         "isSender": false,
       });
     });
@@ -126,7 +128,8 @@ class ChatBubble extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
-        mainAxisAlignment: isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment:
+            isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           if (!isSender)
             Flexible(
