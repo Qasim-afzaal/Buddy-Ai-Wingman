@@ -8,7 +8,9 @@ class CreatePinPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppBar(
-        title: getStorageData.readBoolean(key: getStorageData.isPinCreated) ? AppStrings.changePin : AppStrings.createPin,
+        title: getStorageData.readBoolean(key: getStorageData.isPinCreated)
+            ? AppStrings.changePin
+            : AppStrings.createPin,
       ),
       body: GetBuilder<CreatePinController>(
         init: CreatePinController(),
@@ -18,14 +20,20 @@ class CreatePinPage extends StatelessWidget {
               children: [
                 SB.h(20),
                 Text(
-                  getStorageData.readBoolean(key: getStorageData.isPinCreated) ? AppStrings.enterYourNewPin : AppStrings.createPin,
+                  getStorageData.readBoolean(key: getStorageData.isPinCreated)
+                      ? AppStrings.enterYourNewPin
+                      : AppStrings.createPin,
                   style: context.titleLarge?.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: getStorageData.readBoolean(key: getStorageData.isPinCreated) ? context.primary : null,
+                    color: getStorageData.readBoolean(
+                            key: getStorageData.isPinCreated)
+                        ? context.primary
+                        : null,
                   ),
                 ),
                 SB.h(40),
-                if (getStorageData.readBoolean(key: getStorageData.isPinCreated))
+                if (getStorageData.readBoolean(
+                    key: getStorageData.isPinCreated))
                   CustomTextField(
                     controller: controller.oldPin,
                     title: AppStrings.oldPin,
@@ -35,7 +43,10 @@ class CreatePinPage extends StatelessWidget {
                   ),
                 CustomTextField(
                   controller: controller.newPin,
-                  title: getStorageData.readBoolean(key: getStorageData.isPinCreated) ? AppStrings.newPin : AppStrings.enterPin,
+                  title: getStorageData.readBoolean(
+                          key: getStorageData.isPinCreated)
+                      ? AppStrings.newPin
+                      : AppStrings.enterPin,
                   isPasswordField: true,
                   keyboardType: TextInputType.number,
                   maxLength: 4,
@@ -50,8 +61,14 @@ class CreatePinPage extends StatelessWidget {
                 ),
                 SB.h(30),
                 AppButton.primary(
-                  title: getStorageData.readBoolean(key: getStorageData.isPinCreated) ? AppStrings.changePin : AppStrings.confirmPin,
-                  onPressed: getStorageData.readBoolean(key: getStorageData.isPinCreated) ? controller.changePin : controller.createPin,
+                  title: getStorageData.readBoolean(
+                          key: getStorageData.isPinCreated)
+                      ? AppStrings.changePin
+                      : AppStrings.confirmPin,
+                  onPressed: getStorageData.readBoolean(
+                          key: getStorageData.isPinCreated)
+                      ? controller.changePin
+                      : controller.createPin,
                 ),
                 SB.h(25),
                 AppButton.outline(
@@ -94,11 +111,14 @@ class _BiometricWidgetState extends State<_BiometricWidget> {
             Text(
               isEnabled ? AppStrings.bioAuthSetup : AppStrings.bioAuth,
               textAlign: TextAlign.center,
-              style: context.headlineMedium?.copyWith(fontWeight: FontWeight.w500, height: 1),
+              style: context.headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.w500, height: 1),
             ),
             SB.h(10),
             Text(
-              isEnabled ? AppStrings.bioAuthSetupDescription : AppStrings.bioAuthDescription,
+              isEnabled
+                  ? AppStrings.bioAuthSetupDescription
+                  : AppStrings.bioAuthDescription,
               textAlign: TextAlign.center,
               style: context.bodyLarge?.copyWith(
                 fontWeight: FontWeight.w400,
