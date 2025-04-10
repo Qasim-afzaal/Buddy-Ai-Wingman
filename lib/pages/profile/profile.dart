@@ -20,9 +20,12 @@ class ProfilePage extends StatelessWidget {
         builder: (controller) {
           final userId = getStorageData.getUserId();
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,  // Centering the content
+            crossAxisAlignment:
+                CrossAxisAlignment.center, // Centering the content
             children: [
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               // Tiles for other options like Clear All, Logout, Delete Account
               _Tile(
                 iconPath: Assets.icons.deleteAll.path,
@@ -87,19 +90,17 @@ class _Tile extends StatelessWidget {
             iconPath,
             width: 28,
             height: 28,
-            color: Colors.black,  // Set icon color to black
+            color: Colors.black, // Set icon color to black
           ),
           SB.w(10),
           Expanded(
-            child: Text(
-              title,
-             style: GoogleFonts.interTight(
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                ),
-             ))
-          ),
+              child: Text(title,
+                  style: GoogleFonts.interTight(
+                    textStyle: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ))),
         ],
       ).paddingAll(15),
     );
