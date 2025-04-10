@@ -14,7 +14,8 @@ class ProfileController extends GetxController {
     try {
       ClearAllChatResponse mainModel = ClearAllChatResponse.fromJson(data);
       if (mainModel.success!) {
-        Get.find<InboxController>().callChatList(Get.find<InboxController>().selectedType.value, false);
+        Get.find<InboxController>().callChatList(
+            Get.find<InboxController>().selectedType.value, false);
         utils.showToast(message: mainModel.message!);
       } else {
         utils.showToast(message: mainModel.message!);
@@ -25,14 +26,14 @@ class ProfileController extends GetxController {
     }
   }
 
-    void deleteAccount() async {
-     final userid =getStorageData.getUserId();
-     print("userid $userid");
+  void deleteAccount() async {
+    final userid = getStorageData.getUserId();
+    print("userid $userid");
     final data = await APIFunction().deleteApiCall(
-      apiName: Constants.deleteUser+userid!,
+      apiName: Constants.deleteUser + userid!,
     );
     try {
-     getStorageData.removeAllData();
+      getStorageData.removeAllData();
     } catch (e) {
       ErrorResponse errorModel = ErrorResponse.fromJson(data);
       utils.showToast(message: errorModel.message!);
