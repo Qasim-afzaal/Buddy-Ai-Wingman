@@ -25,12 +25,10 @@ class PinSuccessPage extends StatelessWidget {
               SB.h(60),
               Assets.icons.checkOutline.svg(),
               SB.h(60),
-
               AppButton.primary(
                 title: AppStrings.goBackToProfile,
                 onPressed: controller.backToProfile,
               ),
-
             ],
           ).paddingAll(context.paddingDefault);
         },
