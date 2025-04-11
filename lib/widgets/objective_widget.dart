@@ -1,8 +1,8 @@
-
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class ObjectiveWidget extends StatelessWidget {
-  ObjectiveWidget({super.key, this.selectedObjective, required this.onObjectiveSelection});
+  ObjectiveWidget(
+      {super.key, this.selectedObjective, required this.onObjectiveSelection});
 
   final String? selectedObjective;
   final Function(String) onObjectiveSelection;
@@ -49,9 +49,9 @@ class ObjectiveWidget extends StatelessWidget {
 class _Container extends StatelessWidget {
   const _Container(
       {super.key,
-        required this.objective,
-        this.selectedObjective,
-        required this.onObjectiveSelection});
+      required this.objective,
+      this.selectedObjective,
+      required this.onObjectiveSelection});
 
   final String objective;
   final String? selectedObjective;
@@ -79,15 +79,17 @@ class _Container extends StatelessWidget {
           padding: const EdgeInsets.all(28),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: objective == selectedObjective ? null : context.scaffoldBackgroundColor,
+            color: objective == selectedObjective
+                ? null
+                : context.scaffoldBackgroundColor,
             gradient: objective == selectedObjective
                 ? LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  context.secondary,
-                  context.primary,
-                ])
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                        context.secondary,
+                        context.primary,
+                      ])
                 : null,
           ),
           child: Row(
