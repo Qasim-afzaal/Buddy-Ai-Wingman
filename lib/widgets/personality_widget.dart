@@ -18,22 +18,26 @@ class PersonalityWidget extends StatelessWidget {
     PersonalityModel(
       personality: Personality.Seductive,
       image: Assets.icons.seductuve,
-      description: "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
+      description:
+          "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
     ),
     PersonalityModel(
       personality: Personality.Extrovert,
       image: Assets.icons.extrovert,
-      description: "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
+      description:
+          "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
     ),
     PersonalityModel(
       personality: Personality.Introvert,
       image: Assets.icons.introvert,
-      description: "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
+      description:
+          "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
     ),
     PersonalityModel(
       personality: Personality.Romantic,
       image: Assets.icons.romantic,
-      description: "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
+      description:
+          "Lorem ipsum dolor sit amet. Qui nobisnostrum ut voluptas incidunt.",
     ),
   ];
 
@@ -77,7 +81,10 @@ class PersonalityWidget extends StatelessWidget {
 }
 
 class _Container extends StatelessWidget {
-  const _Container({required this.data, this.selectedPersonality, required this.onPersonalitySelection});
+  const _Container(
+      {required this.data,
+      this.selectedPersonality,
+      required this.onPersonalitySelection});
 
   final PersonalityModel data;
   final Personality? selectedPersonality;
@@ -91,30 +98,41 @@ class _Container extends StatelessWidget {
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [
-          context.primary,
-          context.secondary,
-        ]),
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              context.primary,
+              context.secondary,
+            ]),
       ),
       child: InkWell(
-        onTap: () { 
-           onPersonalitySelection(data.personality);},
+        onTap: () {
+          onPersonalitySelection(data.personality);
+        },
         child: Container(
           padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: data.personality == selectedPersonality ? null : context.scaffoldBackgroundColor,
+            color: data.personality == selectedPersonality
+                ? null
+                : context.scaffoldBackgroundColor,
             gradient: data.personality == selectedPersonality
-                ? LinearGradient(begin: Alignment.centerLeft, end: Alignment.centerRight, colors: [
-                    context.secondary,
-                    context.primary,
-                  ])
+                ? LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                        context.secondary,
+                        context.primary,
+                      ])
                 : null,
           ),
           child: Stack(
             children: [
               data.image.svg(
-                color: data.personality == selectedPersonality ? Colors.white : context.primary,
+                color: data.personality == selectedPersonality
+                    ? Colors.white
+                    : context.primary,
               ),
               Positioned(
                 top: 0,
@@ -126,7 +144,9 @@ class _Container extends StatelessWidget {
                     data.personality.name,
                     style: context.titleLarge?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: data.personality == selectedPersonality ? Colors.white : null,
+                      color: data.personality == selectedPersonality
+                          ? Colors.white
+                          : null,
                     ),
                   ),
                 ),
@@ -162,5 +182,8 @@ class PersonalityModel {
   final SvgGenImage image;
   final String description;
 
-  PersonalityModel({required this.personality, required this.image, required this.description});
+  PersonalityModel(
+      {required this.personality,
+      required this.image,
+      required this.description});
 }
