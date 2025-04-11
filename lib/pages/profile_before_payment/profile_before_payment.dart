@@ -14,7 +14,7 @@ class ProfilePageBeforePayment extends StatelessWidget {
       body: GetBuilder<ProfileBeforePaymentController>(
         init: ProfileBeforePaymentController(),
         builder: (controller) {
-            final userId = getStorageData.getUserId();
+          final userId = getStorageData.getUserId();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,7 +29,7 @@ class ProfilePageBeforePayment extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "buddy_ai_wingman GOLD",
+                    "Sparkd GOLD",
                     style: context.bodyLarge?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -77,21 +77,20 @@ class ProfilePageBeforePayment extends StatelessWidget {
                   ),
                 ),
               ),
-               _Tile(
-                iconPath: Assets.icons.deleteAll.path,
-                title: "Delete Account",
-                onTap: () => Get.bottomSheet(
-                  ConfirmationWidget(
-                    title: "Delete Account",
-                    description: AppStrings.deletetaccont,
-                    onConfirmation: () {
-                      controller.deleteAccount();
-                       print("User ID: $userId");
-                    },
-                  ),
-                ),
-              ),
-
+              //  _Tile(
+              //   iconPath: Assets.icons.deleteAll.path,
+              //   title: "Delete Account",
+              //   onTap: () => Get.bottomSheet(
+              //     ConfirmationWidget(
+              //       title: "Delete Account",
+              //       description: AppStrings.deletetaccont,
+              //       onConfirmation: () {
+              //         controller.deleteAccount();
+              //          print("User ID: $userId");
+              //       },
+              //     ),
+              //   ),
+              // ),
             ],
           );
         },
