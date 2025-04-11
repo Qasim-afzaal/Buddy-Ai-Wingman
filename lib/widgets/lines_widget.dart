@@ -41,15 +41,14 @@ class _LinesWidgetState extends State<LinesWidget> {
       ),
       child: GestureDetector(
         behavior: HitTestBehavior.deferToChild,
-        onTap: (){
-           Get.toNamed(
-            Routes.buddy_ai_wingman_LINES_RESPONSE);
-            // arguments: {
-            //   HttpUtil.conversationId: mainModel.data?[0].conversationId,
-            //   HttpUtil.message: message,
-            //   HttpUtil.name: "",
-            //   HttpUtil.previousSuggestions: []
-            // },
+        onTap: () {
+          Get.toNamed(Routes.SPARKD_LINES_RESPONSE);
+          // arguments: {
+          //   HttpUtil.conversationId: mainModel.data?[0].conversationId,
+          //   HttpUtil.message: message,
+          //   HttpUtil.name: "",
+          //   HttpUtil.previousSuggestions: []
+          // },
         },
         // onTap: widget.enableTap
         //     ? () async {
@@ -128,7 +127,7 @@ class _LinesWidgetState extends State<LinesWidget> {
         SparkLineResponse mainModel = SparkLineResponse.fromJson(data);
         if (mainModel.success!) {
           Get.toNamed(
-            Routes.buddy_ai_wingman_LINES_RESPONSE,
+            Routes.SPARKD_LINES_RESPONSE,
             arguments: {
               HttpUtil.conversationId: mainModel.data?[0].conversationId,
               HttpUtil.message: message,
