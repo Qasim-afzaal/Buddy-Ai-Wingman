@@ -54,18 +54,17 @@ class _Tile extends StatelessWidget {
               Image.asset(
                 iconPath,
                 width: 28,
-                height: 28,color: Colors.black,
+                height: 28,
+                color: Colors.black,
               ),
               SB.w(10),
               Expanded(
-                child: Text(
-                  title,
-                 style: GoogleFonts.interTight(
-                                textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ))
-                ),
+                child: Text(title,
+                    style: GoogleFonts.interTight(
+                        textStyle: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ))),
               ),
               Icon(
                 Icons.arrow_forward_ios,
