@@ -1,11 +1,11 @@
-import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd_controller.dart';
 import 'package:get/get.dart';
+import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd_controller.dart';
 
-class Startbuddy_ai_wingmanBinding extends Bindings {
+class StartSparkdBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<Startbuddy_ai_wingmanController>(
-      () => Startbuddy_ai_wingmanController(),
+    Get.lazyPut<StartSparkdController>(
+      () => StartSparkdController(),
     );
   }
 }
