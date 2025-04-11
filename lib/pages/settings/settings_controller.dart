@@ -12,8 +12,8 @@ class SettingsController extends GetxController {
   Completer<void>? _subscriptionCompleter;
 
   SettingsController({required this.inAppPurchaseSource}) {
-    inAppPurchaseSource.onLoading =  _showLoadingAlert;
-    inAppPurchaseSource.isAnimatedLoading =  _showAnimationLoadingAlert;
+    inAppPurchaseSource.onLoading = _showLoadingAlert;
+    inAppPurchaseSource.isAnimatedLoading = _showAnimationLoadingAlert;
     inAppPurchaseSource.onPurchaseResult = _handlePurchaseResult;
   }
 
@@ -34,7 +34,7 @@ class SettingsController extends GetxController {
   isUserSubscribedToProduct(Function(bool) callBack) async {
     _subscriptionCompleter = Completer<void>();
     try {
-       inAppPurchaseSource.restorePurchase();
+      inAppPurchaseSource.restorePurchase();
       await _subscriptionCompleter!.future;
       // After restoration, call the callback with the subscription status
       callBack(isProductSubscribed);
@@ -68,11 +68,11 @@ class SettingsController extends GetxController {
   void _showAnimationLoadingAlert() {
     if (!isLoading.value) {
       isLoading.value = true;
-
     }
   }
 
-  void _handlePurchaseResult(PurchaseStatus status, String message, {bool isProductSubscribed = false}) {
+  void _handlePurchaseResult(PurchaseStatus status, String message,
+      {bool isProductSubscribed = false}) {
     if (isLoading.value) {
       isLoading.value = false;
       Get.back();
@@ -102,4 +102,5 @@ class SettingsController extends GetxController {
         );
         break;
     }
-  }}
+  }
+}
