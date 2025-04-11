@@ -5,16 +5,14 @@ import 'package:buddy_ai_wingman/core/constants/constants.dart';
 import '../../models/error_response.dart';
 
 class ProfileBeforePaymentController extends GetxController {
-  
-
-    Future<void> deleteAccount() async {
-     final userid =getStorageData.getUserId();
-     print("userid $userid");
+  Future<void> deleteAccount() async {
+    final userid = getStorageData.getUserId();
+    print("userid $userid");
     final data = await APIFunction().deleteApiCall(
-      apiName: Constants.deleteUser+userid!,
+      apiName: Constants.deleteUser + userid!,
     );
     try {
-     getStorageData.removeAllData();
+      getStorageData.removeAllData();
     } catch (e) {
       ErrorResponse errorModel = ErrorResponse.fromJson(data);
       utils.showToast(message: errorModel.message!);
