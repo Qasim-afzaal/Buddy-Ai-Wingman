@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines_controller.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/widgets/lines_widget.dart';
+import 'sparkd_lines_controller.dart';
 
-class buddy_ai_wingmanLinesPage extends StatelessWidget {
-  const buddy_ai_wingmanLinesPage({super.key});
+class SparkdLinesPage extends StatelessWidget {
+  const SparkdLinesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,26 +19,25 @@ class buddy_ai_wingmanLinesPage extends StatelessWidget {
       itemsPerRow = 7;
     } else if (screenHeight >= 940 && screenHeight <= 1000) {
       itemsPerRow = 5;
-    }else if (screenHeight >= 926 && screenHeight <= 940) {
+    } else if (screenHeight >= 926 && screenHeight <= 940) {
       itemsPerRow = Platform.isIOS ? 4 : 4;
-    }  
-    else if (screenHeight >= 800 && screenHeight < 940) {
+    } else if (screenHeight >= 800 && screenHeight < 940) {
       itemsPerRow = 6;
     } else {
       itemsPerRow = 7;
     }
 
-    return GetBuilder<buddy_ai_wingmanLinesController>(
-      init: buddy_ai_wingmanLinesController(),
+    return GetBuilder<SparkdLinesController>(
+      init: SparkdLinesController(),
       builder: (controller) {
         return Scaffold(
-          appBar: const buddy_ai_wingmanAppBar(),
+       
           body: SafeArea(
             child: Column(
               children: [
                 SB.h(20),
                 Text(
-                  AppStrings.getbuddy_ai_wingmanLines,
+                  AppStrings.getSparkdLines,
                   style: context.headlineMedium?.copyWith(
                     color: context.primary,
                     fontWeight: FontWeight.w600,
@@ -46,10 +45,12 @@ class buddy_ai_wingmanLinesPage extends StatelessWidget {
                 ).paddingSymmetric(vertical: 10),
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => const SearchScreen()); // Navigate to SearchScreen on tap
+                    Get.to(() =>
+                        const SearchScreen()); // Navigate to SearchScreen on tap
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 13),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 13),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.orange, width: 1),
                       borderRadius: BorderRadius.circular(50),
@@ -57,11 +58,12 @@ class buddy_ai_wingmanLinesPage extends StatelessWidget {
                     child: const Row(
                       children: [
                         Icon(Icons.search),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           'Search',
                           style: TextStyle(
-            
                             fontSize: 16,
                           ),
                         ),
@@ -78,7 +80,8 @@ class buddy_ai_wingmanLinesPage extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       child: Column(
                         // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(controller.linesList.length ~/ itemsPerRow, (i) {
+                        children: List.generate(
+                            controller.linesList.length ~/ itemsPerRow, (i) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: List.generate(itemsPerRow, (j) {
@@ -101,7 +104,6 @@ class buddy_ai_wingmanLinesPage extends StatelessWidget {
   }
 }
 
-
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -114,13 +116,13 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     // Reset the search when the screen is initialized
-    final controller = Get.find<buddy_ai_wingmanLinesController>();
+    final controller = Get.find<SparkdLinesController>();
     controller.resetSearch();
   }
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<buddy_ai_wingmanLinesController>();
+    final controller = Get.find<SparkdLinesController>();
 
     return Scaffold(
       appBar: AppBar(
