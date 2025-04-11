@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:buddy_ai_wingman/pages/home/home_controller.dart';
 
-class buddy_ai_wingmanLinesController extends GetxController {
+class SparkdLinesController extends GetxController {
   var linesList = <SparkLinesModel>[
-     SparkLinesModel(text: "👋 Casual Hi"),
+    SparkLinesModel(text: "👋 Casual Hi"),
     SparkLinesModel(text: "😘 Flirty Compliment"),
     SparkLinesModel(text: "🌇 Ask About"),
     SparkLinesModel(text: "🗓️ Weekend Plans"),
