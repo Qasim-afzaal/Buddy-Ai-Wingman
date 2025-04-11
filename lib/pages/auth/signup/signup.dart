@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:buddy_ai_wingman/core/Utils/assets_util.dart';
@@ -10,7 +9,6 @@ import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/pages/auth/signup/signup_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
-import 'package:buddy_ai_wingman/widgets/custom_rich_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -27,7 +25,7 @@ class SignupPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -75,7 +73,7 @@ class SignupPage extends StatelessWidget {
                     SB.h(25),
                     CustomTextField(
                       controller: controller.userNameController,
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: const Icon(Icons.person),
                       hintText: "Enter Name",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -86,7 +84,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     CustomTextField(
                       controller: controller.emailController,
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: const Icon(Icons.email),
                       hintText: "Enter Email",
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -102,7 +100,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     CustomTextField(
                       controller: controller.passwordController,
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       hintText: "Enter Password",
                       isPasswordField: true,
                       validator: (value) {
