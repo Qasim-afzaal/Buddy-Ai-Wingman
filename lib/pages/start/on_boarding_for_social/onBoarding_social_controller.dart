@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/models/error_response.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/models/error_response.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
 
 import '../../../routes/app_pages.dart';
 
@@ -16,7 +16,7 @@ class OnBoardingSocialController extends GetxController {
   String? gender;
   String? ageRange;
   String? personalityType;
-   String? name;
+  String? name;
   String? email;
   String? authprovider;
   TextEditingController userNameController = TextEditingController();
@@ -30,6 +30,7 @@ class OnBoardingSocialController extends GetxController {
     update();
     _nextPage();
   }
+
   //   void handleNavigation() {
   //   _paymentPlanController.isUserSubscribedToProduct((p0) {
   //     if (p0 == true) {
@@ -39,7 +40,7 @@ class OnBoardingSocialController extends GetxController {
   //     }
   //   });
   // }
-String genderValue(Genders gender) {
+  String genderValue(Genders gender) {
     switch (gender) {
       case Genders.Male:
         return "Male";
@@ -99,13 +100,13 @@ String genderValue(Genders gender) {
 
   Future<void> onSignup() async {
     var json = {
-      HttpUtil.name:name,
+      HttpUtil.name: name,
       HttpUtil.authProvider: authprovider,
       HttpUtil.email: email,
       HttpUtil.password: passwordController.text.trim(),
       HttpUtil.gender: genderValue(selectedGender!),
       HttpUtil.age: selectedAgeRange,
-      HttpUtil.personalityType:  personalityTypeValue(selectedPersonality!),
+      HttpUtil.personalityType: personalityTypeValue(selectedPersonality!),
       HttpUtil.profileImageUrl: "",
     };
     print(json);
@@ -117,7 +118,7 @@ String genderValue(Genders gender) {
       LoginResponse mainModel = LoginResponse.fromJson(data);
       if (mainModel.success!) {
         getStorageData.saveLoginData(mainModel);
-      // handleNavigation();
+        // handleNavigation();
       } else {
         utils.showToast(message: mainModel.message!);
       }
@@ -130,7 +131,8 @@ String genderValue(Genders gender) {
   void onLogin() {
     Get.offNamed(Routes.LOGIN);
   }
-    @override
+
+  @override
   void onInit() {
     if (Get.arguments != null) {
       name = Get.arguments[HttpUtil.name];
