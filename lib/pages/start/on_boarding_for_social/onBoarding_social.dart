@@ -33,7 +33,8 @@ class OnBoardingSocialPage extends StatelessWidget {
                             SB.w(5),
                             Text(
                               AppStrings.back,
-                              style: context.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                              style: context.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ).paddingAll(context.paddingDefault),
@@ -64,7 +65,8 @@ class OnBoardingSocialPage extends StatelessWidget {
                   Expanded(
                     child: PageView(
                       controller: controller.pageController,
-                      onPageChanged: (index) => controller.currentPage.value = index,
+                      onPageChanged: (index) =>
+                          controller.currentPage.value = index,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         GenderWidget(
@@ -77,8 +79,11 @@ class OnBoardingSocialPage extends StatelessWidget {
                         ),
                         PersonalityWidget(
                           selectedPersonality: controller.selectedPersonality,
-                          onPersonalitySelection: controller.onPersonalitySelection,
-                          onFinish:(){ controller.onSignup();},
+                          onPersonalitySelection:
+                              controller.onPersonalitySelection,
+                          onFinish: () {
+                            controller.onSignup();
+                          },
                         ),
                       ],
                     ),
