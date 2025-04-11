@@ -4,6 +4,7 @@ import 'package:buddy_ai_wingman/widgets/gender_widget.dart';
 import 'package:buddy_ai_wingman/widgets/personality_widget.dart';
 
 import '../../../widgets/custom_rich_text.dart';
+
 import 'onBoarding_controller.dart';
 
 class OnBoardingPage extends StatelessWidget {
@@ -34,7 +35,8 @@ class OnBoardingPage extends StatelessWidget {
                             SB.w(5),
                             Text(
                               AppStrings.back,
-                              style: context.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                              style: context.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ).paddingAll(context.paddingDefault),
@@ -65,7 +67,8 @@ class OnBoardingPage extends StatelessWidget {
                   Expanded(
                     child: PageView(
                       controller: controller.pageController,
-                      onPageChanged: (index) => controller.currentPage.value = index,
+                      onPageChanged: (index) =>
+                          controller.currentPage.value = index,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         GenderWidget(
@@ -78,21 +81,20 @@ class OnBoardingPage extends StatelessWidget {
                         ),
                         PersonalityWidget(
                           selectedPersonality: controller.selectedPersonality,
-                          onPersonalitySelection: controller.onPersonalitySelection,
+                          onPersonalitySelection:
+                              controller.onPersonalitySelection,
                           onFinish: controller.onFinish,
                         ),
                       ],
                     ),
                   ),
                   Center(
-
                     child: CustomRichText(
                       text: AppStrings.alreadyHaveAccount,
                       highlightedText: AppStrings.login,
                       onTap: controller.onLogin,
                     ),
                   ),
-
                 ],
               ),
             ),
