@@ -21,12 +21,12 @@ class ProfilePage extends StatelessWidget {
           final userId = getStorageData.getUserId();
           return Column(
             crossAxisAlignment:
-                CrossAxisAlignment.center, // Centering the content
+                CrossAxisAlignment.center, 
             children: [
               SizedBox(
                 height: 20,
               ),
-              // Tiles for other options like Clear All, Logout, Delete Account
+            
               _Tile(
                 iconPath: Assets.icons.deleteAll.path,
                 title: AppStrings.clearAll,
