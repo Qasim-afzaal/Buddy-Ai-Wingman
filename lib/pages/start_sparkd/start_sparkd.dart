@@ -1,14 +1,15 @@
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd_controller.dart';
+import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
+import 'start_sparkd_controller.dart';
 
-class Startbuddy_ai_wingmanPage extends StatelessWidget {
-  const Startbuddy_ai_wingmanPage({super.key});
+class StartSparkdPage extends StatelessWidget {
+  const StartSparkdPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: Startbuddy_ai_wingmanController(),
+      init: StartSparkdController(),
       builder: (controller) {
         return Scaffold(
           body: SafeArea(
@@ -16,7 +17,7 @@ class Startbuddy_ai_wingmanPage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    AppStrings.startAbuddy_ai_wingman,
+                    AppStrings.startASparkd,
                     textAlign: TextAlign.center,
                     style: context.headlineMedium?.copyWith(
                       color: context.primary,
@@ -78,7 +79,9 @@ class Startbuddy_ai_wingmanPage extends StatelessWidget {
                     onPressed: () {
                       controller.addNewChatManually(true);
                     },
-                  ).paddingSymmetric(horizontal: context.width * 0.15, vertical: context.paddingDefault),
+                  ).paddingSymmetric(
+                      horizontal: context.width * 0.15,
+                      vertical: context.paddingDefault),
                 ],
               ).paddingAll(context.paddingDefault),
             ),
