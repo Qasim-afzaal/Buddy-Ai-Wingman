@@ -14,7 +14,7 @@ class ProfilePageBeforePayment extends StatelessWidget {
       body: GetBuilder<ProfileBeforePaymentController>(
         init: ProfileBeforePaymentController(),
         builder: (controller) {
-          final userId = getStorageData.getUserId();
+          getStorageData.getUserId();
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
