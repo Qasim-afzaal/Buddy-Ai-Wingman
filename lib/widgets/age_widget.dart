@@ -1,8 +1,11 @@
-
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class AgeWidget extends StatelessWidget {
-  AgeWidget({super.key, this.selectedAge, required this.onAgeSelection, this.headingText});
+  AgeWidget(
+      {super.key,
+      this.selectedAge,
+      required this.onAgeSelection,
+      this.headingText});
   final String? headingText;
 
   final String? selectedAge;
@@ -19,7 +22,7 @@ class AgeWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          headingText?? AppStrings.yourAgeHeading,
+          headingText ?? AppStrings.yourAgeHeading,
           style: context.headlineMedium?.copyWith(
             color: context.primary,
             fontWeight: FontWeight.w600,
