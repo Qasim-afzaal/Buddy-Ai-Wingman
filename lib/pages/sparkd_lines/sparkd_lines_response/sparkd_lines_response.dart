@@ -1,15 +1,15 @@
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:flutter/services.dart';
 
-class buddy_ai_wingmanLinesResponsePage extends StatefulWidget {
-  const buddy_ai_wingmanLinesResponsePage({Key? key}) : super(key: key);
+class SparkdLinesResponsePage extends StatefulWidget {
+  const SparkdLinesResponsePage({Key? key}) : super(key: key);
 
   @override
-  State<buddy_ai_wingmanLinesResponsePage> createState() =>
-      _buddy_ai_wingmanLinesResponsePageState();
+  State<SparkdLinesResponsePage> createState() =>
+      _SparkdLinesResponsePageState();
 }
 
-class _buddy_ai_wingmanLinesResponsePageState extends State<buddy_ai_wingmanLinesResponsePage> {
+class _SparkdLinesResponsePageState extends State<SparkdLinesResponsePage> {
   final List<String> paragraphs = [
     "For a new date, always have a plan in mind.",
     "Confidence is key—carry yourself with assurance.",
@@ -39,11 +39,12 @@ class _buddy_ai_wingmanLinesResponsePageState extends State<buddy_ai_wingmanLine
         children: [
           // Adjust height dynamically based on screen height
           SizedBox(height: screenHeight * 0.25), // Adjust this value as needed
-          
+
           // Use Expanded to allow ListView to take available space above the button
           Expanded(
             child: Container(
-              constraints: BoxConstraints(maxHeight: screenHeight * 0.6), // Adjust this value as needed
+              constraints: BoxConstraints(
+                  maxHeight: screenHeight * 0.6), // Adjust this value as needed
               child: ListView(
                 shrinkWrap: true,
                 children: [
@@ -56,7 +57,7 @@ class _buddy_ai_wingmanLinesResponsePageState extends State<buddy_ai_wingmanLine
               ),
             ),
           ),
-          
+
           // Align the button at the bottom of the screen
           SafeArea(
             child: Padding(
