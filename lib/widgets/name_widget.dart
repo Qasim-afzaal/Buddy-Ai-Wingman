@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:buddy_ai_wingman/api_repository/api_class.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/gather_new_chat_info_controller.dart';
 import 'package:buddy_ai_wingman/routes/app_pages.dart';
@@ -14,16 +15,6 @@ class NameWidget extends StatefulWidget {
 class _NameWidgetState extends State<NameWidget> {
   final GatherNewChatInfoController controller = GatherNewChatInfoController();
   bool isLoading = false;
-
-  void _onButtonPressed() async {
-    setState(() => isLoading = true); // Show loader
-
-    await Future.delayed(Duration(seconds: 5));
-
-    setState(() => isLoading = false); // Hide loader
-
-    Get.toNamed(Routes.CHAT); // Navigate to chat
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +32,8 @@ class _NameWidgetState extends State<NameWidget> {
         Text(
           AppStrings.allSetDescription,
           textAlign: TextAlign.center,
-          style: context.bodyLarge?.copyWith(fontWeight: FontWeight.w400, height: 1),
+          style: context.bodyLarge
+              ?.copyWith(fontWeight: FontWeight.w400, height: 1),
         ),
         SB.h(40),
         CustomTextField(
@@ -52,10 +44,12 @@ class _NameWidgetState extends State<NameWidget> {
         AppButton.primary(
           title: isLoading
               ? null // Remove text when loading
-              : AppStrings.getMybuddy_ai_wingman,
-          onPressed: isLoading ? null : _onButtonPressed, // Disable while loading
+              : AppStrings.getMySparkd,
+          onPressed: isLoading
+              ? null
+              : controller.onButtonPressed, // Disable while loading
           child: isLoading
-              ? SizedBox(
+              ? const SizedBox(
                   width: 24,
                   height: 24,
                   child: CircularProgressIndicator(
