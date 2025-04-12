@@ -2,7 +2,10 @@ import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class GenderWidget extends StatelessWidget {
   const GenderWidget(
-      {super.key, this.selectedGender, required this.onGenderSelection, this.headingText});
+      {super.key,
+      this.selectedGender,
+      required this.onGenderSelection,
+      this.headingText});
 
   final Genders? selectedGender;
   final Function(Genders) onGenderSelection;
@@ -13,7 +16,7 @@ class GenderWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          headingText?? AppStrings.yourGenderHeading,
+          headingText ?? AppStrings.yourGenderHeading,
           style: context.headlineMedium?.copyWith(
             color: context.primary,
             fontWeight: FontWeight.w600,
