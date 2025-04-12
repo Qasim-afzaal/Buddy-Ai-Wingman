@@ -13,20 +13,17 @@ class CustomRichText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: text,
-        style: context.bodyLarge
-            ?.copyWith( fontSize: fontSize),
+        style: context.bodyLarge?.copyWith(fontSize: fontSize),
         children: <TextSpan>[
           if (highlightedText != null)
             TextSpan(
               text: " ${highlightedText ?? ''} ",
-
               style: context.bodyLarge?.copyWith(
-                color: Colors.green,
-                fontSize: fontSize,
-                fontWeight: FontWeight.w500,
-                // decoration: TextDecoration.underline,
-                decorationColor: context.primary
-              ),
+                  color: Colors.green,
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.w500,
+                  // decoration: TextDecoration.underline,
+                  decorationColor: context.primary),
               recognizer: onTap == null
                   ? null
                   : (TapGestureRecognizer()..onTap = () => onTap!()),
