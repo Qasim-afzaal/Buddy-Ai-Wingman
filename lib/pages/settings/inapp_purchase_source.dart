@@ -26,7 +26,7 @@ abstract class InAppPurchaseSource {
 }
 
 class InAppPurchaseSourceImpl implements InAppPurchaseSource {
-  Set<String> productIds = <String>{'com.app.buddy_ai_wingman.premium.monthly'};
+  Set<String> productIds = <String>{'com.app.sparkd.premium.monthly'};
   var isUserTryToSubscribeProduct = false;
   var isValidateProductSubscriptionStatus = false;
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
@@ -143,7 +143,7 @@ class InAppPurchaseSourceImpl implements InAppPurchaseSource {
               purchaseDetails.error?.message ?? 'Unknown error',
               isProductSubscribed: false);
           break;
-        }
+      }
 
       if (purchaseDetails.pendingCompletePurchase) {
         completePurchase(purchaseDetails);
@@ -169,15 +169,14 @@ class InAppPurchaseSourceImpl implements InAppPurchaseSource {
   Future<void> _restorePurchase(PurchaseDetails purchaseDetails) async {
     bool valid = await verifyPurchase(purchaseDetails);
     print("i am here in resytore");
-     Map msg = {"name": " Recipt Verification Checking"};
-      Constants.socket!.emit("logEvent", msg);
+    Map msg = {"name": " Recipt Verification Checking"};
+    Constants.socket!.emit("logEvent", msg);
     if (valid) {
-     
       var data = purchaseDetails.verificationData.localVerificationData;
       if (isValidateProductSubscriptionStatus) {
         isValidateProductSubscriptionStatus = false;
         if (Platform.isAndroid) {
-           print("i am here in Androidrestore");
+          print("i am here in Androidrestore");
           var restoreData = jsonDecode(data) as Map<String, dynamic>;
           final isProductSubscribe = restoreData['autoRenewing'] == true;
           onPurchaseResult?.call(
@@ -326,13 +325,12 @@ class InAppPurchaseSourceImpl implements InAppPurchaseSource {
       Constants.socket!.emit("logEvent", msg);
       await _inAppPurchase.restorePurchases();
       Map restore = {"name": " Restore Complete ....."};
-    Constants.socket!.emit("logEvent", restore);
-       debugPrint("Subscription Check initiated");
+      Constants.socket!.emit("logEvent", restore);
+      debugPrint("Subscription Check initiated");
       Map inapi = {"name": " in recipt api"};
       Constants.socket!.emit("logEvent", inapi);
-        Map inapis = {"name": " check recipt status ::: false"};
+      Map inapis = {"name": " check recipt status ::: false"};
       Constants.socket!.emit("logEvent", inapis);
-  
     } catch (e) {
       if (e is SKError) {
         debugPrint("SKError code: '${e.code}', userInfo: '${e.userInfo}'");
