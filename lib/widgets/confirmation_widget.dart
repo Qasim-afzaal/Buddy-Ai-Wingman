@@ -1,8 +1,8 @@
-
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class ConfirmationWidget extends StatelessWidget {
-  const ConfirmationWidget({super.key, this.title, this.description, this.onConfirmation});
+  const ConfirmationWidget(
+      {super.key, this.title, this.description, this.onConfirmation});
   final String? title, description;
   final VoidCallback? onConfirmation;
 
@@ -19,21 +19,21 @@ class ConfirmationWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SB.h(10),
-            if(title!=null)
-            Text(
-           title!,
-              style: context.titleLarge?.copyWith(
-                fontWeight: FontWeight.w600,
+            if (title != null)
+              Text(
+                title!,
+                style: context.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
             SB.h(15),
-            if(description!=null)
-            Text(
-              description!,
-              style: context.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w400,
+            if (description != null)
+              Text(
+                description!,
+                style: context.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
             SB.h(25),
             Row(
               children: [
@@ -41,7 +41,8 @@ class ConfirmationWidget extends StatelessWidget {
                   child: AppButton.outline(
                     title: AppStrings.cancel,
                     onPressed: Get.back,
-                  ),),
+                  ),
+                ),
                 SB.w(10),
                 Expanded(
                   child: AppButton.primary(
@@ -51,7 +52,6 @@ class ConfirmationWidget extends StatelessWidget {
                 )
               ],
             ),
-
           ],
         ).paddingAll(context.paddingDefault),
       ),
