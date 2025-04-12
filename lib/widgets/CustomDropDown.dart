@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 
 class CustomDropDown extends StatelessWidget {
@@ -25,8 +26,8 @@ class CustomDropDown extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
-                  if(item.iconPath!=null)
-                  SvgPicture.asset(item.iconPath!).paddingOnly(right: 8),
+                  if (item.iconPath != null)
+                    SvgPicture.asset(item.iconPath!).paddingOnly(right: 8),
                   Text(
                     item.text,
                     style: context.bodyLarge,
