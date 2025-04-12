@@ -9,7 +9,6 @@ import 'package:buddy_ai_wingman/api_repository/api_function.dart';
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
 import 'package:buddy_ai_wingman/models/error_response.dart';
 import 'package:buddy_ai_wingman/pages/payment/payment_confirmation/payment_confirmation.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_method/payment_method.dart';
 import 'package:buddy_ai_wingman/pages/settings/inapp_purchase_source.dart';
 
 class PaymentPlanController extends GetxController {
