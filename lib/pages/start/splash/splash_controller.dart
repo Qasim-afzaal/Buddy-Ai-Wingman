@@ -15,31 +15,16 @@ import '../../payment/payment_plan/payment_plan_controller.dart';
 class SplashController extends GetxController {
   final PaymentPlanController _paymentPlanController =
       getPaymentPlanController();
-
   void handleNavigation() {
-    // _paymentPlanController.isUserSubscribedToProduct((p0) {
-    //   Map chatmsg = {"name": "Splash payment rceipt check status value::$p0"};
-    //   Constants.socket!.emit("logEvent", chatmsg);
-    //   print("value of p@$p0");
-    //   if (p0 == true) {
-    //     Map chatmsg = {"name": "Dashboadr screen::"};
-    //     Constants.socket!.emit("logEvent", chatmsg);
-    //     print("this is profile status${getStorageData.isProfileComplete}");
-    //     print(
-    //         "what is profile complete${getStorageData.readLoginData().data!.isProfileComplete}");
+    _paymentPlanController.isUserSubscribedToProduct((p0) {
+      print("Verification Api Called Status::$p0");
 
-    //     if (getStorageData.readLoginData().data!.isProfileComplete == false) {
-    //       Get.offNamed(Routes.ON_BOARDING);
-        // } else {
-          Get.offNamed(Routes.HOME);
-      //   }
-      // } else {
-      //   Map chatmsg = {"name": "Payment screen::"};
-      //   Constants.socket!.emit("logEvent", chatmsg);
-      //   print("value of p@$p0");
-      //   Get.offNamed(Routes.PAYMENT_PLAN);
-      // }
-    // }, loadingRequired: false);
+      if (p0 == true) {
+        Get.offNamed(Routes.HOME);
+      } else {
+        Get.offNamed(Routes.PAYMENT_PLAN);
+      }
+    });
   }
 
   @override
