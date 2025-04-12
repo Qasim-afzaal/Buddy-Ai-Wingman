@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
       body: GetBuilder<ProfileController>(
         init: ProfileController(),
         builder: (controller) {
-          final userId = getStorageData.getUserId();
+          getStorageData.getUserId();
           return Column(
             crossAxisAlignment:
                 CrossAxisAlignment.center, 
