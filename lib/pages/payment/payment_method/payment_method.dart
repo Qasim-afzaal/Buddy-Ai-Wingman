@@ -7,7 +7,7 @@ class PaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
+      appBar: const SimpleAppBar(
         title: AppStrings.paymentMethods,
       ),
       body: GetBuilder<PaymentMethodController>(
