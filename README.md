@@ -47,7 +47,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/Qasim-afzaal/ai-rizz-app.git
+git clone https://github.com/Qasim-afzaal/Buddy-Ai-Wingman.git
 
 # Install dependencies
 flutter pub get
