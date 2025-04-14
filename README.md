@@ -115,7 +115,6 @@ class RizzSuggestions extends StatelessWidget {
 
 [![License](https://img.shields.io/github/license/Qasim-afzaal/ai-rizz-app?color=blue)](LICENSE)
 
----
 
 ## 💌 Connect With Us
 
