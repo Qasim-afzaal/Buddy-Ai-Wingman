@@ -1,4 +1,4 @@
-# 💘 BUDDY AI WINGMAN - Your AI-Powered Dating Wingman
+# 💘 BUDDY AI WINGMAN - Your AI-Powered Dating App
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.22-%2302569B?logo=flutter)](https://flutter.dev)
 [![License](https://img.shields.io/badge/License-MIT-%23D22128)](https://opensource.org/licenses/MIT)
