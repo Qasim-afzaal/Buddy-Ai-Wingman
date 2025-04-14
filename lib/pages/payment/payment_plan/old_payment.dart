@@ -8,7 +8,6 @@ import 'package:buddy_ai_wingman/routes/app_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/terms_condition/terms_condition.dart';
 
 import 'payment_plan_controller.dart';
 
