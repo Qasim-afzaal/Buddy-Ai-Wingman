@@ -4,7 +4,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/app_colors.dart';
 
 class Loading {
   Loading() {
