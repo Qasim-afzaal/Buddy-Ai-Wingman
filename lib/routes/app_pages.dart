@@ -1,49 +1,56 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/auth/forgot_password/code_verification/code_verification.dart';
-import 'package:buddy_ai_wingman/pages/auth/forgot_password/create_password/create_password.dart';
-import 'package:buddy_ai_wingman/pages/auth/forgot_password/create_password/create_password_binding.dart';
-import 'package:buddy_ai_wingman/pages/auth/forgot_password/email_verification/email_verification.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login.dart';
-import 'package:buddy_ai_wingman/pages/auth/otp/otp_verification/otp_varification.dart';
-import 'package:buddy_ai_wingman/pages/auth/otp/otp_verification/otp_verification_binding.dart';
-import 'package:buddy_ai_wingman/pages/auth/pin_verification/pin_verification.dart';
-import 'package:buddy_ai_wingman/pages/auth/signup/signup.dart';
-import 'package:buddy_ai_wingman/pages/home/home.dart';
-import 'package:buddy_ai_wingman/pages/home/image_chat/screen/image_chat_binding.dart';
-import 'package:buddy_ai_wingman/pages/home/image_chat/screen/image_chat_screen.dart';
-import 'package:buddy_ai_wingman/pages/home/manual_chat/manual_chat_binding.dart';
-import 'package:buddy_ai_wingman/pages/home/manual_chat/manual_chat_name.dart';
-import 'package:buddy_ai_wingman/pages/home/pickup_lines/pickup_line.dart';
-import 'package:buddy_ai_wingman/pages/home/pickup_lines/pickup_line_binding.dart';
-import 'package:buddy_ai_wingman/pages/inbox/inbox.dart';
-import 'package:buddy_ai_wingman/pages/inbox/inbox_binding.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/chat.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/chat_page_m.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/chat_w_biding.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/gather_new_chat.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/manual_Chat.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/newbinding.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/info/info.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/voice_chat/voice_chat.dart';
-import 'package:buddy_ai_wingman/pages/notifications/notification_settings.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_confirmation/payment_confirmation.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_method/payment_method.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan.dart';
-import 'package:buddy_ai_wingman/pages/pin/create_pin/create_pin.dart';
-import 'package:buddy_ai_wingman/pages/pin/pin_success/pin_success.dart';
-import 'package:buddy_ai_wingman/pages/profile/profile.dart';
-import 'package:buddy_ai_wingman/pages/profile_before_payment/profile_before_payment.dart';
-import 'package:buddy_ai_wingman/pages/profile_before_payment/profile_before_payment_binding.dart';
-import 'package:buddy_ai_wingman/pages/settings/settings.dart';
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines.dart';
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines_response/sparkd_lines_response.dart';
-import 'package:buddy_ai_wingman/pages/start/create_account/create_account.dart';
-import 'package:buddy_ai_wingman/pages/start/on_boarding/onBoarding.dart';
-import 'package:buddy_ai_wingman/pages/start/on_boarding_for_social/onBoarding_social.dart';
-import 'package:buddy_ai_wingman/pages/start/on_boarding_for_social/onBoarding_social_binding.dart';
-import 'package:buddy_ai_wingman/pages/start/splash/splash.dart';
-import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd.dart';
-import 'package:buddy_ai_wingman/pages/terms_condition/terms_condition.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/auth/forgot_password/code_verification/code_verification.dart';
+import 'package:buddy/pages/auth/forgot_password/create_password/create_password.dart';
+import 'package:buddy/pages/auth/forgot_password/create_password/create_password_binding.dart';
+import 'package:buddy/pages/auth/forgot_password/email_verification/email_verification.dart';
+import 'package:buddy/pages/auth/login/login.dart';
+import 'package:buddy/pages/auth/login/login_bloc.dart';
+import 'package:buddy/pages/auth/otp/otp_verification/otp_varification.dart';
+import 'package:buddy/pages/auth/otp/otp_verification/otp_verification_binding.dart';
+import 'package:buddy/pages/auth/pin_verification/pin_verification.dart';
+import 'package:buddy/pages/auth/pin_verification/pin_verification_bloc.dart';
+import 'package:buddy/pages/auth/signup/signup.dart';
+import 'package:buddy/pages/auth/signup/signup_bloc.dart';
+import 'package:buddy/pages/auth/auth_demo.dart';
+import 'package:buddy/pages/home/home.dart';
+import 'package:buddy/pages/home/image_chat/screen/image_chat_binding.dart';
+import 'package:buddy/pages/home/image_chat/screen/image_chat_screen.dart';
+import 'package:buddy/pages/home/manual_chat/manual_chat_binding.dart';
+import 'package:buddy/pages/home/manual_chat/manual_chat_name.dart';
+import 'package:buddy/pages/home/pickup_lines/pickup_line.dart';
+import 'package:buddy/pages/home/pickup_lines/pickup_line_binding.dart';
+import 'package:buddy/pages/inbox/inbox.dart';
+import 'package:buddy/pages/inbox/inbox_binding.dart';
+import 'package:buddy/pages/new_chat/chat/chat.dart';
+import 'package:buddy/pages/new_chat/chat/chat_page_m.dart';
+import 'package:buddy/pages/new_chat/chat/chat_w_biding.dart';
+import 'package:buddy/pages/new_chat/gather_new_chat/gather_new_chat.dart';
+import 'package:buddy/pages/new_chat/gather_new_chat/manual_Chat.dart';
+import 'package:buddy/pages/new_chat/gather_new_chat/newbinding.dart';
+import 'package:buddy/pages/new_chat/info/info.dart';
+import 'package:buddy/pages/new_chat/voice_chat/voice_chat.dart';
+import 'package:buddy/pages/notifications/notification_settings.dart';
+import 'package:buddy/pages/payment/payment_confirmation/payment_confirmation.dart';
+import 'package:buddy/pages/payment/payment_method/payment_method.dart';
+import 'package:buddy/pages/payment/payment_plan/payment_plan.dart';
+import 'package:buddy/pages/payment/trial_start/trail_start.dart';
+import 'package:buddy/pages/payment/trial_start/trail_start_binding.dart';
+import 'package:buddy/pages/pin/create_pin/create_pin.dart';
+import 'package:buddy/pages/pin/pin_success/pin_success.dart';
+import 'package:buddy/pages/profile/profile.dart';
+import 'package:buddy/pages/profile_before_payment/profile_before_payment.dart';
+import 'package:buddy/pages/profile_before_payment/profile_before_payment_binding.dart';
+import 'package:buddy/pages/settings/settings.dart';
+import 'package:buddy/pages/sparkd_lines/sparkd_lines.dart';
+import 'package:buddy/pages/sparkd_lines/sparkd_lines_response/sparkd_lines_response.dart';
+import 'package:buddy/pages/start/create_account/create_account.dart';
+import 'package:buddy/pages/start/on_boarding/onBoarding.dart';
+import 'package:buddy/pages/start/on_boarding_for_social/onBoarding_social.dart';
+import 'package:buddy/pages/start/on_boarding_for_social/onBoarding_social_binding.dart';
+import 'package:buddy/pages/start/splash/splash.dart';
+import 'package:buddy/pages/start/splash/splash_bloc.dart';
+import 'package:buddy/pages/start_sparkd/start_sparkd.dart';
+import 'package:buddy/pages/terms_condition/terms_condition.dart';
 
 import '../pages/auth/forgot_password/code_verification/code_verification_binding.dart';
 import '../pages/auth/forgot_password/email_verification/email_verification_binding.dart';
@@ -85,6 +92,9 @@ class AppPages {
         page: () => const SplashPage(),
         binding: SplashBinding()),
     GetPage(
+        name: _Paths.SPLASH_BLOC,
+        page: () => const SplashBlocPage()),
+    GetPage(
         name: _Paths.PROFILEPAGE_2,
         page: () => const ProfilePageBeforePayment(),
         binding: ProfileBeforePaymentBinding()),
@@ -105,6 +115,9 @@ class AppPages {
         page: () => const LoginPage(),
         binding: LoginBinding()),
     GetPage(
+        name: _Paths.LOGIN_BLOC,
+        page: () => const LoginBlocPage()),
+    GetPage(
         name: _Paths.OTP,
         page: () => OTPVerificationPage(),
         binding: OtpVerificationBinding()),
@@ -112,6 +125,9 @@ class AppPages {
         name: _Paths.SIGN_UP,
         page: () => const SignupPage(),
         binding: SignupBinding()),
+    GetPage(
+        name: _Paths.SIGN_UP_BLOC,
+        page: () => const SignupBlocPage()),
     GetPage(
         name: _Paths.CODE_VERIFICATION,
         page: () => const CodeVerificationPage(),
@@ -128,6 +144,9 @@ class AppPages {
         name: _Paths.PIN_VERIFICATION,
         page: () => const PinVerificationPage(),
         binding: PinVerificationBinding()),
+    GetPage(
+        name: _Paths.PIN_VERIFICATION_BLOC,
+        page: () => const PinVerificationBlocPage()),
     GetPage(
         name: _Paths.DASHBOARD,
         page: () => const DashboardPage(),
@@ -185,8 +204,14 @@ class AppPages {
         name: _Paths.NOTIFICATION_SETTINGS,
         page: () => const NotificationSettingsPage(),
         binding: NotificationSettingsBinding()),
-   
-
+    GetPage(
+        name: _Paths.SPARKD_LINES_RESPONSE,
+        page: () => const SparkdLinesResponsePage(),
+        binding: SparkdLinesResponseBinding()),
+    GetPage(
+        name: _Paths.SPARKD_LINES,
+        page: () => const SparkdLinesPage(),
+        binding: SparkdLinesBinding()),
     GetPage(
         name: _Paths.START_SPARKD,
         page: () => const StartSparkdPage(),
@@ -214,9 +239,18 @@ class AppPages {
       binding: ManualChatBinding(),
     ),
     GetPage(
+      name: _Paths.TRAIL_START,
+      page: () => TrailStart(),
+      binding: TrailStartBinding(),
+    ),
+    GetPage(
       name: _Paths.NEW2,
       page: () => ChatPage2(),
       binding: Chat2Binding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH_DEMO,
+      page: () => const AuthDemoPage(),
     ),
   ];
 }
