@@ -6,9 +6,9 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
-import 'package:buddy_ai_wingman/api_repository/loading.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
+import 'package:buddy/api_repository/loading.dart';
+import 'package:buddy/core/constants/constants.dart';
+import 'package:buddy/core/constants/helper.dart';
 
 class HttpUtil {
   // Body params name ->
