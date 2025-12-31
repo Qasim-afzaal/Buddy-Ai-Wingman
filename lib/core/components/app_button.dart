@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/core/extensions/build_context_extension.dart';
 
 const double _defaultButtonHeight = 49.0;
 
