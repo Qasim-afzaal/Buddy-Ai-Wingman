@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/home/home.dart';
-import 'package:buddy_ai_wingman/pages/inbox/inbox.dart';
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines.dart';
-import 'package:buddy_ai_wingman/pages/start_sparkd/start_sparkd.dart';
-import 'package:buddy_ai_wingman/widgets/custom_navbar.dart';
-import 'package:buddy_ai_wingman/widgets/lazy_stackindex.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/home/home.dart';
+import 'package:buddy/pages/inbox/inbox.dart';
+import 'package:buddy/pages/sparkd_lines/sparkd_lines.dart';
+import 'package:buddy/pages/start_sparkd/start_sparkd.dart';
+import 'package:buddy/widgets/custom_navbar.dart';
+import 'package:buddy/widgets/lazy_stackindex.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
