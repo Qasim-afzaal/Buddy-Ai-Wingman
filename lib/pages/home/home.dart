@@ -2,11 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:buddy_ai_wingman/core/components/custom_button2.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/home/home_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/components/custom_button2.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/home/home_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const buddy_ai_wingmanAppBar(),
+      appBar: const SparkdAppBarBeforePayment(),
       body: SafeArea(
         child: Stack(
           children: [
