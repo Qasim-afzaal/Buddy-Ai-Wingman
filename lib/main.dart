@@ -1,25 +1,114 @@
 // import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
-import 'package:buddy_ai_wingman/api_repository/loading.dart';
-import 'package:buddy_ai_wingman/api_repository/socket_service.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/core/theme/theme_light.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan_controller.dart';
-import 'package:buddy_ai_wingman/pages/settings/inapp_purchase_source.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'dart:io';
+
+import 'dart:convert';
+import 'package:buddy/api_repository/loading.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/core/theme/theme_light.dart';
+import 'package:buddy/core/services/notification_service.dart';
+import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
+import 'package:buddy/pages/settings/inapp_purchase_source.dart';
+import 'package:buddy/pages/settings/revenuecat_purchase_source.dart';
+import 'package:buddy/routes/app_pages.dart';
+import 'package:buddy/bloc/auth/auth_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+
+
+
+  // Initialize RevenueCat with platform-specific API keys
+  try {
+    await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
+    
+    // Use platform-specific API keys
+    String revenueCatApiKey;
+    if (Platform.isIOS) {
+      revenueCatApiKey = 'appl_fIAZauleXmbNzvTkKxzMskudacI'; // Apple App Store API Key
+    } else if (Platform.isAndroid) {
+      revenueCatApiKey = 'goog_AEecDlzshWcNLbrsvVQrjUWoCbR'; // Google Play Store API Key
+    } else {
+      revenueCatApiKey = 'goog_AEecDlzshWcNLbrsvVQrjUWoCbR'; // Default to Android
+    }
+    
+    await Purchases.configure(
+      PurchasesConfiguration(revenueCatApiKey)
+        ..appUserID = null // RevenueCat will generate an anonymous ID
+    );
+    debugPrint("✅ RevenueCat initialized successfully with key: ${Platform.isIOS ? 'iOS' : 'Android'}");
+  } catch (e) {
+    debugPrint("❌ Error initializing RevenueCat: $e");
+  }
+
+  // Initialize Notification Service (both push and local notifications)
+  await NotificationService.instance.initialize(
+    iosOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
+    androidOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
+  );
+
+  // Get OneSignal Player ID after initialization (runs asynchronously)
+  // Note: Player ID may take a few seconds to be available, especially if permissions are not granted yet
+  _getPlayerIdAsync();
+
   // await Firebase.initializeApp();
   Loading();
   Utils.screenPortrait();
 //  Get.lazyPut<SocketService>(() => SocketService(), fenix: true);
   runApp(const MyApp());
+}
+
+/// Get Player ID asynchronously (runs in background, doesn't block app startup)
+Future<void> _getPlayerIdAsync() async {
+  try {
+    // Wait for OneSignal to fully initialize and request permissions
+    await Future.delayed(const Duration(milliseconds: 3000));
+    
+    // Get Player ID (waits for it if not ready, with multiple retries)
+    String? playerId;
+    int attempts = 0;
+    const maxAttempts = 5;
+    
+    while (attempts < maxAttempts && (playerId == null || playerId.isEmpty)) {
+      playerId = await NotificationService.instance.getPlayerId();
+      
+      if (playerId == null || playerId.isEmpty) {
+        attempts++;
+        debugPrint('⏳ Waiting for Player ID... (attempt $attempts/$maxAttempts)');
+        await Future.delayed(const Duration(milliseconds: 2000));
+      }
+    }
+    
+    if (playerId != null && playerId.isNotEmpty) {
+      debugPrint('=== ✅ OneSignal Player ID Retrieved ===');
+      debugPrint('Player ID: $playerId');
+      debugPrint('========================================');
+      
+      // If user is logged in, send Player ID to backend
+      final userId = getStorageData.getUserId();
+      if (userId != null) {
+        debugPrint('User is logged in. Sending Player ID to backend...');
+        // await _sendPlayerIdToBackend(userId, playerId);
+      }
+    } else {
+      debugPrint('⚠️ Player ID not available after $maxAttempts attempts.');
+      debugPrint('💡 The Player ID will be logged automatically when it becomes available.');
+      debugPrint('💡 Make sure notification permissions are granted in device settings.');
+      debugPrint('💡 Check console for "OneSignal Player ID updated" message.');
+    }
+  } catch (e) {
+    debugPrint('Error getting Player ID: $e');
+  }
 }
 
 PaymentPlanController getPaymentPlanController() {
@@ -28,8 +117,10 @@ PaymentPlanController getPaymentPlanController() {
     return Get.find<PaymentPlanController>();
   } else {
     debugPrint("Payment Dependencies going to register");
+    // Using RevenueCat for in-app purchases (old InAppPurchaseSourceImpl code is kept intact)
     Get.lazyPut<InAppPurchaseSource>(
-      () => InAppPurchaseSourceImpl(),
+      () => RevenueCatPurchaseSourceImpl(), // RevenueCat implementation
+      // () => InAppPurchaseSourceImpl(), // Old payment method (kept for reference)
       fenix: true,
     );
 
@@ -42,6 +133,31 @@ PaymentPlanController getPaymentPlanController() {
   }
 }
 
+/// Send Player ID to backend
+// Future<void> _sendPlayerIdToBackend(String userId, String playerId) async {
+//   try {
+//     final token = getStorageData.readString(getStorageData.tokenKey);
+    
+//     // TODO: Replace 'users/update-onesignal-id' with your actual backend API endpoint
+//     // This endpoint should accept: user_id and onesignal_player_id
+//     final data = await APIFunction().apiCall(
+//       apiName: 'users/update-onesignal-id',
+//       withOutFormData: jsonEncode({
+//         'user_id': userId,
+//         'onesignal_player_id': playerId,
+//       }),
+//       token: token ?? '',
+//     );
+    
+//     debugPrint('✅ Player ID sent to backend successfully');
+//     debugPrint('Backend response: $data');
+//   } catch (e) {
+//     debugPrint('❌ Error sending Player ID to backend: $e');
+//     debugPrint('💡 Make sure your backend API endpoint is correct');
+//     debugPrint('💡 Endpoint should be: users/update-onesignal-id (or your custom endpoint)');
+//   }
+// }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -50,12 +166,15 @@ class MyApp extends StatelessWidget {
     return Sizer(
         builder: (context, orientation, deviceType) => MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: GetMaterialApp(
-                debugShowCheckedModeBanner: false,
-                theme: ThemeLight().theme,
-                builder: EasyLoading.init(),
-                initialRoute: AppPages.INITIAL,
-                getPages: AppPages.routes,
+              child: BlocProvider(
+                create: (context) => AuthBloc(),
+                child: GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  theme: ThemeLight().theme,
+                  builder: EasyLoading.init(),
+                  initialRoute: AppPages.INITIAL,
+                  getPages: AppPages.routes,
+                ),
               ),
             ));
   }
