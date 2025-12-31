@@ -1,13 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/home/image_chat/model/image_model.dart';
-import 'package:buddy_ai_wingman/pages/home/model/message_model.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/error_response.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/core/services/notification_service.dart';
+import 'package:buddy/pages/home/image_chat/model/image_model.dart';
+import 'package:buddy/pages/home/model/message_model.dart';
+import 'package:buddy/pages/new_chat/chat/error_response.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../api_repository/api_function.dart';
 
@@ -15,9 +18,9 @@ class HomeController extends GetxController {
   String? imagePath;
   String? userId;
 
-  static const String socketBaseUrl = "http://3.92.114.189:3004/";
+  static const String socketBaseUrl = "http://3.123.108.18:3000/";
   static const String uploadFileEndpoint =
-      "http://3.92.114.189:3005/api/chat/upload-file";
+      "http://3.123.108.18:3000/api/chat/upload-file";
   var isLoading = false.obs;
   late io.Socket socket;
   List<MessageModelPickup>? messages;
@@ -29,6 +32,111 @@ class HomeController extends GetxController {
     userId = getStorageData.readString(getStorageData.userIdKey);
 
     initSocket();
+    
+    // Print user info after a short delay
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      printUserInfo();
+    });
+    
+    // Update device token (OneSignal Player ID) to backend
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      updateDeviceToken();
+    });
+  }
+
+  /// Update device token (OneSignal Player ID) to backend
+  Future<void> updateDeviceToken() async {
+    try {
+      debugPrint("🔄 Updating device token to backend...");
+      
+      // Get OneSignal Player ID
+      String? playerId = await NotificationService.instance.getPlayerId();
+      
+      if (playerId == null || playerId.isEmpty) {
+        debugPrint("⚠️ Player ID not available yet, retrying...");
+        // Retry after 2 seconds
+        Future.delayed(const Duration(seconds: 2), () {
+          updateDeviceToken();
+        });
+        return;
+      }
+      
+      // Determine platform
+      String platform = Platform.isIOS ? "ios" : (Platform.isAndroid ? "android" : "unknown");
+      
+      // Prepare request data
+      final requestData = {
+        "onesignal_player_id": playerId,
+        "platform": platform,
+      };
+      
+      debugPrint("📤 Sending device token update:");
+      debugPrint("   Player ID: $playerId");
+      debugPrint("   Platform: $platform");
+      
+      // Make API call
+      final token = getStorageData.readString(getStorageData.tokenKey);
+      final response = await APIFunction().apiCall(
+        apiName: "user-devices",
+        withOutFormData: jsonEncode(requestData),
+        token: token ?? "",
+        isLoading: false, // Don't show loading indicator
+      );
+      
+      debugPrint("✅ Device token updated successfully");
+      debugPrint("   Response: $response");
+      
+    } catch (e) {
+      debugPrint("❌ Error updating device token: $e");
+      // Don't show error to user, just log it
+    }
+  }
+
+  /// Print user information to logs
+  void printUserInfo() {
+    final userName = getStorageData.readString(getStorageData.userName) ?? 'N/A';
+    final userEmail = getStorageData.readString(getStorageData.userEmailId) ?? 'N/A';
+    final platform = Platform.isIOS ? 'iOS' : (Platform.isAndroid ? 'Android' : 'Unknown');
+    
+    // Get subscription info
+    String subscription = 'N/A';
+    try {
+      final storedProductId = getStorageData.readString("subscribed_product_id");
+      if (storedProductId != null) {
+        if (storedProductId.contains("basic")) {
+          subscription = "Basic";
+        } else if (storedProductId.contains("pro")) {
+          subscription = "Pro";
+        } else {
+          subscription = "Active";
+        }
+      } else {
+        // Check if user is on trial
+        final loginData = getStorageData.readLoginData();
+        final createdAtString = loginData.data?.createdAt;
+        if (createdAtString != null && createdAtString.isNotEmpty) {
+          final createdAt = DateTime.tryParse(createdAtString);
+          if (createdAt != null) {
+            final now = DateTime.now();
+            final trialEndDate = createdAt.add(const Duration(days: 7));
+            if (now.isBefore(trialEndDate)) {
+              subscription = "Free Trial";
+            }
+          }
+        }
+      }
+    } catch (e) {
+      debugPrint("Error getting subscription info: $e");
+    }
+    
+    debugPrint('========================================');
+    debugPrint('USER INFORMATION (HOME SCREEN)');
+    debugPrint('========================================');
+    debugPrint('Name: $userName');
+    debugPrint('Email: $userEmail');
+    debugPrint('Platform: $platform');
+    debugPrint('Subscription: $subscription');
+    debugPrint('========================================');
   }
 
   void initSocket() {
@@ -59,7 +167,7 @@ class HomeController extends GetxController {
 
           // Navigate and pass parsed list
           if (messages!.isNotEmpty) {
-            Get.offNamed(Routes.PICKUP_LINES, arguments: {
+            Get.toNamed(Routes.PICKUP_LINES, arguments: {
               HttpUtil.message: messages, // Pass full list
               HttpUtil.conversationId: messages![0].conversationId
             });
@@ -122,6 +230,14 @@ class HomeController extends GetxController {
 
     print("this is api response $data ");
     try {
+      // Check if response is an error (has statusCode field)
+      if (data is Map<String, dynamic> && data.containsKey('statusCode')) {
+        // This is an error response
+        final errorMessage = data['message'] ?? 'Upload failed';
+        utils.showToast(message: errorMessage);
+        return;
+      }
+
       model = ImageAnalyzerModel.fromJson(data);
       if (model!.success) {
         update();
@@ -131,11 +247,20 @@ class HomeController extends GetxController {
           HttpUtil.conversationId: model!.data[0].conversationId
         });
       } else {
-        utils.showToast(message: model!.message!);
+        utils.showToast(message: model!.message ?? 'Upload failed');
       }
     } catch (e) {
-      ErrorResponse errorModel = ErrorResponse.fromJson(data);
-      utils.showToast(message: errorModel.message!);
+      // Try to extract error message
+      String errorMessage = "Upload failed";
+      if (data is Map<String, dynamic> && data.containsKey('message')) {
+        errorMessage = data['message'] ?? errorMessage;
+      } else {
+        try {
+          ErrorResponse errorModel = ErrorResponse.fromJson(data);
+          errorMessage = errorModel.message ?? errorMessage;
+        } catch (_) {}
+      }
+      utils.showToast(message: errorMessage);
     }
   }
 
