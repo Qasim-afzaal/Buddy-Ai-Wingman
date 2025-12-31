@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:buddy_ai_wingman/core/components/app_image.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/components/app_image.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 class ChatBubble extends StatelessWidget {
   ChatBubble({
