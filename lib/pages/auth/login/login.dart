@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/Utils/assets_util.dart';
-import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
-import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/Utils/assets_util.dart';
+import 'package:buddy/core/Utils/custom_text_styles.dart';
+import 'package:buddy/core/Widgets/custom_button.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 import '../../../api_repository/api_class.dart';
 import '../../../routes/app_pages.dart';
@@ -110,157 +110,158 @@ class LoginPage extends StatelessWidget {
                   CustomButton(
                     buttonText: "Sign in",
                     onTap: () async {
-                      // Check connectivity status before proceeding
-                      var connectivityResult =
-                          await Connectivity().checkConnectivity();
+                      // // Check connectivity status before proceeding
+                      // var connectivityResult =
+                      //     await Connectivity().checkConnectivity();
 
                       // Print the result for debugging
-                      print('Connectivity Result: $connectivityResult');
+                      // print('Connectivity Result: $connectivityResult');
 
-                      if (connectivityResult != ConnectivityResult.none) {
-                        // If internet is available, proceed with the onLogin method
-                        controller.onLogin();
-                      } else {
-                        // No internet connection, show snackbar and stop further execution
-                        Get.snackbar(
-                          "No Internet",
-                          "Please check your internet connection and try again.",
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                        return; // Prevent the method call by returning here
-                      }
+                      // if (connectivityResult != ConnectivityResult.none) {
+                      // If internet is available, proceed with the onLogin method
+                      controller.onLogin();
+                      // } else {
+                      //   // No internet connection, show snackbar and stop further execution
+                      //   Get.snackbar(
+                      //     "No Internet",
+                      //     "Please check your internet connection and try again.",
+                      //     snackPosition: SnackPosition.BOTTOM,
+                      //   );
+                      //   return; // Prevent the method call by returning here
+                      // }
                     },
                   ),
                   SB.h(context.height * 0.03),
-                  Row(
-                    children: [
-                      const Expanded(child: Divider()),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "OR CONTINUE WITH",
-                        style: GoogleFonts.interTight(
-                            textStyle: const TextStyle(
-                                fontWeight: FontWeight.w400, fontSize: 10)),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      const Expanded(child: Divider()),
-                    ],
-                  ),
-                  SB.h(12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () async {
-                            // Check connectivity status before proceeding
-                            var connectivityResult =
-                                await Connectivity().checkConnectivity();
+                  // Row(
+                  //   children: [
+                  //     const Expanded(child: Divider()),
+                  //     const SizedBox(
+                  //       width: 20,
+                  //     ),
+                  //     Text(
+                  //       "OR CONTINUE WITH",
+                  //       style: GoogleFonts.interTight(
+                  //           textStyle: const TextStyle(
+                  //               fontWeight: FontWeight.w400, fontSize: 10)),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 20,
+                  //     ),
+                  //     const Expanded(child: Divider()),
+                  //   ],
+                  // ),
+                  // SB.h(12),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: GestureDetector(
+                  //         onTap: () async {
+                  //           // Check connectivity status before proceeding
+                  //           var connectivityResult =
+                  //               await Connectivity().checkConnectivity();
 
-                            // Print the result for debugging
-                            print('Connectivity Result: $connectivityResult');
+                  //           // Print the result for debugging
+                  //           print('Connectivity Result: $connectivityResult');
 
-                            if (connectivityResult != ConnectivityResult.none) {
-                              // If internet is available, proceed with Google login
-                              // controller.loginWithGoogle(context);
-                            } else {
-                              // No internet connection, show snackbar and stop further execution
-                              Get.snackbar(
-                                "No Internet",
-                                "Please check your internet connection and try again.",
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
-                              return; // Prevent the API call by returning here
-                            }
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: AppColors.textFieldBorderColor,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  CustomImages.googleIcon,
-                                  width: 30,
-                                  height: 30,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "Google",
-                                  style: GoogleFonts.interTight(
-                                      textStyle: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400)),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      if (Platform.isIOS) ...[
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async {
-                              // Check connectivity status before proceeding
-                              var connectivityResult =
-                                  await Connectivity().checkConnectivity();
+                  //           if (connectivityResult != ConnectivityResult.none) {
+                  //             // If internet is available, proceed with Google login
+                  //             // controller.loginWithGoogle(context);
+                  //           } else {
+                  //             // No internet connection, show snackbar and stop further execution
+                  //             Get.snackbar(
+                  //               "No Internet",
+                  //               "Please check your internet connection and try again.",
+                  //               snackPosition: SnackPosition.BOTTOM,
+                  //             );
+                  //             return; // Prevent the API call by returning here
+                  //           }
+                  //         },
+                  //         child: Container(
+                  //           alignment: Alignment.center,
+                  //           height: 50,
+                  //           decoration: BoxDecoration(
+                  //               color: AppColors.textFieldBorderColor,
+                  //               borderRadius: BorderRadius.circular(10)),
+                  //           child: Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               Image.asset(
+                  //                 CustomImages.googleIcon,
+                  //                 width: 30,
+                  //                 height: 30,
+                  //               ),
+                  //               const SizedBox(
+                  //                 width: 10,
+                  //               ),
+                  //               Text(
+                  //                 "Google",
+                  //                 style: GoogleFonts.interTight(
+                  //                     textStyle: const TextStyle(
+                  //                         fontSize: 12,
+                  //                         fontWeight: FontWeight.w400)),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 10,
+                  //     ),
+                  //     if (Platform.isIOS) ...[
+                  //       Expanded(
+                  //         child: GestureDetector(
+                  //           onTap: () async {
+                  //             // Check connectivity status before proceeding
+                  //             var connectivityResult =
+                  //                 await Connectivity().checkConnectivity();
 
-                              // Print the result for debugging
-                              print('Connectivity Result: $connectivityResult');
+                  //             // Print the result for debugging
+                  //             print('Connectivity Result: $connectivityResult');
 
-                              if (connectivityResult !=
-                                  ConnectivityResult.none) {
-                                // If internet is available, proceed with the signInWithApple method
-                                // controller.signInWithApple(context);
-                              } else {
-                                // No internet connection, show snackbar and stop further execution
-                                Get.snackbar(
-                                  "No Internet",
-                                  "Please check your internet connection and try again.",
-                                  snackPosition: SnackPosition.BOTTOM,
-                                );
-                                return; // Prevent the method call by returning here
-                              }
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  color: AppColors.textFieldBorderColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Assets.icons.apple.svg(),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Apple",
-                                    style: GoogleFonts.interTight(
-                                        textStyle: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ]
-                    ],
-                  ),
-                  SB.h(context.height * 0.1),
+                  //             if (connectivityResult !=
+                  //                 ConnectivityResult.none) {
+                  //               // If internet is available, proceed with the signInWithApple method
+                  //               // controller.signInWithApple(context);
+                  //             } else {
+                  //               // No internet connection, show snackbar and stop further execution
+                  //               Get.snackbar(
+                  //                 "No Internet",
+                  //                 "Please check your internet connection and try again.",
+                  //                 snackPosition: SnackPosition.BOTTOM,
+                  //               );
+                  //               return; // Prevent the method call by returning here
+                  //             }
+                  //           },
+                  //           child: Container(
+                  //             height: 50,
+                  //             decoration: BoxDecoration(
+                  //                 color: AppColors.textFieldBorderColor,
+                  //                 borderRadius: BorderRadius.circular(10)),
+                  //             child: Row(
+                  //               mainAxisAlignment: MainAxisAlignment.center,
+                  //               children: [
+                  //                 Assets.icons.apple.svg(),
+                  //                 const SizedBox(
+                  //                   width: 10,
+                  //                 ),
+                  //                 Text(
+                  //                   "Apple",
+                  //                   style: GoogleFonts.interTight(
+                  //                       textStyle: const TextStyle(
+                  //                           fontSize: 12,
+                  //                           fontWeight: FontWeight.w400)),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ]
+                  //   ],
+                  // ),
+                  // SB.h(context.height * 0.1),
+
                   TextButton(
                     child: Text("Don’t have an account?",
                         style: headingTextStyle(
