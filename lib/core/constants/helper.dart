@@ -14,13 +14,11 @@ import 'package:intl/intl.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/constants.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 class Utils {
   static const String languageCodeEn = 'en';
@@ -76,40 +74,29 @@ class Utils {
     return false;
   }
 
-// Function to open image picker using wechat_assets_picker
+// Function to open image picker using image_picker
   void openImagePicker(BuildContext context,
       {required void Function(List<String>) onPicked}) async {
-    // Check permissions
-    // bool permissionsGranted = await requestPermissions();
+    try {
+      final ImagePicker picker = ImagePicker();
+      
+      // Directly open gallery - automatically selects when clicked (no checkmark needed)
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 85, // Reduce quality slightly for better performance
+      );
 
-    // // If permissions are denied, notify the user and exit
-    // if (!permissionsGranted) {
-    //   showPermissionDeniedDialog(context);
-    //   return;
-    // }
-
-    // Pick assets using wechat_assets_picker package
-    List<AssetEntity>? result = await AssetPicker.pickAssets(
-      context,
-      pickerConfig: const AssetPickerConfig(
-        requestType: RequestType.all,
-        maxAssets: 1,
-      ),
-    );
-
-    // Convert AssetEntity to file path
-    if (result != null && result.isNotEmpty) {
-      List<String> paths = [];
-      for (var asset in result) {
-        final file = await asset.file;
-        if (file != null) {
-          paths.add(file.path);
-        }
+      if (image != null) {
+        // Return the image path directly
+        onPicked([image.path]);
+      } else {
+        // User didn't select an image (cancelled)
+        // No need to show error message for cancellation
       }
-      onPicked(paths);
-    } else {
+    } catch (e) {
+      debugPrint('Error picking image: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No image selected.')),
+        SnackBar(content: Text('Error selecting image: ${e.toString()}')),
       );
     }
   }
