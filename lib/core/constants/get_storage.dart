@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/services/onesignal_service.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 /// <<< To store data in phone storage --------- >>>
 class GetStorageData {
@@ -119,6 +121,13 @@ class GetStorageData {
     await removeData(userIdKey);
     await removeData(tokenKey);
     await removeData(isPinCreated);
+
+    // Logout from OneSignal
+    try {
+      await OneSignalService.instance.logout();
+    } catch (e) {
+      debugPrint('Error logging out from OneSignal: $e');
+    }
 
     removeLoginData();
     Get.offAllNamed(Routes.LOGIN);
