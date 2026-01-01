@@ -1,9 +1,9 @@
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/components/sb.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
+import 'package:buddy/core/components/sb.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/core/extensions/build_context_extension.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
