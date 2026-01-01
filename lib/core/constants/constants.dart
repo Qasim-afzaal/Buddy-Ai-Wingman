@@ -1,7 +1,8 @@
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import 'package:buddy_ai_wingman/core/constants/get_storage.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
+import 'package:buddy/core/constants/get_storage.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/core/config/app_config.dart';
 
 GetStorageData getStorageData = GetStorageData();
 Utils utils = Utils();
@@ -9,7 +10,7 @@ Utils utils = Utils();
 class Constants {
   /// Socket
   static IO.Socket? socket;
-  static const String socketBaseUrl = "http://18.190.30.218:3004/";
+  static String get socketBaseUrl => AppConfig.socketBaseUrl;
 
   /// Socket emit event
   static const String sendMessage = 'sendMessage';
@@ -25,7 +26,7 @@ class Constants {
   static const String error = 'Error';
 
   /// API
-  static const String baseUrl = 'http://3.92.114.189:3005/api/';
+  static String get baseUrl => AppConfig.apiBaseUrl;
 
   /// Users API end point
   static const String signUp = 'users/register';
