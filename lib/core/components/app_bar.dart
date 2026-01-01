@@ -1,10 +1,10 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/core/extensions/build_context_extension.dart';
-import 'package:buddy_ai_wingman/gen/assets.gen.dart';
-import 'package:buddy_ai_wingman/pages/profile/profile.dart';
-import 'package:buddy_ai_wingman/pages/profile_before_payment/profile_before_payment.dart';
-import 'package:buddy_ai_wingman/pages/settings/settings.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/core/extensions/build_context_extension.dart';
+import 'package:buddy/gen/assets.gen.dart';
+import 'package:buddy/pages/profile/profile.dart';
+import 'package:buddy/pages/profile_before_payment/profile_before_payment.dart';
+import 'package:buddy/pages/settings/settings.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SimpleAppBar({
@@ -35,12 +35,9 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(color: context.primary),
       actions: actions,
       leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: Theme.of(context).primaryColor,
-          onPressed: onPressed ??
-              () => Get.offNamed(
-                    Routes.HOME,
-                  )),
+          onPressed: onPressed ?? () => Get.back()),
     );
   }
 
