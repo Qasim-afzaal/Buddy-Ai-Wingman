@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // import 'package:fluttertoast/fluttertoast.dart';
-import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
+import 'package:buddy/core/extensions/app_theme_extension.dart';
 
 extension BuildContextEntension<T> on BuildContext {
   bool get isMobile => MediaQuery.of(this).size.width <= 500.0;
