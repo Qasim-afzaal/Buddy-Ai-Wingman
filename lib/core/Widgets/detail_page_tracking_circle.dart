@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/app_colors.dart';
 
 class DetailPageTrackingCircle extends StatelessWidget {
   final bool isActive;
