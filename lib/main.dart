@@ -21,10 +21,14 @@ import 'package:buddy/pages/settings/inapp_purchase_source.dart';
 import 'package:buddy/pages/settings/revenuecat_purchase_source.dart';
 import 'package:buddy/routes/app_pages.dart';
 import 'package:buddy/bloc/auth/auth_bloc.dart';
+import 'package:buddy/core/config/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  
+  // Load environment variables from .env file
+  await AppConfig.load();
 
 
 
@@ -32,14 +36,14 @@ void main() async {
   try {
     await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
     
-    // Use platform-specific API keys
+    // Use platform-specific API keys from environment variables
     String revenueCatApiKey;
     if (Platform.isIOS) {
-      revenueCatApiKey = 'appl_fIAZauleXmbNzvTkKxzMskudacI'; // Apple App Store API Key
+      revenueCatApiKey = AppConfig.revenueCatAppleApiKey;
     } else if (Platform.isAndroid) {
-      revenueCatApiKey = 'goog_AEecDlzshWcNLbrsvVQrjUWoCbR'; // Google Play Store API Key
+      revenueCatApiKey = AppConfig.revenueCatGoogleApiKey;
     } else {
-      revenueCatApiKey = 'goog_AEecDlzshWcNLbrsvVQrjUWoCbR'; // Default to Android
+      revenueCatApiKey = AppConfig.revenueCatGoogleApiKey; // Default to Android
     }
     
     await Purchases.configure(
