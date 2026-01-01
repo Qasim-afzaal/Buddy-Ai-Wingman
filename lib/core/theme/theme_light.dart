@@ -1,8 +1,8 @@
 // import 'package:sparkd/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/extensions/app_theme_extension.dart';
-import 'package:buddy_ai_wingman/core/theme/app_theme.dart';
+import 'package:buddy/core/extensions/app_theme_extension.dart';
+import 'package:buddy/core/theme/app_theme.dart';
 
 class ThemeLight extends AppTheme {
   ThemeData get theme => ThemeData(
