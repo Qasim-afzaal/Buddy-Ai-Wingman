@@ -1,4 +1,4 @@
-name: buddy_ai_wingman
+name: buddy
 description: "A new Flutter project."
 publish_to: 'none'
 
@@ -62,6 +62,7 @@ dependencies:
   in_app_purchase: ^3.2.0
   image_picker: ^0.8.6
   flutter_markdown: ^0.7.7
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   build_runner: null
@@ -82,3 +83,4 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/icons/sparklines/
+    - .env
