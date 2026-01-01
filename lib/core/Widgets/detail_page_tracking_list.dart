@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/Widgets/detail_page_tracking_circle.dart';
+import 'package:buddy/core/Widgets/detail_page_tracking_circle.dart';
 
 class DetailPageTrackingList extends StatelessWidget {
   final int pageNumber;
