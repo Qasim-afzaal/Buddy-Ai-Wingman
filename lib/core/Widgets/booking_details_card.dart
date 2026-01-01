@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
+import 'package:buddy/core/Utils/custom_text_styles.dart';
+import 'package:buddy/core/constants/app_colors.dart';
 
 import '../Utils/assets_util.dart';
 
