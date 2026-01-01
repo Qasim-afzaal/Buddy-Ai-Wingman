@@ -1,9 +1,9 @@
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/components/custom_button.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/components/custom_button.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import 'create_password_controller.dart';
 
