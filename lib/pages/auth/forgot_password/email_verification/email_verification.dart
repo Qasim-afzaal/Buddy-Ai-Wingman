@@ -1,7 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import 'email_verification_controller.dart';
 
