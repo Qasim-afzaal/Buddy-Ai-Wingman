@@ -28,7 +28,7 @@ class AppStrings {
   static const String delete = "Delete";
   static const String deleteChat = "Delete Chat";
   static const String deleteChatDescription = "Are you sure you want to delete this chat?";
-  static const String giveMeLine = "Give me a more";
+  static const String giveMeLine = "Give me more";
   static const String dontHaveAccount = "Don’t have an account?";
 
   static const String email = "Email";
