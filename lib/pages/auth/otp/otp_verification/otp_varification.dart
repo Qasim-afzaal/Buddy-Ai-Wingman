@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/pages/auth/otp/otp_verification/otp_verification_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/Widgets/custom_button.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/pages/auth/otp/otp_verification/otp_verification_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 class OTPVerificationPage extends StatelessWidget {
   const OTPVerificationPage({Key? key}) : super(key: key);
