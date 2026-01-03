@@ -7,9 +7,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/home/manual_chat/manual_chat_controller.dart';
-import 'package:buddy_ai_wingman/pages/home/manual_chat/manual_chat_model.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/home/manual_chat/manual_chat_controller.dart';
+import 'package:buddy/pages/home/manual_chat/manual_chat_model.dart';
 
 class ManualChatPage extends StatelessWidget {
   const ManualChatPage({Key? key}) : super(key: key);
@@ -25,16 +25,15 @@ class ManualChatPage extends StatelessWidget {
         children: [
           Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Align(
-                  alignment: Alignment.center,
+                child: Center(
                   child: Text(
-                    "What the other person \ntexted?",
+                    "Vertel Buddy wat er speelt, en krijg de tips die jouw love game naar een hoger niveau tillen.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).primaryColor,
                     ),
@@ -163,15 +162,12 @@ class ChatBubble extends StatelessWidget {
   });
 
   String processBulletContent(String content) {
-    // Ensure **bold text:** moves to a new line properly
     content = content.replaceAllMapped(
       RegExp(r'(?<!\n)\*\*(.*?)\*\*\s*(:)?'),
       (match) {
         if (match.group(2) != null) {
-          // If a colon is present, move the entire bold text + colon to a new line
           return '\n\n**${match.group(1)!}**:\n\n';
         } else {
-          // Otherwise, just move bold text to a new line
           return '\n\n**${match.group(1)!}**\n\n';
         }
       },
@@ -190,11 +186,41 @@ class ChatBubble extends StatelessWidget {
     return content;
   }
 
+  void _handleReport(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Report Message"),
+        content:
+            const Text("Do you want to report this AI-generated response?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Fluttertoast.showToast(
+                msg: "Message reported to the team",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+              );
+              debugPrint("Reported message: ${chatItem.content}");
+            },
+            child: const Text("Report"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isSentByUser = chatItem.senderId == currentUserId;
-    print("both id ${chatItem.senderId}.....${currentUserId}");
-    print(isSentByUser);
+
     Widget bubble = Container(
       constraints: const BoxConstraints(maxWidth: 300),
       padding: const EdgeInsets.all(12),
@@ -218,18 +244,17 @@ class ChatBubble extends StatelessWidget {
                       width: 200,
                       height: 200,
                       fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
                         return SizedBox(
                           width: 200,
                           height: 200,
                           child: Center(
                             child: CircularProgressIndicator(
                               color: context.primary,
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
+                              value: progress.expectedTotalBytes != null
+                                  ? progress.cumulativeBytesLoaded /
+                                      progress.expectedTotalBytes!
                                   : null,
                             ),
                           ),
@@ -260,38 +285,36 @@ class ChatBubble extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(child: bubble),
-              // Copy icon
-              GestureDetector(
-                onTap: () async {
-                  await Clipboard.setData(
-                    ClipboardData(text: chatItem.content ?? ""),
-                  );
-                  Fluttertoast.showToast(
-                    msg: "Copied to clipboard",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.black,
-                    textColor: Colors.white,
-                    fontSize: 16.0,
-                  );
-                },
-                child: Assets.icons.copy.svg().paddingAll(8),
-              ),
-              // Regenerate icon: only show if this is the last message and the regenerate callback is not null.
-              if (isLast && regenerate != null)
+          child: GestureDetector(
+            onLongPress: () => _handleReport(context),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(child: bubble),
                 GestureDetector(
-                  onTap: regenerate,
-                  child: Assets.icons.restartAgain
-                      .svg()
-                      .paddingAll(8)
-                      .marginOnly(bottom: 2),
+                  onTap: () async {
+                    await Clipboard.setData(
+                        ClipboardData(text: chatItem.content ?? ""));
+                    Fluttertoast.showToast(
+                      msg: "Copied to clipboard",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: Colors.black,
+                      textColor: Colors.white,
+                    );
+                  },
+                  child: Assets.icons.copy.svg().paddingAll(8),
                 ),
-            ],
+                if (isLast && regenerate != null)
+                  GestureDetector(
+                    onTap: regenerate,
+                    child: Assets.icons.restartAgain
+                        .svg()
+                        .paddingAll(8)
+                        .marginOnly(bottom: 2),
+                  ),
+              ],
+            ),
           ),
         ),
       );
