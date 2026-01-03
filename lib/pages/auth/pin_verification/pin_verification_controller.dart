@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../models/error_response.dart';
 
