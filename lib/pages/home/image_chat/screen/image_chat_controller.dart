@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/models/file_upload_response.dart';
-import 'package:buddy_ai_wingman/pages/home/image_chat/model/image_model.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/models/file_upload_response.dart';
+import 'package:buddy/pages/home/image_chat/model/image_model.dart';
 
 class ImageChatController extends GetxController {
-  static const String socketBaseUrl = "http://3.92.114.189:3004/";
+  static const String socketBaseUrl = "http://3.123.108.18:3000/";
   static const String uploadFileEndpoint =
-      "http://3.92.114.189:3005/api/chat/upload-file";
+      "http://3.123.108.18:3000/api/chat/upload-file";
 
   late io.Socket socket;
   final TextEditingController textController = TextEditingController();
@@ -120,7 +120,34 @@ class ImageChatController extends GetxController {
       messages[messages.length - 1] = newMessage;
       isRegenerating = false;
     } else {
-      messages.add(newMessage);
+      // Check if this message already exists (to prevent duplicates)
+      // This happens when we add message optimistically and then receive it from socket
+      bool messageExists = false;
+      
+      // If message has an ID, check by ID
+      if (newMessage.id != null && newMessage.id!.isNotEmpty) {
+        messageExists = messages.any((msg) => msg.id == newMessage.id);
+      }
+      
+      // If no ID or not found by ID, check if it's from current user and matches last message
+      if (!messageExists && newMessage.senderId == userId) {
+        if (messages.isNotEmpty) {
+          final lastMessage = messages.last;
+          // Check if last message is from same sender, has same content, and no ID (optimistic message)
+          if (lastMessage.senderId == userId &&
+              lastMessage.content == newMessage.content &&
+              (lastMessage.id == null || lastMessage.id!.isEmpty)) {
+            // Replace the optimistic message with the server version
+            messages[messages.length - 1] = newMessage;
+            messageExists = true;
+          }
+        }
+      }
+      
+      // Only add if message doesn't exist
+      if (!messageExists) {
+        messages.add(newMessage);
+      }
     }
   }
 
@@ -214,16 +241,36 @@ class ImageChatController extends GetxController {
         data: formData,
       );
 
+      // Check if response is an error (has statusCode field)
+      if (data is Map<String, dynamic> && data.containsKey('statusCode')) {
+        // This is an error response
+        final errorMessage = data['message'] ?? 'Upload failed';
+        isLoading.value = false;
+        utils.showToast(message: errorMessage);
+        return;
+      }
+
+      // Try to parse as successful response
       FileUploadResponse model = FileUploadResponse.fromJson(data);
       if (model.success!) {
         await sendImage(model.data ?? "");
       } else {
-        utils.showToast(message: model.message!);
+        utils.showToast(message: model.message ?? 'Upload failed');
         isLoading.value = false;
       }
     } catch (e) {
       isLoading.value = false;
-      utils.showToast(message: "Image upload failed: $e");
+      // Try to extract error message from exception
+      String errorMessage = "Image upload failed";
+      if (e is DioException && e.response != null) {
+        try {
+          final errorData = e.response!.data;
+          if (errorData is Map && errorData.containsKey('message')) {
+            errorMessage = errorData['message'] ?? errorMessage;
+          }
+        } catch (_) {}
+      }
+      utils.showToast(message: errorMessage);
     }
   }
 
