@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 import 'pickup_line_controller.dart';
 
@@ -17,21 +17,35 @@ class PickupLinePage extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const SimpleAppBar(title: "Buddy Ai Wingman"),
+      appBar: SimpleAppBar(
+        title: "Buddy Ai Wingman",
+      ),
       body: Stack(
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: screenHeight * 0.25),
+              SizedBox(height: screenHeight * 0.15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Origineel zijn scoort.\nTik op 'Give me more', Buddy blijft nieuwe openingszinnen bedenken tot je de perfecte hebt.",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.05),
               Expanded(
                 child: Obx(() => ListView.builder(
                       controller: controller.scrollController,
-                      itemCount: controller.messages?.length ?? 0,
+                      itemCount: controller.messages.length,
                       itemBuilder: (context, index) {
-                        final message = controller.messages![index];
+                        final message = controller.messages[index];
                         return ChatBubble(
-                          message: message.content ?? '', // Ensure safe access
+                          message: message.content,
                           disableButton: false,
                           onRegenerate: () {},
                         );
@@ -83,6 +97,36 @@ class ChatBubble extends StatelessWidget {
     this.onRegenerate,
   }) : super(key: key);
 
+  void _handleReport(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Report Message"),
+        content:
+            const Text("Do you want to report this AI-generated response?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Message reported to the team"),
+                  backgroundColor: Colors.redAccent,
+                ),
+              );
+              debugPrint("Reported message: $message");
+            },
+            child: const Text("Report"),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -91,17 +135,20 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(
-                message,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w400,
-                    ),
+            child: GestureDetector(
+              onLongPress: () => _handleReport(context),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  message,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
               ),
             ),
           ),
