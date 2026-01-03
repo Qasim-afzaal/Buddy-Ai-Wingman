@@ -4,19 +4,21 @@ import 'package:flutter/material.dart';
 
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/app_globals.dart';
-import 'package:buddy_ai_wingman/core/constants/app_strings.dart';
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_controller.dart';
-import 'package:buddy_ai_wingman/pages/auth/login/login_response.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/payment_plan_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/app_globals.dart';
+import 'package:buddy/core/constants/app_strings.dart';
+import 'package:buddy/core/constants/constants.dart';
+import 'package:buddy/core/services/onesignal_service.dart';
+import 'package:buddy/core/services/payment_api_service.dart';
+import 'package:buddy/pages/auth/login/login_controller.dart';
+import 'package:buddy/pages/auth/login/login_response.dart';
+import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../main.dart';
 import '../../../models/error_response.dart';
@@ -64,7 +66,7 @@ class SignupController extends GetxController {
         };
 
         print("i am in dahsboatd");
-        Get.offNamed(Routes.DASHBOARD);
+        Get.offNamed(Routes.HOME);
 
         Constants.socket!.emit("logEvent", chatmsg);
       } else {
@@ -93,7 +95,6 @@ class SignupController extends GetxController {
   // }
 
   Future<void> onSignup() async {
-    // if (isSignUpValidation()) {
     var json = {
       HttpUtil.name: userNameController.text.trim(),
       HttpUtil.authProvider: "",
@@ -103,9 +104,9 @@ class SignupController extends GetxController {
     };
 
     print(json);
+
     final data = await APIFunction().apiCall(
       apiName: "users/register",
-      // apiName: Constants.signUp,
       withOutFormData: jsonEncode(json),
     );
 
@@ -114,20 +115,42 @@ class SignupController extends GetxController {
 
       if (mainModel!.success!) {
         getStorageData.saveLoginData(mainModel!);
-        handleNavigation();
+        
+        // Set OneSignal user ID for targeted notifications
+        final userId = mainModel!.data?.id;
+        if (userId != null) {
+          await OneSignalService.instance.setUserId(userId);
+        }
+
+        // Send payment info to backend after signup (user is on free trial)
+        Future.delayed(const Duration(milliseconds: 500), () {
+          PaymentApiService.sendPaymentInfoAfterAuth();
+        });
+
+        final createdAtString = mainModel!.data?.createdAt ?? "";
+        final createdAt = DateTime.tryParse(createdAtString ?? "");
+
+        if (createdAt != null) {
+          final now = DateTime.now();
+          final trialEndDate = createdAt.add(const Duration(days: 7));
+
+          if (now.isBefore(trialEndDate)) {
+            // Within 7-day trial
+            Get.offNamed(Routes.TRAIL_START);
+          } else {
+            // Trial completed
+            handleNavigation();
+          }
+        } else {
+          // Fallback if createdAt is null or invalid
+          handleNavigation();
+        }
       } else {
-        // if (mainModel!.data!.isProfileComplete == false) {
-        //   getStorageData.saveLoginData(mainModel!);
-        //   handleNavigation();
-        // } else {
         utils.showToast(message: mainModel!.message!);
-        // }
       }
     } catch (e) {
       ErrorResponse errorModel = ErrorResponse.fromJson(data);
-
       utils.showToast(message: errorModel.message!);
-      // }
     }
   }
 
@@ -199,11 +222,11 @@ class SignupController extends GetxController {
     return true;
   }
 
-  GoogleSignInAccount? _currentUser;
+  // GoogleSignInAccount? _currentUser;
   RxString appleId = "".obs;
   RxString userName = "".obs;
   RxString userEmail = "".obs;
-  final GoogleSignIn? googleSignIn = GoogleSignIn();
+  // final GoogleSignIn? googleSignIn = GoogleSignIn();
 
   Future<void> socialLogin(SocialLoginModel socialLoginModel) async {
     var json = {
