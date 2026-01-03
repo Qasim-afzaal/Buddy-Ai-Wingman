@@ -1,14 +1,16 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:buddy_ai_wingman/core/Utils/assets_util.dart';
-import 'package:buddy_ai_wingman/core/Utils/custom_text_styles.dart';
-import 'package:buddy_ai_wingman/core/Widgets/custom_button.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/auth/signup/signup_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/Utils/assets_util.dart';
+import 'package:buddy/core/Utils/custom_text_styles.dart';
+import 'package:buddy/core/Widgets/custom_button.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/auth/signup/signup_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
+import 'package:buddy/widgets/custom_rich_text.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});
@@ -25,7 +27,7 @@ class SignupPage extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -73,7 +75,7 @@ class SignupPage extends StatelessWidget {
                     SB.h(25),
                     CustomTextField(
                       controller: controller.userNameController,
-                      prefixIcon: const Icon(Icons.person),
+                      prefixIcon: Icon(Icons.person),
                       hintText: "Enter Name",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -84,7 +86,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     CustomTextField(
                       controller: controller.emailController,
-                      prefixIcon: const Icon(Icons.email),
+                      prefixIcon: Icon(Icons.email),
                       hintText: "Enter Email",
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
@@ -100,7 +102,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     CustomTextField(
                       controller: controller.passwordController,
-                      prefixIcon: const Icon(Icons.lock),
+                      prefixIcon: Icon(Icons.lock),
                       hintText: "Enter Password",
                       isPasswordField: true,
                       validator: (value) {
@@ -114,7 +116,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     SB.h(15),
                     CustomButton(
-                      buttonText: "Sign in",
+                      buttonText: "Sign Up",
                       onTap: () async {
                         // Check connectivity status before proceeding
                         // var connectivityResult =
@@ -166,197 +168,197 @@ class SignupPage extends StatelessWidget {
                     //   },
                     // ),
 
-                    SB.h(context.height * 0.03),
+                    // SB.h(context.height * 0.03),
 
-                    Row(
-                      children: [
-                        const Expanded(child: Divider()),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          "OR CONTINUE WITH",
-                          style: GoogleFonts.interTight(
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 10)),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        const Expanded(child: Divider()),
-                      ],
-                    ),
-                    SB.h(12),
                     // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
                     //   children: [
-                    //     AppButton.borderIcon(
-                    //       onTap: () async {
-                    //         // Check connectivity status before proceeding
-                    //         var connectivityResult =
-                    //             await Connectivity().checkConnectivity();
+                    //     const Expanded(child: Divider()),
+                    //     const SizedBox(
+                    //       width: 20,
+                    //     ),
+                    //     Text(
+                    //       "OR CONTINUE WITH",
+                    //       style: GoogleFonts.interTight(
+                    //           textStyle: const TextStyle(
+                    //               fontWeight: FontWeight.w400, fontSize: 10)),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 20,
+                    //     ),
+                    //     const Expanded(child: Divider()),
+                    //   ],
+                    // ),
+                    // SB.h(12),
+                    // // Row(
+                    // //   mainAxisAlignment: MainAxisAlignment.center,
+                    // //   children: [
+                    // //     AppButton.borderIcon(
+                    // //       onTap: () async {
+                    // //         // Check connectivity status before proceeding
+                    // //         var connectivityResult =
+                    // //             await Connectivity().checkConnectivity();
 
-                    //         // Print the result for debugging
-                    //         print('Connectivity Result: $connectivityResult');
+                    // //         // Print the result for debugging
+                    // //         print('Connectivity Result: $connectivityResult');
 
-                    //         if (connectivityResult != ConnectivityResult.none) {
-                    //           // If internet is available, proceed with Google login
-                    //           controller.loginWithGoogle(context);
-                    //         } else {
-                    //           // No internet connection, show snackbar and stop further execution
-                    //           Get.snackbar(
-                    //             "No Internet",
-                    //             "Please check your internet connection and try again.",
-                    //             snackPosition: SnackPosition.BOTTOM,
-                    //           );
-                    //           return; // Prevent the API call by returning here
-                    //         }
-                    //       },
-                    //       icon: Assets.icons.google.svg(),
+                    // //         if (connectivityResult != ConnectivityResult.none) {
+                    // //           // If internet is available, proceed with Google login
+                    // //           controller.loginWithGoogle(context);
+                    // //         } else {
+                    // //           // No internet connection, show snackbar and stop further execution
+                    // //           Get.snackbar(
+                    // //             "No Internet",
+                    // //             "Please check your internet connection and try again.",
+                    // //             snackPosition: SnackPosition.BOTTOM,
+                    // //           );
+                    // //           return; // Prevent the API call by returning here
+                    // //         }
+                    // //       },
+                    // //       icon: Assets.icons.google.svg(),
+                    // //     ),
+                    // //     if (Platform.isIOS) ...[
+                    // //       SB.w(15),
+                    // //       AppButton.borderIcon(
+                    // //         onTap: () async {
+                    // //           // Check connectivity status before proceeding
+                    // //           var connectivityResult =
+                    // //               await Connectivity().checkConnectivity();
+
+                    // //           // Print the result for debugging
+                    // //           print('Connectivity Result: $connectivityResult');
+
+                    // //           if (connectivityResult != ConnectivityResult.none) {
+                    // //             // If internet is available, proceed with the Apple sign-in
+                    // //             controller.signInWithApple(context);
+                    // //           } else {
+                    // //             // No internet connection, show snackbar and stop further execution
+                    // //             Get.snackbar(
+                    // //               "No Internet",
+                    // //               "Please check your internet connection and try again.",
+                    // //               snackPosition: SnackPosition.BOTTOM,
+                    // //             );
+                    // //             return; // Prevent the API call by returning here
+                    // //           }
+                    // //         },
+                    // //         icon: Assets.icons.apple.svg(),
+                    // //       ),
+                    // //     ]
+                    // //   ],
+                    // // ),
+
+                    // Row(
+                    //   children: [
+                    //     Expanded(
+                    //       child: GestureDetector(
+                    //         onTap: () async {
+                    //           //  Get.offNamed(Routes.PAYMENT_PLAN);
+
+                    //           // // Check connectivity status before proceeding
+                    //           // var connectivityResult =
+                    //           //     await Connectivity().checkConnectivity();
+
+                    //           // // Print the result for debugging
+                    //           // print('Connectivity Result: $connectivityResult');
+
+                    //           // if (connectivityResult != ConnectivityResult.none) {
+                    //           //   // If internet is available, proceed with Google login
+                    //           //   controller.loginWithGoogle(context);
+                    //           // } else {
+                    //           //   // No internet connection, show snackbar and stop further execution
+                    //           //   Get.snackbar(
+                    //           //     "No Internet",
+                    //           //     "Please check your internet connection and try again.",
+                    //           //     snackPosition: SnackPosition.BOTTOM,
+                    //           //   );
+                    //           //   return; // Prevent the API call by returning here
+                    //           // }
+                    //         },
+                    //         child: Container(
+                    //           alignment: Alignment.center,
+                    //           height: 50,
+                    //           decoration: BoxDecoration(
+                    //               color: AppColors.textFieldBorderColor,
+                    //               borderRadius: BorderRadius.circular(10)),
+                    //           child: Row(
+                    //             mainAxisAlignment: MainAxisAlignment.center,
+                    //             children: [
+                    //               Image.asset(
+                    //                 CustomImages.googleIcon,
+                    //                 width: 30,
+                    //                 height: 30,
+                    //               ),
+                    //               const SizedBox(
+                    //                 width: 10,
+                    //               ),
+                    //               Text(
+                    //                 "Google",
+                    //                 style: GoogleFonts.interTight(
+                    //                     textStyle: const TextStyle(
+                    //                         fontSize: 12,
+                    //                         fontWeight: FontWeight.w400)),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     const SizedBox(
+                    //       width: 10,
                     //     ),
                     //     if (Platform.isIOS) ...[
-                    //       SB.w(15),
-                    //       AppButton.borderIcon(
-                    //         onTap: () async {
-                    //           // Check connectivity status before proceeding
-                    //           var connectivityResult =
-                    //               await Connectivity().checkConnectivity();
+                    //       Expanded(
+                    //         child: GestureDetector(
+                    //           onTap: () async {
+                    //             // Get.offNamed(Routes.PAYMENT_PLAN);
+                    //             // // Check connectivity status before proceeding
+                    //             // var connectivityResult =
+                    //             //     await Connectivity().checkConnectivity();
 
-                    //           // Print the result for debugging
-                    //           print('Connectivity Result: $connectivityResult');
+                    //             // // Print the result for debugging
+                    //             // print('Connectivity Result: $connectivityResult');
 
-                    //           if (connectivityResult != ConnectivityResult.none) {
-                    //             // If internet is available, proceed with the Apple sign-in
-                    //             controller.signInWithApple(context);
-                    //           } else {
-                    //             // No internet connection, show snackbar and stop further execution
-                    //             Get.snackbar(
-                    //               "No Internet",
-                    //               "Please check your internet connection and try again.",
-                    //               snackPosition: SnackPosition.BOTTOM,
-                    //             );
-                    //             return; // Prevent the API call by returning here
-                    //           }
-                    //         },
-                    //         icon: Assets.icons.apple.svg(),
+                    //             // if (connectivityResult !=
+                    //             //     ConnectivityResult.none) {
+                    //             //   // If internet is available, proceed with the signInWithApple method
+                    //             //   controller.signInWithApple(context);
+                    //             // } else {
+                    //             //   // No internet connection, show snackbar and stop further execution
+                    //             //   Get.snackbar(
+                    //             //     "No Internet",
+                    //             //     "Please check your internet connection and try again.",
+                    //             //     snackPosition: SnackPosition.BOTTOM,
+                    //             //   );
+                    //             //   return; // Prevent the method call by returning here
+                    //             // }
+                    //           },
+                    //           child: Container(
+                    //             height: 50,
+                    //             decoration: BoxDecoration(
+                    //                 color: AppColors.textFieldBorderColor,
+                    //                 borderRadius: BorderRadius.circular(10)),
+                    //             child: Row(
+                    //               mainAxisAlignment: MainAxisAlignment.center,
+                    //               children: [
+                    //                 Assets.icons.apple.svg(),
+                    //                 const SizedBox(
+                    //                   width: 10,
+                    //                 ),
+                    //                 Text(
+                    //                   "Apple",
+                    //                   style: GoogleFonts.interTight(
+                    //                       textStyle: const TextStyle(
+                    //                           fontSize: 12,
+                    //                           fontWeight: FontWeight.w400)),
+                    //                 ),
+                    //               ],
+                    //             ),
+                    //           ),
+                    //         ),
                     //       ),
                     //     ]
                     //   ],
                     // ),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () async {
-                              //  Get.offNamed(Routes.PAYMENT_PLAN);
-
-                              // // Check connectivity status before proceeding
-                              // var connectivityResult =
-                              //     await Connectivity().checkConnectivity();
-
-                              // // Print the result for debugging
-                              // print('Connectivity Result: $connectivityResult');
-
-                              // if (connectivityResult != ConnectivityResult.none) {
-                              //   // If internet is available, proceed with Google login
-                              //   controller.loginWithGoogle(context);
-                              // } else {
-                              //   // No internet connection, show snackbar and stop further execution
-                              //   Get.snackbar(
-                              //     "No Internet",
-                              //     "Please check your internet connection and try again.",
-                              //     snackPosition: SnackPosition.BOTTOM,
-                              //   );
-                              //   return; // Prevent the API call by returning here
-                              // }
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  color: AppColors.textFieldBorderColor,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    CustomImages.googleIcon,
-                                    width: 30,
-                                    height: 30,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Google",
-                                    style: GoogleFonts.interTight(
-                                        textStyle: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        if (Platform.isIOS) ...[
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () async {
-                                // Get.offNamed(Routes.PAYMENT_PLAN);
-                                // // Check connectivity status before proceeding
-                                // var connectivityResult =
-                                //     await Connectivity().checkConnectivity();
-
-                                // // Print the result for debugging
-                                // print('Connectivity Result: $connectivityResult');
-
-                                // if (connectivityResult !=
-                                //     ConnectivityResult.none) {
-                                //   // If internet is available, proceed with the signInWithApple method
-                                //   controller.signInWithApple(context);
-                                // } else {
-                                //   // No internet connection, show snackbar and stop further execution
-                                //   Get.snackbar(
-                                //     "No Internet",
-                                //     "Please check your internet connection and try again.",
-                                //     snackPosition: SnackPosition.BOTTOM,
-                                //   );
-                                //   return; // Prevent the method call by returning here
-                                // }
-                              },
-                              child: Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    color: AppColors.textFieldBorderColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Assets.icons.apple.svg(),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Apple",
-                                      style: GoogleFonts.interTight(
-                                          textStyle: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]
-                      ],
-                    ),
-                    SB.h(context.height * 0.1),
+                    // SB.h(context.height * 0.1),
                     TextButton(
                       child: Text("Already have an account?",
                           style: headingTextStyle(
