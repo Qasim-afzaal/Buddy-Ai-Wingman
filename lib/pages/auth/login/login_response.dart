@@ -34,7 +34,17 @@ class Data {
   String? updatedAt;
   String? accessToken;
 
-  Data({this.id, this.name, this.email, this.authProvider, this.gender, this.age, this.profileImageUrl, this.createdAt, this.updatedAt, this.accessToken});
+  Data(
+      {this.id,
+      this.name,
+      this.email,
+      this.authProvider,
+      this.gender,
+      this.age,
+      this.profileImageUrl,
+      this.createdAt,
+      this.updatedAt,
+      this.accessToken});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
