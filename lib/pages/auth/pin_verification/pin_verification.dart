@@ -1,7 +1,7 @@
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/auth/pin_verification/pin_verification_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/auth/pin_verification/pin_verification_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 class PinVerificationPage extends StatelessWidget {
   const PinVerificationPage({super.key});
