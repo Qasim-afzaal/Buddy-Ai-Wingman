@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/loading.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
-import 'package:buddy_ai_wingman/models/file_upload_response.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/error_response.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/get_message_list_response.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/chat/send_message_response.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/loading.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/models/file_upload_response.dart';
+import 'package:buddy/pages/new_chat/chat/error_response.dart';
+import 'package:buddy/pages/new_chat/chat/get_message_list_response.dart';
+import 'package:buddy/pages/new_chat/chat/send_message_response.dart';
 
 import '../../../api_repository/api_function.dart';
 import '../../../core/constants/imports.dart';
@@ -277,6 +277,14 @@ class ChatController extends GetxController {
       data: formData,
     );
     try {
+      // Check if response is an error (has statusCode field)
+      if (data is Map<String, dynamic> && data.containsKey('statusCode')) {
+        // This is an error response
+        final errorMessage = data['message'] ?? 'Upload failed';
+        utils.showToast(message: errorMessage);
+        return;
+      }
+
       FileUploadResponse model = FileUploadResponse.fromJson(data);
       if (model.success!) {
         // chatList.add(
@@ -292,11 +300,20 @@ class ChatController extends GetxController {
         update();
         sendMessage("", model.data);
       } else {
-        utils.showToast(message: model.message!);
+        utils.showToast(message: model.message ?? 'Upload failed');
       }
     } catch (e) {
-      ErrorResponse errorModel = ErrorResponse.fromJson(data);
-      utils.showToast(message: errorModel.message!);
+      // Try to extract error message
+      String errorMessage = "Upload failed";
+      if (data is Map<String, dynamic> && data.containsKey('message')) {
+        errorMessage = data['message'] ?? errorMessage;
+      } else {
+        try {
+          ErrorResponse errorModel = ErrorResponse.fromJson(data);
+          errorMessage = errorModel.message ?? errorMessage;
+        } catch (_) {}
+      }
+      utils.showToast(message: errorMessage);
     }
   }
 
