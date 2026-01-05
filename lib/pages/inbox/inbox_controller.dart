@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/inbox/archive_response.dart';
-import 'package:buddy_ai_wingman/pages/inbox/delete_response.dart';
-import 'package:buddy_ai_wingman/pages/inbox/index_response.dart';
-import 'package:buddy_ai_wingman/widgets/CustomDropDown.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/inbox/archive_response.dart';
+import 'package:buddy/pages/inbox/delete_response.dart';
+import 'package:buddy/pages/inbox/index_response.dart';
+import 'package:buddy/widgets/CustomDropDown.dart';
 
 import '../../models/error_response.dart';
 
