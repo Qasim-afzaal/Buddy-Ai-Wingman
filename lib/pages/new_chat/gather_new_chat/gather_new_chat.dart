@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/widgets/age_widget.dart';
-import 'package:buddy_ai_wingman/widgets/gender_widget.dart';
-import 'package:buddy_ai_wingman/widgets/name_widget.dart';
-import 'package:buddy_ai_wingman/widgets/objective_widget.dart';
-import 'package:buddy_ai_wingman/widgets/personality_widget.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/widgets/age_widget.dart';
+import 'package:buddy/widgets/gender_widget.dart';
+import 'package:buddy/widgets/name_widget.dart';
+import 'package:buddy/widgets/objective_widget.dart';
+import 'package:buddy/widgets/personality_widget.dart';
 
 class GatherNewChatInfoPage extends StatefulWidget {
   const GatherNewChatInfoPage({super.key});
