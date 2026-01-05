@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 class ChatPage2 extends StatefulWidget {
   const ChatPage2({Key? key}) : super(key: key);
