@@ -1,13 +1,13 @@
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/home/model/message_model.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/home/model/message_model.dart';
+import 'package:buddy/core/config/app_config.dart';
 
 class PickupLineController extends GetxController {
-  static const String socketBaseUrl = "http://3.92.114.189:3004/";
-  static const String uploadFileEndpoint =
-      "http://3.92.114.189:3005/api/chat/upload-file";
+  static String get socketBaseUrl => AppConfig.socketBaseUrl;
+  static String get uploadFileEndpoint => '${AppConfig.apiBaseUrl}chat/upload-file';
 
   late io.Socket socket;
   final TextEditingController textController = TextEditingController();
