@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_confirmation/payment_confirmation_controller.dart';
+import 'package:buddy/pages/payment/payment_confirmation/payment_confirmation_controller.dart';
 
 class PaymentConfirmationBinding extends Bindings {
   @override
