@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/voice_chat/voice_chat_controller.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/new_chat/voice_chat/voice_chat_controller.dart';
 
 class VoiceChatPage extends StatelessWidget {
   const VoiceChatPage({super.key});
