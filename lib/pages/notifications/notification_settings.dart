@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/terms_condition/terms_condition.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/terms_condition/terms_condition.dart';
 
 import 'notification_settings_controller.dart';
 
