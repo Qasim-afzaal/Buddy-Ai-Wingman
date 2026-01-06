@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_method/payment_method_controller.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/payment/payment_method/payment_method_controller.dart';
 
 class PaymentMethodPage extends StatelessWidget {
   const PaymentMethodPage({super.key});
@@ -7,7 +7,7 @@ class PaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppBar(
+      appBar: SimpleAppBar(
         title: AppStrings.paymentMethods,
       ),
       body: GetBuilder<PaymentMethodController>(
