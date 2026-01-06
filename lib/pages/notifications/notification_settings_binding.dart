@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/pages/notifications/notification_settings_controller.dart';
+import 'package:buddy/pages/notifications/notification_settings_controller.dart';
 
 class NotificationSettingsBinding extends Bindings {
   @override
