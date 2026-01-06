@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_plan/subscription_box.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/pages/payment/payment_plan/subscription_box.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/terms_condition/terms_condition.dart';
 
 import 'payment_plan_controller.dart';
 
@@ -28,7 +29,7 @@ class PaymentPlanPage extends StatelessWidget {
       init: PaymentPlanController(inAppPurchaseSource: Get.find()),
       builder: (controller) {
         return Scaffold(
-
+          appBar: const SparkdAppBarBeforePayment(),
           body: SafeArea(
             child: Column(
               children: [
@@ -246,7 +247,7 @@ class PaymentPlanPage extends StatelessWidget {
                     title: AppStrings.unlockFreeTrial,
                     onPressed: () {
                       if (controller.isLoading.value == false) {
-                        controller.onSubscriptionPressed();
+                        controller.onSubscriptionPressed("");
                       } else {
                         null;
                       }
