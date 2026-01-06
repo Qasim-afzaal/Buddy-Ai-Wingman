@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/pages/payment/payment_confirmation/payment_confirmation.dart';
-import 'package:buddy_ai_wingman/pages/payment/payment_method/payment_method.dart';
+import 'package:buddy/pages/payment/payment_confirmation/payment_confirmation.dart';
+import 'package:buddy/pages/payment/payment_method/payment_method.dart';
 
 import '../../../core/constants/imports.dart';
 
