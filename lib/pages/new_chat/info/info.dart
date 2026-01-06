@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/info/info_controller.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/new_chat/info/info_controller.dart';
 
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
