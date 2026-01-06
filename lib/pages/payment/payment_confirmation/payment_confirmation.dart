@@ -1,4 +1,6 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/home/home.dart';
+
 import 'payment_confirmation_controller.dart';
 
 class PaymentConfirmationPage extends StatelessWidget {
@@ -6,43 +8,45 @@ class PaymentConfirmationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
+    return GetBuilder<PaymentConfirmationController>(
       init: PaymentConfirmationController(),
       builder: (controller) {
         return Scaffold(
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: Assets.images.paymentConfirmation.provider(),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: SafeArea(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const Icon(
+                    Icons.verified_rounded,
+                    size: 80,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(height: 24),
                   Text(
                     AppStrings.paymentConfirmation,
                     textAlign: TextAlign.center,
                     style: context.headlineMedium?.copyWith(
-                      color: context.onPrimary,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
-                  SB.h(15),
+                  const SizedBox(height: 16),
                   Text(
-                    AppStrings.paymentConfirmationDescription,
+                    "Your payment was successful! Enjoy your premium experience.",
                     textAlign: TextAlign.center,
-                    style: context.titleLarge?.copyWith(
-                      color: context.onPrimary,
-                      fontWeight: FontWeight.w400,
+                    style: context.bodyLarge?.copyWith(
+                      color: Colors.grey[700],
                     ),
                   ),
-                  SB.h(35),
+                  const SizedBox(height: 40),
                   AppButton.primary(
                     title: AppStrings.letsGo,
-                    onPressed: () => Get.offAll(() => const DashboardPage()),
-                  ).paddingAll(context.paddingDefault),
+                    onPressed: () => Get.offAll(() => HomePage()),
+                  ),
                 ],
               ),
             ),
