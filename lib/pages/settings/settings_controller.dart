@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/settings/inapp_purchase_source.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/settings/inapp_purchase_source.dart';
 
 class SettingsController extends GetxController {
   InAppPurchaseSource inAppPurchaseSource;
@@ -23,9 +23,9 @@ class SettingsController extends GetxController {
     inAppPurchaseSource.initiateStreamSubscription();
   }
 
-  void onSubscriptionPressed() async {
+  void onSubscriptionPressed(String productId) async {
     try {
-      await inAppPurchaseSource.subscribeProduct();
+      await inAppPurchaseSource.subscribeProduct(productId);
     } catch (error) {
       debugPrint("Subscription error: $error");
     }
