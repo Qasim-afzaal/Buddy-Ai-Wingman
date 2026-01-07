@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/pages/settings/settings_controller.dart';
+import 'package:buddy/pages/settings/settings_controller.dart';
 
 class SettingsBinding extends Bindings {
   @override
