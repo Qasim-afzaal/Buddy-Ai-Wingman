@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/widgets/lines_widget.dart';
+
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/widgets/lines_widget.dart';
+
 import 'sparkd_lines_controller.dart';
 
 class SparkdLinesPage extends StatelessWidget {
@@ -31,7 +33,7 @@ class SparkdLinesPage extends StatelessWidget {
       init: SparkdLinesController(),
       builder: (controller) {
         return Scaffold(
-       
+          appBar: const SparkdAppBar(),
           body: SafeArea(
             child: Column(
               children: [
