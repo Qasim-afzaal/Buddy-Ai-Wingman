@@ -1,6 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:buddy_ai_wingman/core/constants/app_colors.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/app_colors.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 class SubscriptionBox extends StatelessWidget {
   final String plan;
@@ -23,7 +23,7 @@ class SubscriptionBox extends StatelessWidget {
     return GestureDetector(
       onTap: onSelect,
       child: Container(
-        height: 130,
+        height: 180,
         width: MediaQuery.of(context).size.width / 2 - 20,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
@@ -40,9 +40,10 @@ class SubscriptionBox extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              price,
+              "$price — $plan",
               style: GoogleFonts.interTight(
                 textStyle: TextStyle(
                   fontWeight: FontWeight.w500,
@@ -51,14 +52,19 @@ class SubscriptionBox extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              description,
-              style: GoogleFonts.interTight(
-                textStyle: TextStyle(
-                  fontSize: 12,
-                  color: isSelected ? Colors.white70 : Colors.black54,
+            const SizedBox(height: 8),
+            Expanded(
+              child: Text(
+                description,
+                style: GoogleFonts.interTight(
+                  textStyle: TextStyle(
+                    fontSize: 11,
+                    color: isSelected ? Colors.white70 : Colors.black54,
+                    height: 1.3,
+                  ),
                 ),
+                maxLines: 10,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ],
