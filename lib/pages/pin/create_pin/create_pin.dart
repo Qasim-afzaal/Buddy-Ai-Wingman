@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/pin/create_pin/create_pin_controller.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/pin/create_pin/create_pin_controller.dart';
 
 class CreatePinPage extends StatelessWidget {
   const CreatePinPage({super.key});
