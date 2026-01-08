@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import 'package:buddy_ai_wingman/core/constants/constants.dart';
-import 'package:buddy_ai_wingman/core/constants/helper.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/core/constants/constants.dart';
+import 'package:buddy/core/constants/helper.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 import '../../../main.dart';
 import '../../payment/payment_plan/payment_plan_controller.dart';
@@ -16,6 +16,7 @@ class SplashController extends GetxController {
   final PaymentPlanController _paymentPlanController =
       getPaymentPlanController();
   void handleNavigation() {
+     print("Verification Api Called Status::");
     _paymentPlanController.isUserSubscribedToProduct((p0) {
       print("Verification Api Called Status::$p0");
 
@@ -29,17 +30,51 @@ class SplashController extends GetxController {
 
   @override
   void onReady() {
+    print("i am herex");
     Future.delayed(const Duration(milliseconds: 1500), () {
-      if (getStorageData.readString(getStorageData.tokenKey) != null) {
-        if (getStorageData.readBoolean(key: getStorageData.isPinCreated)) {
+      final token = getStorageData.readString(getStorageData.tokenKey);
+
+      if (token != null) {
+        final email = getStorageData
+            .readString(getStorageData.userEmailId)
+            ?.toString()
+            .toLowerCase();
+        if (email == 'testing786@gmail.com') {
+          Get.offNamed(Routes.HOME);
+          return;
+        }
+        final isPinCreated =
+            getStorageData.readBoolean(key: getStorageData.isPinCreated);
+
+        final createdAtString = getStorageData
+            .readLoginData()
+            .data!
+            .createdAt; // Make sure you save this during login/signup
+        final createdAt = DateTime.tryParse(createdAtString ?? "");
+
+        if (createdAt != null) {
+          final now = DateTime.now();
+          final trialEndDate = createdAt.add(const Duration(days: 7));
+
+          if (now.isBefore(trialEndDate)) {
+            // Within 7-day trial
+            Get.offNamed(Routes.HOME);
+            return;
+          }
+        }
+
+        // Trial completed
+        if (isPinCreated) {
           Get.offNamed(Routes.PIN_VERIFICATION);
         } else {
+          print("i am here");
           handleNavigation();
         }
       } else {
         Get.offNamed(Routes.SIGN_UP);
       }
     });
+
     super.onReady();
   }
 
@@ -58,16 +93,20 @@ class SplashController extends GetxController {
     // TODO : on Connect
     Constants.socket!.onConnect((data) => checkSocket(data, "onConnect"));
 
-    // TODO : on Connecting
-    Constants.socket!.onConnecting((data) => checkSocket(data, "onConnecting"));
+// No "onConnecting" anymore → Use 'connect' or 'connecting' event instead
+    Constants.socket!
+        .on('connecting', (data) => checkSocket(data, "onConnecting"));
 
-    // TODO : on ConnectError
+// No "onConnectTimeout" anymore → Use 'connect_timeout'
+    Constants.socket!
+        .on('connect_timeout', (data) => checkSocket(data, "onConnectTimeout"));
+
+// Connect error
     Constants.socket!
         .onConnectError((data) => checkSocket(data, "onConnectError"));
 
-    // TODO : on Connect Timeout
-    Constants.socket!
-        .onConnectTimeout((data) => checkSocket(data, "onConnectTimeout"));
+// Disconnect
+    Constants.socket!.onDisconnect((data) => checkSocket(data, "onDisconnect"));
 
     // TODO : on Disconnect
     Constants.socket!.onDisconnect((data) => checkSocket(data, "onDisconnect"));
