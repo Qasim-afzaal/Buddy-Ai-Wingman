@@ -1,4 +1,4 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
 import 'package:flutter/services.dart';
 
 class SparkdLinesResponsePage extends StatefulWidget {
