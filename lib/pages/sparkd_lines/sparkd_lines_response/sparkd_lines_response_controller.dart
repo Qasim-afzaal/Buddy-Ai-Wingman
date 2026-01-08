@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 import '../../../api_repository/api_class.dart';
 import '../../../api_repository/api_function.dart';
@@ -148,7 +148,7 @@ class SparkdLinesResponseController extends GetxController {
     };
     print("json bodyprint $json");
     final data = await APIFunction().patchApiCall2(
-      apiName: Constants.buddy_ai_wingmanLines,
+      apiName: Constants.sparkdLines,
       withOutFormData: jsonEncode(json),
     );
     print("data is here ${data["data"]["content"]}");
@@ -223,7 +223,7 @@ class SparkdLinesResponseController extends GetxController {
     };
 
     final data = await APIFunction().patchApiCall2(
-      apiName: Constants.buddy_ai_wingmanLines,
+      apiName: Constants.sparkdLines,
       withOutFormData: jsonEncode(json),
     );
 
@@ -276,7 +276,7 @@ class SparkdLinesResponseController extends GetxController {
     };
 
     final data = await APIFunction().patchApiCall2(
-      apiName: Constants.buddy_ai_wingmanLines,
+      apiName: Constants.sparkdLines,
       withOutFormData: jsonEncode(json),
     );
     try {
@@ -336,7 +336,7 @@ class SparkdLinesResponseController extends GetxController {
       HttpUtil.personalityType: "",
     };
     final data = await APIFunction().patchApiCall(
-      apiName: Constants.buddy_ai_wingmanLines,
+      apiName: Constants.sparkdLines,
       withOutFormData: jsonEncode(json),
     );
     try {
