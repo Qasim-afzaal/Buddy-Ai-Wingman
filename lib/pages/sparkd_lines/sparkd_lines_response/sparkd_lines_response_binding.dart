@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/pages/sparkd_lines/sparkd_lines_response/sparkd_lines_response_controller.dart';
+import 'package:buddy/pages/sparkd_lines/sparkd_lines_response/sparkd_lines_response_controller.dart';
 
 class SparkdLinesResponseBinding extends Bindings {
   @override
