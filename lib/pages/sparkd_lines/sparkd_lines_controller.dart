@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/pages/home/home_controller.dart';
+import 'package:buddy/pages/home/home_controller.dart';
 
 class SparkdLinesController extends GetxController {
   var linesList = <SparkLinesModel>[
