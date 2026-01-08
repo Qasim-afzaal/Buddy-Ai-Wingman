@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 import '../../../routes/app_pages.dart';
 
