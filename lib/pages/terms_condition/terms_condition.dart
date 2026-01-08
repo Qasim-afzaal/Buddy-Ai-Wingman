@@ -1,5 +1,5 @@
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/terms_condition/terms_condition_controller.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/terms_condition/terms_condition_controller.dart';
 
 class TermsConditionPage extends StatelessWidget {
   const TermsConditionPage({super.key});
