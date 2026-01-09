@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/gather_new_chat_info_controller.dart';
-import 'package:buddy_ai_wingman/routes/app_pages.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/pages/new_chat/gather_new_chat/gather_new_chat_info_controller.dart';
+import 'package:buddy/routes/app_pages.dart';
 
 class NameWidget extends StatefulWidget {
   const NameWidget({super.key});
