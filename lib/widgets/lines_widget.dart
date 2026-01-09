@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:buddy_ai_wingman/api_repository/api_class.dart';
-import 'package:buddy_ai_wingman/api_repository/api_function.dart';
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
-import 'package:buddy_ai_wingman/models/error_response.dart';
-import 'package:buddy_ai_wingman/pages/home/home_controller.dart';
-import 'package:buddy_ai_wingman/pages/new_chat/gather_new_chat/spark_line_response.dart';
+import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/core/constants/imports.dart';
+import 'package:buddy/models/error_response.dart';
+import 'package:buddy/pages/home/home_controller.dart';
+import 'package:buddy/pages/new_chat/gather_new_chat/spark_line_response.dart';
 
 import '../routes/app_pages.dart';
 
@@ -119,7 +119,7 @@ class _LinesWidgetState extends State<LinesWidget> {
       print("this is data$json");
 
       final data = await APIFunction().patchApiCall(
-        apiName: Constants.buddy_ai_wingmanLines,
+        apiName: Constants.sparkdLines,
         withOutFormData: jsonEncode(json),
       );
 
