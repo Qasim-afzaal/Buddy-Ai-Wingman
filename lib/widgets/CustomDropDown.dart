@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-import 'package:buddy_ai_wingman/core/constants/imports.dart';
+import 'package:buddy/core/constants/imports.dart';
 
 class CustomDropDown extends StatelessWidget {
   const CustomDropDown(
