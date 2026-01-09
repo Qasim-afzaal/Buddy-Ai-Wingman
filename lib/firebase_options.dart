@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:buddy/core/config/app_config.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -49,20 +50,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC2eibeAvT64UrXKTIEkNGhNKPL4fWY02w',
-    appId: '1:712141951266:android:4900fd936e299f36eb957b',
-    messagingSenderId: '712141951266',
-    projectId: 'buddy-f4ca5',
-    storageBucket: 'buddy-f4ca5.firebasestorage.app',
+  static FirebaseOptions get android => FirebaseOptions(
+    apiKey: AppConfig.firebaseAndroidApiKey,
+    appId: AppConfig.firebaseAndroidAppId,
+    messagingSenderId: AppConfig.firebaseAndroidMessagingSenderId,
+    projectId: AppConfig.firebaseAndroidProjectId,
+    storageBucket: AppConfig.firebaseAndroidStorageBucket,
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyABeYDnRlLmo0lPqpJfQ8oG3myfUHJjV3Y',
-    appId: '1:712141951266:ios:1d53996868a4c833eb957b',
-    messagingSenderId: '712141951266',
-    projectId: 'buddy-f4ca5',
-    storageBucket: 'buddy-f4ca5.firebasestorage.app',
+  static FirebaseOptions get ios => FirebaseOptions(
+    apiKey: AppConfig.firebaseIosApiKey,
+    appId: AppConfig.firebaseIosAppId,
+    messagingSenderId: AppConfig.firebaseIosMessagingSenderId,
+    projectId: AppConfig.firebaseIosProjectId,
+    storageBucket: AppConfig.firebaseIosStorageBucket,
     iosBundleId: 'com.app.buddyai',
   );
 }
