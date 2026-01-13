@@ -49,3 +49,4 @@ class Loading {
     EasyLoading.dismiss();
   }
 }
+
