@@ -9,3 +9,4 @@ enum InboxType{
   Chats,
   Archived,
 }
+
