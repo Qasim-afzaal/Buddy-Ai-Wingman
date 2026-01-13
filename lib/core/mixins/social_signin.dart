@@ -20,3 +20,4 @@ mixin SocialSignIn {
         ],
       );
 }
+
