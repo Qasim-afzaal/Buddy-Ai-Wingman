@@ -166,3 +166,4 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
     ),
   );
 }
+
