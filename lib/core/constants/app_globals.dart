@@ -5,3 +5,4 @@ class AppGlobals {
   static String email = "";
   static Widget? nextPage;
 }
+
