@@ -47,3 +47,4 @@ class AppColors {
   static const turquoiseColor = Color(0xffE6DFF1);
   static const grayColor = Color(0xff484848);
 }
+
