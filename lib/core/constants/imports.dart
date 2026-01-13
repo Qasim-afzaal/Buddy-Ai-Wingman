@@ -29,3 +29,4 @@ export 'package:flutter_svg/flutter_svg.dart';
 
 export 'package:buddy/core/constants/constants.dart';
 export 'package:buddy/pages/dashboard/dashboard.dart';
+
