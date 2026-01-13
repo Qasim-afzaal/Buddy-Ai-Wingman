@@ -193,3 +193,4 @@ class AppStrings {
   static const String pleaseEnterAccountNumber = "Please enter account number";
   static const String pleaseEnterValidAccountNumber = "Please enter valid account number";
 }
+
