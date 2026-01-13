@@ -6,3 +6,4 @@ enum Personality {
   Introvert,
   Romantic,
 }
+
