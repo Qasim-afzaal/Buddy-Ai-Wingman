@@ -1,3 +1,4 @@
+/// Custom image asset paths
 class CustomImages {
   static const carPic = 'assets/images/car_pic.png';
   static const sPic = 'assets/images/s.png';
