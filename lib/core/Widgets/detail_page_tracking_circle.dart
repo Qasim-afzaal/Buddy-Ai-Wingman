@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+/// Detail page tracking circle widget
+
 import 'package:buddy/core/constants/app_colors.dart';
 
 class DetailPageTrackingCircle extends StatelessWidget {
