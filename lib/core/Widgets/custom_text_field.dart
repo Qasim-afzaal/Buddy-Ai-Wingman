@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../Utils/app_colors.dart';
 
+/// Custom text field widget
+
 class CustomTextField extends StatelessWidget {
   final Function()? onTap;
   final TextEditingController controller;
