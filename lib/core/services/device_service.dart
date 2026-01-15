@@ -3,6 +3,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:buddy/core/constants/constants.dart';
 
+/// Device service for device information
+
 /// Service to fetch and manage device ID for both iOS and Android
 class DeviceService {
   static DeviceService? _instance;
