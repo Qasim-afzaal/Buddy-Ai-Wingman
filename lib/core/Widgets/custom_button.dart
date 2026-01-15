@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:buddy/core/constants/app_colors.dart';
 
+/// Custom button widget
+
 class CustomButton extends StatelessWidget {
   final void Function()? onTap;
   final String buttonText;
