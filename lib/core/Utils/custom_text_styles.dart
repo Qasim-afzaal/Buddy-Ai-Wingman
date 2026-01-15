@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
+/// Custom text style utilities
 bodyTextStyle({double? size = 12, Color color = AppColors.blackColor}) {
   return  GoogleFonts.interTight(
       textStyle: TextStyle(
