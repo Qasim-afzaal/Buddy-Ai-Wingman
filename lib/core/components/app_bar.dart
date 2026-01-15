@@ -4,6 +4,8 @@ import 'package:buddy/gen/assets.gen.dart';
 import 'package:buddy/pages/profile/profile.dart';
 import 'package:buddy/pages/profile_before_payment/profile_before_payment.dart';
 import 'package:buddy/pages/settings/settings.dart';
+
+/// Custom app bar component
 import 'package:buddy/routes/app_pages.dart';
 
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
