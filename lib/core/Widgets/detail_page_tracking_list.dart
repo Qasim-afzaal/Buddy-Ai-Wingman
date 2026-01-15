@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:buddy/core/Widgets/detail_page_tracking_circle.dart';
 
+/// Detail page tracking list widget
+
 class DetailPageTrackingList extends StatelessWidget {
   final int pageNumber;
   const DetailPageTrackingList({super.key, required this.pageNumber});
