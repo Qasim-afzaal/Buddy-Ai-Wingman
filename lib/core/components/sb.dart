@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Spacing builder widget
 class SB extends StatelessWidget {
   final Widget _child;
 
