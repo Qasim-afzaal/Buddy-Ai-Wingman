@@ -1,3 +1,4 @@
+/// User role enumeration
 enum UserRole {
   carOwner,
   carRenter,
