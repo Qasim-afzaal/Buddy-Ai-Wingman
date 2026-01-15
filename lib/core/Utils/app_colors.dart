@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// App color constants
 class AppColors {
   static const secondaryColor = Color(0xffCDFF49);
 
