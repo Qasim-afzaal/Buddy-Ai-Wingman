@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:buddy/core/constants/imports.dart';
 import 'package:buddy/core/extensions/build_context_extension.dart';
 
+/// App button component
+
 const double _defaultButtonHeight = 49.0;
 
 class AppButton extends StatelessWidget {
