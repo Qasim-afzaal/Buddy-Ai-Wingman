@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:buddy/core/Utils/assets_util.dart';
+
+/// Custom alert dialogue widget
 import 'package:buddy/core/constants/app_colors.dart';
 
 class CustomAlertDialogue extends StatelessWidget {
