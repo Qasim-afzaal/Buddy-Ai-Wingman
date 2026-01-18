@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+/// Permission handling utility class
 class PermissionHandle {
-  //android
+  // Android
   /// mamifest in permission set
   ///<uses-permission android:name="android.permission.CAMERA" />
   ///<uses-permission android:name="android.permission.RECORD_AUDIO" />
