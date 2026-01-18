@@ -4,10 +4,10 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:buddy/core/constants/constants.dart';
 import 'package:buddy/core/constants/imports.dart';
 
+/// Socket service for real-time communication
 class SocketService extends GetxService {
   late IO.Socket socket;
-  final String serverUrl =
-      Constants.socketBaseUrl; // Replace with your server's URL
+  final String serverUrl = Constants.socketBaseUrl;
 
   @override
   Future<void> onInit() async {
