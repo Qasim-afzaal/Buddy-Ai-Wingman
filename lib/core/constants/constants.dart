@@ -7,6 +7,7 @@ import 'package:buddy/core/config/app_config.dart';
 GetStorageData getStorageData = GetStorageData();
 Utils utils = Utils();
 
+/// Application constants and configuration
 class Constants {
   /// Socket
   static IO.Socket? socket;
