@@ -8,7 +8,7 @@ import 'package:buddy/core/services/onesignal_service.dart';
 import 'package:buddy/pages/auth/login/login_response.dart';
 import 'package:buddy/routes/app_pages.dart';
 
-/// <<< To store data in phone storage --------- >>>
+/// Storage utility class for local data persistence
 class GetStorageData {
   String loginData = "loginData";
   String type = "type";
