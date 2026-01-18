@@ -10,8 +10,9 @@ import 'package:buddy/api_repository/loading.dart';
 import 'package:buddy/core/constants/constants.dart';
 import 'package:buddy/core/constants/helper.dart';
 
+/// HTTP utility class for API requests
 class HttpUtil {
-  // Body params name ->
+  // Body params name
   static String name = "name";
   static String firstName = "firstname";
   static String lastName = "lastname";
