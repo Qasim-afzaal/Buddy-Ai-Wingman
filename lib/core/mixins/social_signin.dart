@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:buddy/core/constants/imports.dart';
 
+/// Mixin for social sign-in functionality
 mixin SocialSignIn {
   Widget socialButton(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.center,
