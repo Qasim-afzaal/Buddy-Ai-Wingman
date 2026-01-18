@@ -54,5 +54,8 @@ class AppConfig {
   static Future<void> load() async {
     await dotenv.load(fileName: '.env');
   }
+  
+  /// Check if environment variables are loaded
+  static bool get isLoaded => dotenv.isInitialized;
 }
 
