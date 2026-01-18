@@ -1,3 +1,4 @@
+/// Application string constants
 class AppStrings {
   static const String about = "About";
   static const String paymentMethods = "Payment Methods";
