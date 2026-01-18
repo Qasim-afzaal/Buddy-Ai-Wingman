@@ -6,6 +6,7 @@ import 'package:nuts_activity_indicator/nuts_activity_indicator.dart';
 
 import 'package:buddy/core/constants/app_colors.dart';
 
+/// Loading indicator utility class
 class Loading {
   Loading() {
     EasyLoading.instance
