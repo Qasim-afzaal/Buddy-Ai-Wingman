@@ -5,7 +5,7 @@ enum MessageType {
   video,
 }
 
-enum InboxType{
+enum InboxType {
   Chats,
   Archived,
 }
