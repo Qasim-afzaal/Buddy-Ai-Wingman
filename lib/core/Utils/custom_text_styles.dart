@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 /// Custom text style utilities
+
+/// Body text style helper function
 bodyTextStyle({double? size = 12, Color color = AppColors.blackColor}) {
   return  GoogleFonts.interTight(
       textStyle: TextStyle(
