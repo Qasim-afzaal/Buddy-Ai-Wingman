@@ -5,6 +5,3 @@ enum Genders {
   Male,
   Other,
 }
-
-
-
