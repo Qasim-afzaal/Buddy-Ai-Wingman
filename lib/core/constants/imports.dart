@@ -8,7 +8,7 @@ export 'package:buddy/core/components/app_button.dart';
 export 'package:buddy/core/components/app_bar.dart';
 export 'package:buddy/core/components/app_text_field.dart';
 
-///Enums
+/// Enums
 export 'package:buddy/core/enums/genders.dart';
 export 'package:buddy/core/enums/personality.dart';
 
