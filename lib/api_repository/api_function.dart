@@ -10,6 +10,7 @@ import 'package:buddy/core/constants/constants.dart';
 
 import '../core/constants/imports.dart';
 
+/// API function utilities for making HTTP requests
 class APIFunction {
   Future<dynamic> apiCall({
     required String apiName,
