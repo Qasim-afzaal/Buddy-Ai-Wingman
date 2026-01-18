@@ -20,6 +20,8 @@ import 'package:buddy/core/constants/app_colors.dart';
 import 'package:buddy/core/constants/constants.dart';
 import 'package:buddy/core/constants/imports.dart';
 
+/// Utility class for common helper functions
+
 class Utils {
   static const String languageCodeEn = 'en';
   static const String languageCodeSr = 'sr';
