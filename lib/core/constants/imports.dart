@@ -15,10 +15,6 @@ export 'package:buddy/core/enums/personality.dart';
 export 'package:buddy/core/enums/chat_type.dart';
 export 'package:buddy/models/message_model.dart';
 
-/// Pages=
-
-/// Widgets=
-
 /// Extensions
 export 'package:buddy/core/extensions/build_context_extension.dart';
 
