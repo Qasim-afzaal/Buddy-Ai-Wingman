@@ -21,6 +21,11 @@ class HomeController extends GetxController {
   static const Duration deviceTokenUpdateDelay = Duration(milliseconds: 2000);
   static const Duration playerIdRetryDelay = Duration(milliseconds: 2000);
   static const int maxPlayerIdRetryAttempts = 5;
+  static const Duration socketReconnectDelay = Duration(seconds: 3);
+  static const int maxSocketReconnectAttempts = 3;
+  
+  // Error recovery state
+  int _socketReconnectAttempts = 0;
   
   String? imagePath;
   String? userId;
@@ -246,13 +251,19 @@ class HomeController extends GetxController {
     });
 
     socket.onError((error) {
-      Get.snackbar('Error', 'Socket error: $error');
+      debugPrint('❌ Socket error: $error');
       isLoading.value = false;
+      
+      // Attempt to reconnect on error
+      _attemptSocketReconnect();
     });
 
     socket.onDisconnect((_) {
       debugPrint('⚠️ Socket disconnected');
       isLoading.value = false;
+      
+      // Attempt to reconnect on disconnect
+      _attemptSocketReconnect();
     });
   }
 
