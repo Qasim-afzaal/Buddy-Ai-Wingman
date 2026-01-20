@@ -249,9 +249,20 @@ class HomeController extends GetxController {
     });
   }
 
+  /// Starts a chat session by requesting opening lines from the server
+  /// 
+  /// Validates that userId is available before sending the request.
+  /// Shows loading indicator while waiting for response.
   void startChat() {
+    // Validate userId before proceeding
+    if (userId == null || userId!.isEmpty) {
+      debugPrint('⚠️ Cannot start chat: userId is null or empty');
+      utils.showToast(message: 'User ID not found. Please log in again.');
+      return;
+    }
+
     final Map<String, dynamic> messageData = {
-      "user_id": userId,
+      "user_id": userId!,
     };
 
     isLoading.value = true; // Show loader
