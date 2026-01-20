@@ -212,9 +212,22 @@ class HomeController extends GetxController {
   }
 
   uploadImage() async {
-    FormData formData = FormData();
-    printAction("imagePath >>>>>>>>>>> $imagePath");
-    if (imagePath != null) {
+    // Validate image path before proceeding
+    if (imagePath == null || imagePath!.isEmpty) {
+      utils.showToast(message: 'Please select an image first');
+      return;
+    }
+
+    // Check if file exists
+    final file = File(imagePath!);
+    if (!await file.exists()) {
+      utils.showToast(message: 'Selected image file not found');
+      return;
+    }
+
+    try {
+      FormData formData = FormData();
+      printAction("imagePath >>>>>>>>>>> $imagePath");
       formData.fields.add(const MapEntry("name", "static"));
       formData.files.add(MapEntry(
           HttpUtil.profileImageUrl,
@@ -222,24 +235,25 @@ class HomeController extends GetxController {
             imagePath!,
             filename: imagePath!.split("/").last,
           )));
-    }
-    final data = await APIFunction().patchApiCall(
-      apiName: "chat/with-file",
-      data: formData,
-    );
 
-    print("this is api response $data ");
-    try {
+      final data = await APIFunction().patchApiCall(
+        apiName: "chat/with-file",
+        data: formData,
+      );
+
+      print("this is api response $data ");
+      
       // Check if response is an error (has statusCode field)
       if (data is Map<String, dynamic> && data.containsKey('statusCode')) {
         // This is an error response
-        final errorMessage = data['message'] ?? 'Upload failed';
+        final errorMessage = data['message'] ?? 'Upload failed. Please try again.';
+        debugPrint('❌ Image upload error: $errorMessage');
         utils.showToast(message: errorMessage);
         return;
       }
 
       model = ImageAnalyzerModel.fromJson(data);
-      if (model!.success) {
+      if (model!.success && model!.data.isNotEmpty) {
         update();
 
         Get.toNamed(Routes.IMAGE_CHAT, arguments: {
@@ -247,18 +261,25 @@ class HomeController extends GetxController {
           HttpUtil.conversationId: model!.data[0].conversationId
         });
       } else {
-        utils.showToast(message: model!.message ?? 'Upload failed');
+        final errorMsg = model?.message ?? 'Upload failed. Please try again.';
+        debugPrint('❌ Image upload failed: $errorMsg');
+        utils.showToast(message: errorMsg);
       }
+    } on FileSystemException catch (e) {
+      debugPrint('❌ File system error during upload: $e');
+      utils.showToast(message: 'Error reading image file. Please try again.');
     } catch (e) {
-      // Try to extract error message
-      String errorMessage = "Upload failed";
-      if (data is Map<String, dynamic> && data.containsKey('message')) {
-        errorMessage = data['message'] ?? errorMessage;
-      } else {
-        try {
-          ErrorResponse errorModel = ErrorResponse.fromJson(data);
-          errorMessage = errorModel.message ?? errorMessage;
-        } catch (_) {}
+      debugPrint('❌ Unexpected error during image upload: $e');
+      // Try to extract error message from response
+      String errorMessage = "Upload failed. Please check your connection and try again.";
+      try {
+        if (e is DioException) {
+          errorMessage = e.response?.data?['message'] ?? 
+                        e.message ?? 
+                        'Network error. Please try again.';
+        }
+      } catch (_) {
+        // Fallback to default message
       }
       utils.showToast(message: errorMessage);
     }
