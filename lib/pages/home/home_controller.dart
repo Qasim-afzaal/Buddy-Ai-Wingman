@@ -407,15 +407,23 @@ class HomeController extends GetxController {
   }
 
   void addNewChatManually(bool value) {
-    Map chatmsg = {"name": "add new chat manual Chat"};
-    Constants.socket!.emit("logEvent", chatmsg);
-    Get.toNamed(
-      Routes.GATHER_NEW_CHAT_INFO,
-      arguments: {
-        if (!value) HttpUtil.filePath: imagePath,
-        HttpUtil.isManually: value,
-      },
-    );
+    // Log event if socket is available
+    if (Constants.socket != null && Constants.socket!.connected) {
+      Map chatmsg = {"name": "add new chat manual Chat"};
+      Constants.socket!.emit("logEvent", chatmsg);
+    }
+    
+    // Navigate to gather new chat info
+    final arguments = <String, dynamic>{
+      HttpUtil.isManually: value,
+    };
+    
+    // Only add filePath if value is false and imagePath is not null
+    if (!value && imagePath != null && imagePath!.isNotEmpty) {
+      arguments[HttpUtil.filePath] = imagePath!;
+    }
+    
+    Get.toNamed(Routes.GATHER_NEW_CHAT_INFO, arguments: arguments);
   }
 
   @override
