@@ -16,6 +16,12 @@ import 'package:buddy/routes/app_pages.dart';
 import '../../../api_repository/api_function.dart';
 
 class HomeController extends GetxController {
+  // Timing constants
+  static const Duration userInfoDelay = Duration(milliseconds: 1000);
+  static const Duration deviceTokenUpdateDelay = Duration(milliseconds: 2000);
+  static const Duration playerIdRetryDelay = Duration(milliseconds: 2000);
+  static const int maxPlayerIdRetryAttempts = 5;
+  
   String? imagePath;
   String? userId;
 
@@ -41,12 +47,12 @@ class HomeController extends GetxController {
     initSocket();
     
     // Print user info after a short delay
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(userInfoDelay, () {
       printUserInfo();
     });
     
     // Update device token (OneSignal Player ID) to backend
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(deviceTokenUpdateDelay, () {
       updateDeviceToken();
     });
   }
@@ -61,8 +67,8 @@ class HomeController extends GetxController {
       
       if (playerId == null || playerId.isEmpty) {
         debugPrint("⚠️ Player ID not available yet, retrying...");
-        // Retry after 2 seconds
-        Future.delayed(const Duration(seconds: 2), () {
+        // Retry after delay
+        Future.delayed(playerIdRetryDelay, () {
           updateDeviceToken();
         });
         return;
