@@ -54,6 +54,8 @@ class HomeController extends GetxController {
   }
   
   /// Validates that imagePath is available and file exists
+  /// 
+  /// Performance: Async file check to avoid blocking UI thread
   Future<bool> _isValidImagePath() async {
     if (imagePath == null || imagePath!.isEmpty) {
       return false;
@@ -198,6 +200,8 @@ class HomeController extends GetxController {
   /// Navigates to pickup lines page with the provided messages
   /// 
   /// Validates that messages are not empty and have a valid conversationId
+  /// 
+  /// Performance: O(1) - Only checks first element for conversationId
   void _navigateToPickupLines(List<MessageModelPickup> messagesList) {
     if (messagesList.isEmpty) {
       debugPrint('⚠️ Cannot navigate: messages list is empty');
@@ -243,7 +247,8 @@ class HomeController extends GetxController {
         isLoading.value = false; // Hide loader when data is received
 
         if (data is List) {
-          // Validate list contains valid map entries
+          // Performance: Validate list contains valid map entries
+          // Using List for O(1) append operations
           final List<Map<String, dynamic>> validMessages = [];
           for (var item in data) {
             if (item is Map<String, dynamic>) {
@@ -340,6 +345,9 @@ class HomeController extends GetxController {
   /// Attempts to reconnect the socket with exponential backoff
   /// 
   /// Will retry up to [maxSocketReconnectAttempts] times with increasing delays
+  /// 
+  /// Performance: Uses exponential backoff to prevent overwhelming the server
+  /// with reconnection attempts. Delay increases with each attempt.
   void _attemptSocketReconnect() {
     if (_socketReconnectAttempts >= maxSocketReconnectAttempts) {
       debugPrint('❌ Max socket reconnection attempts reached. Please restart the app.');
