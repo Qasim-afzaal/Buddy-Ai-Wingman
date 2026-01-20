@@ -1,27 +1,24 @@
-// import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:sizer/sizer.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 import 'dart:io';
 
-import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:sizer/sizer.dart';
+
 import 'package:buddy/api_repository/loading.dart';
-import 'package:buddy/api_repository/api_function.dart';
+import 'package:buddy/bloc/auth/auth_bloc.dart';
+import 'package:buddy/core/config/app_config.dart';
 import 'package:buddy/core/constants/helper.dart';
 import 'package:buddy/core/constants/imports.dart';
-import 'package:buddy/core/theme/theme_light.dart';
 import 'package:buddy/core/services/notification_service.dart';
+import 'package:buddy/core/theme/theme_light.dart';
 import 'package:buddy/pages/payment/payment_plan/payment_plan_controller.dart';
 import 'package:buddy/pages/settings/inapp_purchase_source.dart';
 import 'package:buddy/pages/settings/revenuecat_purchase_source.dart';
 import 'package:buddy/routes/app_pages.dart';
-import 'package:buddy/bloc/auth/auth_bloc.dart';
-import 'package:buddy/core/config/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
