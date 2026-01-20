@@ -25,12 +25,21 @@ import 'package:buddy/core/config/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
+  
+  try {
+    await GetStorage.init();
+  } catch (e) {
+    debugPrint("❌ Error initializing GetStorage: $e");
+    // Continue execution as GetStorage might still work
+  }
   
   // Load environment variables from .env file
-  await AppConfig.load();
-
-
+  try {
+    await AppConfig.load();
+  } catch (e) {
+    debugPrint("❌ Error loading AppConfig: $e");
+    // Continue execution but app might not work properly without config
+  }
 
   // Initialize RevenueCat with platform-specific API keys
   try {
@@ -56,10 +65,15 @@ void main() async {
   }
 
   // Initialize Notification Service (both push and local notifications)
-  await NotificationService.instance.initialize(
-    iosOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
-    androidOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
-  );
+  try {
+    await NotificationService.instance.initialize(
+      iosOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
+      androidOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
+    );
+  } catch (e) {
+    debugPrint("❌ Error initializing NotificationService: $e");
+    // Continue execution as notifications are not critical for app startup
+  }
 
   // Get OneSignal Player ID after initialization (runs asynchronously)
   // Note: Player ID may take a few seconds to be available, especially if permissions are not granted yet
