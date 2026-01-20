@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import 'package:buddy/api_repository/api_class.dart';
+import 'package:buddy/core/constants/constants.dart';
 import 'package:buddy/core/constants/helper.dart';
 import 'package:buddy/core/constants/imports.dart';
 import 'package:buddy/core/services/notification_service.dart';
@@ -18,9 +19,9 @@ class HomeController extends GetxController {
   String? imagePath;
   String? userId;
 
-  static const String socketBaseUrl = "http://3.123.108.18:3000/";
-  static const String uploadFileEndpoint =
-      "http://3.123.108.18:3000/api/chat/upload-file";
+  // Use centralized constants from Constants class
+  String get socketBaseUrl => Constants.socketBaseUrl;
+  String get uploadFileEndpoint => "${Constants.baseUrl}${Constants.uploadFile}";
   var isLoading = false.obs;
   late io.Socket socket;
   List<MessageModelPickup>? messages;
@@ -141,7 +142,7 @@ class HomeController extends GetxController {
 
   void initSocket() {
     socket = io.io(
-      socketBaseUrl,
+      this.socketBaseUrl,
       io.OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()
