@@ -10,7 +10,6 @@ import 'package:buddy/core/constants/imports.dart';
 import 'package:buddy/core/services/notification_service.dart';
 import 'package:buddy/pages/home/image_chat/model/image_model.dart';
 import 'package:buddy/pages/home/model/message_model.dart';
-import 'package:buddy/pages/new_chat/chat/error_response.dart';
 import 'package:buddy/routes/app_pages.dart';
 
 import '../../../api_repository/api_function.dart';
