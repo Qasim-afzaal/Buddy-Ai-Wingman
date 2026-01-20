@@ -74,10 +74,8 @@ void main() async {
   // Note: Player ID may take a few seconds to be available, especially if permissions are not granted yet
   _getPlayerIdAsync();
 
-  // await Firebase.initializeApp();
   Loading();
   Utils.screenPortrait();
-//  Get.lazyPut<SocketService>(() => SocketService(), fenix: true);
   runApp(const MyApp());
 }
 
