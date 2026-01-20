@@ -178,36 +178,62 @@ class HomeController extends GetxController {
       try {
         isLoading.value = false; // Hide loader when data is received
 
-        if (data is List<dynamic>) {
-          // Ensure data is properly cast before mapping
-          messages = data
-              .map((msg) =>
-                  MessageModelPickup.fromMap(msg as Map<String, dynamic>))
-              .toList();
+        if (data is List) {
+          // Validate list contains valid map entries
+          final List<Map<String, dynamic>> validMessages = [];
+          for (var item in data) {
+            if (item is Map<String, dynamic>) {
+              try {
+                final message = MessageModelPickup.fromMap(item);
+                validMessages.add(item);
+              } catch (e) {
+                debugPrint('⚠️ Skipping invalid message item: $e');
+              }
+            }
+          }
+          
+          if (validMessages.isNotEmpty) {
+            messages = validMessages
+                .map((msg) => MessageModelPickup.fromMap(msg))
+                .toList();
 
-          print("Received messages: $messages");
+            debugPrint("✅ Received ${messages!.length} messages");
 
-          // Navigate and pass parsed list
-          if (messages!.isNotEmpty) {
-            Get.toNamed(Routes.PICKUP_LINES, arguments: {
-              HttpUtil.message: messages, // Pass full list
-              HttpUtil.conversationId: messages![0].conversationId
-            });
+            // Navigate and pass parsed list
+            if (messages!.isNotEmpty && messages![0].conversationId != null) {
+              Get.toNamed(Routes.PICKUP_LINES, arguments: {
+                HttpUtil.message: messages,
+                HttpUtil.conversationId: messages![0].conversationId!
+              });
+            } else {
+              debugPrint('⚠️ Messages list is empty or missing conversationId');
+            }
+          } else {
+            debugPrint('⚠️ No valid messages found in received data');
           }
         } else if (data is Map<String, dynamic>) {
           // If it's a single message, parse it
-          final message = MessageModelPickup.fromMap(data);
-          print("Received single message: ${message.content}");
+          try {
+            final message = MessageModelPickup.fromMap(data);
+            debugPrint("✅ Received single message: ${message.content}");
 
-          Get.toNamed(Routes.PICKUP_LINES, arguments: {
-            HttpUtil.message: [message], // Wrap single message in a list
-            HttpUtil.conversationId: message.conversationId
-          });
+            if (message.conversationId != null) {
+              Get.toNamed(Routes.PICKUP_LINES, arguments: {
+                HttpUtil.message: [message],
+                HttpUtil.conversationId: message.conversationId!
+              });
+            } else {
+              debugPrint('⚠️ Message missing conversationId');
+            }
+          } catch (e) {
+            debugPrint('❌ Error parsing single message: $e');
+          }
         } else {
-          print("Unexpected data format: $data");
+          debugPrint("⚠️ Unexpected data format: ${data.runtimeType}");
         }
-      } catch (e) {
-        print("Error parsing socket data: $e");
+      } catch (e, stackTrace) {
+        debugPrint("❌ Error parsing socket data: $e");
+        debugPrint("Stack trace: $stackTrace");
         isLoading.value = false;
       }
     });
