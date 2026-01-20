@@ -267,6 +267,37 @@ class HomeController extends GetxController {
     });
   }
 
+  /// Attempts to reconnect the socket with exponential backoff
+  /// 
+  /// Will retry up to [maxSocketReconnectAttempts] times with increasing delays
+  void _attemptSocketReconnect() {
+    if (_socketReconnectAttempts >= maxSocketReconnectAttempts) {
+      debugPrint('❌ Max socket reconnection attempts reached. Please restart the app.');
+      _socketReconnectAttempts = 0; // Reset for next session
+      return;
+    }
+    
+    _socketReconnectAttempts++;
+    debugPrint('🔄 Attempting socket reconnection (attempt $_socketReconnectAttempts/$maxSocketReconnectAttempts)...');
+    
+    Future.delayed(socketReconnectDelay * _socketReconnectAttempts, () {
+      try {
+        if (!socket.connected) {
+          socket.connect();
+          debugPrint('✅ Socket reconnection attempt initiated');
+        } else {
+          debugPrint('✅ Socket already connected');
+          _socketReconnectAttempts = 0; // Reset on success
+        }
+      } catch (e) {
+        debugPrint('❌ Socket reconnection failed: $e');
+        if (_socketReconnectAttempts < maxSocketReconnectAttempts) {
+          _attemptSocketReconnect(); // Retry
+        }
+      }
+    });
+  }
+
   /// Starts a chat session by requesting opening lines from the server
   /// 
   /// Validates that userId is available before sending the request.
