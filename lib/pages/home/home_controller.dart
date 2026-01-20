@@ -172,7 +172,7 @@ class HomeController extends GetxController {
     socket.connect();
 
     socket.onConnect((_) {
-      print('Socket connected');
+      debugPrint('✅ Socket connected successfully');
     });
     socket.on('receiveOpeningLines', (data) {
       try {
@@ -244,7 +244,7 @@ class HomeController extends GetxController {
     });
 
     socket.onDisconnect((_) {
-      print('Socket disconnected');
+      debugPrint('⚠️ Socket disconnected');
       isLoading.value = false;
     });
   }
@@ -300,7 +300,7 @@ class HomeController extends GetxController {
         data: formData,
       );
 
-      print("this is api response $data ");
+      debugPrint("📥 API response received: ${data.toString().substring(0, data.toString().length > 200 ? 200 : data.toString().length)}");
       
       // Check if response is an error (has statusCode field)
       if (data is Map<String, dynamic> && data.containsKey('statusCode')) {
@@ -360,7 +360,7 @@ class HomeController extends GetxController {
   void onClose() {
     socket.disconnect();
     socket.dispose();
-    print('Socket disconnected in onClose');
+    debugPrint('🔌 Socket disconnected in onClose');
     super.onClose();
   }
 }
