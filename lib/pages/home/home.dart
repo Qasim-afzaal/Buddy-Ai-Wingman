@@ -41,6 +41,7 @@ class HomePage extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
+                      semanticsLabel: "Upload a screenshot of a chat or bio",
                     ),
                     SB.h(20),
                     Container(
