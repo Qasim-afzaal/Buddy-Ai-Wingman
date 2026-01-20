@@ -43,14 +43,9 @@ void main() async {
     await Purchases.setLogLevel(kDebugMode ? LogLevel.debug : LogLevel.info);
     
     // Use platform-specific API keys from environment variables
-    String revenueCatApiKey;
-    if (Platform.isIOS) {
-      revenueCatApiKey = AppConfig.revenueCatAppleApiKey;
-    } else if (Platform.isAndroid) {
-      revenueCatApiKey = AppConfig.revenueCatGoogleApiKey;
-    } else {
-      revenueCatApiKey = AppConfig.revenueCatGoogleApiKey; // Default to Android
-    }
+    final String revenueCatApiKey = Platform.isIOS
+        ? AppConfig.revenueCatAppleApiKey
+        : AppConfig.revenueCatGoogleApiKey;
     
     await Purchases.configure(
       PurchasesConfiguration(revenueCatApiKey)
