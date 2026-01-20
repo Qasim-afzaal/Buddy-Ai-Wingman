@@ -127,7 +127,7 @@ Future<void> _getPlayerIdAsync() async {
 
 PaymentPlanController getPaymentPlanController() {
   if (Get.isRegistered<PaymentPlanController>()) {
-    debugPrint("Payment Dependencies already register");
+    debugPrint("Payment Dependencies already registered");
     return Get.find<PaymentPlanController>();
   } else {
     debugPrint("Payment Dependencies going to register");
