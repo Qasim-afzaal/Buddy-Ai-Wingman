@@ -59,13 +59,16 @@ class HomePage extends StatelessWidget {
                     AppButton.primary(
                       title: "Upload a screenshot",
                       onPressed: () async {
+                        // Check network connectivity before allowing image upload
                         final connectivityResult =
                             await Connectivity().checkConnectivity();
                         if (connectivityResult != ConnectivityResult.none) {
+                          // Open image picker and handle selected images
                           utils.openImagePicker(
                             context,
                             onPicked: (pickFile) {
                               if (pickFile.isNotEmpty) {
+                                // Process each selected image
                                 pickFile.forEach((element) {
                                   controller.imagePath = element;
                                   controller.uploadImage();
