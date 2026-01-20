@@ -45,6 +45,35 @@ class HomeController extends GetxController {
   ImageAnalyzerModel? imageAnalyzerModel;
   
   // ============================================================================
+  // Validation Helpers
+  // ============================================================================
+  
+  /// Validates that userId is available and not empty
+  bool _isValidUserId() {
+    return userId != null && userId!.isNotEmpty;
+  }
+  
+  /// Validates that imagePath is available and file exists
+  Future<bool> _isValidImagePath() async {
+    if (imagePath == null || imagePath!.isEmpty) {
+      return false;
+    }
+    
+    try {
+      final file = File(imagePath!);
+      return await file.exists();
+    } catch (e) {
+      debugPrint('❌ Error checking image file: $e');
+      return false;
+    }
+  }
+  
+  /// Validates socket connection is active
+  bool _isSocketConnected() {
+    return socket.connected;
+  }
+
+  // ============================================================================
   // Lifecycle Methods
   // ============================================================================
   
@@ -317,9 +346,17 @@ class HomeController extends GetxController {
   /// Shows loading indicator while waiting for response.
   void startChat() {
     // Validate userId before proceeding
-    if (userId == null || userId!.isEmpty) {
+    if (!_isValidUserId()) {
       debugPrint('⚠️ Cannot start chat: userId is null or empty');
       utils.showToast(message: 'User ID not found. Please log in again.');
+      return;
+    }
+    
+    // Validate socket connection
+    if (!_isSocketConnected()) {
+      debugPrint('⚠️ Cannot start chat: socket is not connected');
+      utils.showToast(message: 'Connection lost. Please try again.');
+      _attemptSocketReconnect();
       return;
     }
 
@@ -334,15 +371,8 @@ class HomeController extends GetxController {
 
   uploadImage() async {
     // Validate image path before proceeding
-    if (imagePath == null || imagePath!.isEmpty) {
-      utils.showToast(message: 'Please select an image first');
-      return;
-    }
-
-    // Check if file exists
-    final file = File(imagePath!);
-    if (!await file.exists()) {
-      utils.showToast(message: 'Selected image file not found');
+    if (!await _isValidImagePath()) {
+      utils.showToast(message: 'Please select a valid image first');
       return;
     }
 
