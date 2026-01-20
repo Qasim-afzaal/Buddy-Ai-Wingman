@@ -8,6 +8,8 @@ import 'package:buddy/pages/start_sparkd/start_sparkd.dart';
 import 'package:buddy/widgets/custom_navbar.dart';
 import 'package:buddy/widgets/lazy_stackindex.dart';
 
+/// Main dashboard page that contains the bottom navigation bar and manages
+/// navigation between different app sections: Home, Inbox, Start Sparkd, and Sparkd Lines.
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
