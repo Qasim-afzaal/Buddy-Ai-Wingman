@@ -33,8 +33,9 @@ void main() async {
   // Load environment variables from .env file
   try {
     await AppConfig.load();
-  } catch (e) {
+  } catch (e, stackTrace) {
     debugPrint("❌ Error loading AppConfig: $e");
+    debugPrint("Stack trace: $stackTrace");
     // Continue execution but app might not work properly without config
   }
 
@@ -52,8 +53,9 @@ void main() async {
         ..appUserID = null // RevenueCat will generate an anonymous ID
     );
     debugPrint("✅ RevenueCat initialized successfully with key: ${Platform.isIOS ? 'iOS' : 'Android'}");
-  } catch (e) {
+  } catch (e, stackTrace) {
     debugPrint("❌ Error initializing RevenueCat: $e");
+    debugPrint("Stack trace: $stackTrace");
   }
 
   // Initialize Notification Service (both push and local notifications)
@@ -62,8 +64,9 @@ void main() async {
       iosOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
       androidOneSignalAppId: '0f62dbc7-12e5-4c48-9a7f-a66410067968', // OneSignal App ID
     );
-  } catch (e) {
+  } catch (e, stackTrace) {
     debugPrint("❌ Error initializing NotificationService: $e");
+    debugPrint("Stack trace: $stackTrace");
     // Continue execution as notifications are not critical for app startup
   }
 
