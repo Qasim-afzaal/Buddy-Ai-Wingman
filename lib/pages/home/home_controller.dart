@@ -495,11 +495,34 @@ class HomeController extends GetxController {
     Get.toNamed(Routes.GATHER_NEW_CHAT_INFO, arguments: arguments);
   }
 
+  /// Resets the controller state
+  /// 
+  /// Useful for cleanup or when user logs out
+  void resetState() {
+    isLoading.value = false;
+    messages = null;
+    imageAnalyzerModel = null;
+    imagePath = null;
+    _socketReconnectAttempts = 0;
+    debugPrint('🔄 HomeController state reset');
+  }
+
   @override
   void onClose() {
-    socket.disconnect();
-    socket.dispose();
-    debugPrint('🔌 Socket disconnected in onClose');
+    // Clean up socket connection
+    try {
+      if (socket.connected) {
+        socket.disconnect();
+      }
+      socket.dispose();
+      debugPrint('🔌 Socket disconnected and disposed in onClose');
+    } catch (e) {
+      debugPrint('⚠️ Error during socket cleanup: $e');
+    }
+    
+    // Reset state
+    resetState();
+    
     super.onClose();
   }
 }
