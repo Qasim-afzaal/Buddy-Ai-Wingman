@@ -9,7 +9,7 @@ import 'package:buddy/pages/home/home_controller.dart';
 import 'package:buddy/routes/app_pages.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   final HomeController controller = Get.put(HomeController());
   @override
