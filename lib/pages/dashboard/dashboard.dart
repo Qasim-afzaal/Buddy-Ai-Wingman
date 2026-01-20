@@ -18,11 +18,11 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int currentTab = 0;
+  int _currentTabIndex = 0;
 
-  void changeNavIndex(int index) {
+  void _onTabChanged(int index) {
     setState(() {
-      currentTab = index;
+      _currentTabIndex = index;
     });
   }
 
@@ -30,8 +30,8 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LazyIndexedStack(
-        index: currentTab,
-        children: [
+        index: _currentTabIndex,
+        children: const [
           HomePage(),
           InboxPage(),
           StartSparkdPage(),
@@ -39,8 +39,8 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
-        selectedIndex: currentTab,
-        onTabTapped: changeNavIndex,
+        selectedIndex: _currentTabIndex,
+        onTabTapped: _onTabChanged,
       ),
     );
   }
