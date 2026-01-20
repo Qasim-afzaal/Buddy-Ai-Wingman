@@ -18,17 +18,16 @@ import 'package:buddy/routes/app_pages.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  final HomeController controller = Get.put(HomeController());
-  
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
+    
     return Scaffold(
       appBar: const SparkdAppBarBeforePayment(),
       body: SafeArea(
         child: Stack(
           children: [
             GetBuilder<HomeController>(
-              init: HomeController(),
               builder: (controller) {
                 return Column(
                   children: [
