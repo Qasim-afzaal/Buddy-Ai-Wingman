@@ -146,6 +146,15 @@ class HomeController extends GetxController {
     debugPrint('========================================');
   }
 
+  /// Initializes the WebSocket connection to the server
+  /// 
+  /// Sets up socket event listeners for:
+  /// - Connection status
+  /// - Receiving opening lines (pickup lines)
+  /// - Error handling
+  /// - Disconnection handling
+  /// 
+  /// The socket uses WebSocket transport and connects automatically after initialization.
   void initSocket() {
     socket = io.io(
       this.socketBaseUrl,
