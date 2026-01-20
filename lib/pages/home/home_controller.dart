@@ -43,6 +43,11 @@ class HomeController extends GetxController {
   // Data models
   List<MessageModelPickup>? messages;
   ImageAnalyzerModel? imageAnalyzerModel;
+  
+  // ============================================================================
+  // Lifecycle Methods
+  // ============================================================================
+  
   @override
   void onInit() {
     super.onInit();
@@ -61,6 +66,10 @@ class HomeController extends GetxController {
       updateDeviceToken();
     });
   }
+
+  // ============================================================================
+  // Device Token Management
+  // ============================================================================
 
   /// Update device token (OneSignal Player ID) to backend
   Future<void> updateDeviceToken() async {
@@ -297,6 +306,10 @@ class HomeController extends GetxController {
       }
     });
   }
+
+  // ============================================================================
+  // Chat Methods
+  // ============================================================================
 
   /// Starts a chat session by requesting opening lines from the server
   /// 
