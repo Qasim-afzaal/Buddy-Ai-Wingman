@@ -7,6 +7,8 @@
 
 **Transform your dating game with AI-generated charm & scientifically-backed matchmaking** ✨
 
+A modern Flutter application that leverages AI to help users create engaging conversations and meaningful connections through intelligent pickup lines, conversation analysis, and personalized coaching.
+
 ---
 
 ## 🚀 Key Features
