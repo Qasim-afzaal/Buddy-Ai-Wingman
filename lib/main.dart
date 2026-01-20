@@ -162,6 +162,14 @@ PaymentPlanController getPaymentPlanController() {
 //   }
 // }
 
+/// Main application widget that sets up the app's theme, routing, and state management.
+/// 
+/// This widget initializes:
+/// - Material app with custom theme
+/// - GetX routing system
+/// - Authentication BLoC provider
+/// - EasyLoading for loading indicators
+/// - Sizer for responsive design
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
