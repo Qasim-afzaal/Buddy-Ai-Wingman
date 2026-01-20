@@ -289,16 +289,48 @@ class HomeController extends GetxController {
     });
 
     socket.onError((error) {
-      debugPrint('❌ Socket error: $error');
+      final errorMessage = error is String 
+          ? error 
+          : error.toString();
+      
+      debugPrint('❌ Socket connection error: $errorMessage');
+      debugPrint('📍 Attempting to recover connection...');
+      
       isLoading.value = false;
+      
+      // Show user-friendly error message
+      if (Get.context != null) {
+        Get.snackbar(
+          'Connection Error',
+          'Lost connection to server. Attempting to reconnect...',
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 3),
+        );
+      }
       
       // Attempt to reconnect on error
       _attemptSocketReconnect();
     });
 
-    socket.onDisconnect((_) {
-      debugPrint('⚠️ Socket disconnected');
+    socket.onDisconnect((reason) {
+      final disconnectReason = reason is String 
+          ? reason 
+          : reason?.toString() ?? 'Unknown reason';
+      
+      debugPrint('⚠️ Socket disconnected: $disconnectReason');
       isLoading.value = false;
+      
+      // Show user-friendly message for unexpected disconnects
+      if (disconnectReason != 'io client disconnect') {
+        if (Get.context != null) {
+          Get.snackbar(
+            'Connection Lost',
+            'Reconnecting to server...',
+            snackPosition: SnackPosition.BOTTOM,
+            duration: const Duration(seconds: 2),
+          );
+        }
+      }
       
       // Attempt to reconnect on disconnect
       _attemptSocketReconnect();
