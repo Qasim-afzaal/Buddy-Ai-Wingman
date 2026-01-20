@@ -152,6 +152,27 @@ class HomeController extends GetxController {
     debugPrint('========================================');
   }
 
+  /// Navigates to pickup lines page with the provided messages
+  /// 
+  /// Validates that messages are not empty and have a valid conversationId
+  void _navigateToPickupLines(List<MessageModelPickup> messagesList) {
+    if (messagesList.isEmpty) {
+      debugPrint('⚠️ Cannot navigate: messages list is empty');
+      return;
+    }
+    
+    final conversationId = messagesList[0].conversationId;
+    if (conversationId == null) {
+      debugPrint('⚠️ Cannot navigate: conversationId is null');
+      return;
+    }
+    
+    Get.toNamed(Routes.PICKUP_LINES, arguments: {
+      HttpUtil.message: messagesList,
+      HttpUtil.conversationId: conversationId,
+    });
+  }
+
   /// Initializes the WebSocket connection to the server
   /// 
   /// Sets up socket event listeners for:
@@ -200,14 +221,7 @@ class HomeController extends GetxController {
             debugPrint("✅ Received ${messages!.length} messages");
 
             // Navigate and pass parsed list
-            if (messages!.isNotEmpty && messages![0].conversationId != null) {
-              Get.toNamed(Routes.PICKUP_LINES, arguments: {
-                HttpUtil.message: messages,
-                HttpUtil.conversationId: messages![0].conversationId!
-              });
-            } else {
-              debugPrint('⚠️ Messages list is empty or missing conversationId');
-            }
+            _navigateToPickupLines(messages!);
           } else {
             debugPrint('⚠️ No valid messages found in received data');
           }
@@ -217,14 +231,7 @@ class HomeController extends GetxController {
             final message = MessageModelPickup.fromMap(data);
             debugPrint("✅ Received single message: ${message.content}");
 
-            if (message.conversationId != null) {
-              Get.toNamed(Routes.PICKUP_LINES, arguments: {
-                HttpUtil.message: [message],
-                HttpUtil.conversationId: message.conversationId!
-              });
-            } else {
-              debugPrint('⚠️ Message missing conversationId');
-            }
+            _navigateToPickupLines([message]);
           } catch (e) {
             debugPrint('❌ Error parsing single message: $e');
           }
