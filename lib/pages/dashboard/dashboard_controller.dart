@@ -5,7 +5,7 @@ class DashBoardController extends GetxController {
 
   int get currentIndex => _currentIndex;
 
-  void changeNaveIndex(int? index) {
+  void changeNavIndex(int? index) {
     if (index != null) {
       _currentIndex = index;
       update();
