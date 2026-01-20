@@ -119,8 +119,9 @@ Future<void> _getPlayerIdAsync() async {
       debugPrint('💡 Make sure notification permissions are granted in device settings.');
       debugPrint('💡 Check console for "OneSignal Player ID updated" message.');
     }
-  } catch (e) {
-    debugPrint('Error getting Player ID: $e');
+  } catch (e, stackTrace) {
+    debugPrint('❌ Error getting Player ID: $e');
+    debugPrint('Stack trace: $stackTrace');
   }
 }
 
