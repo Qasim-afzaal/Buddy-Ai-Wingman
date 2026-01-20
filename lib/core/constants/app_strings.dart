@@ -50,8 +50,8 @@ class AppStrings {
   static const String enterYourNewPin = "Enter your new pin";
   static const String logout = "Log out";
   static const String logoutDescription = "Are you sure do you want to log out?";
-  static const String deletetDescription = "Are you sure you want to permanently delete your account? This action cannot be undone, and all your data will be erased. Please note, any active subscriptions will remain in effect. Make sure to cancel them in your account settings to avoid future charges.";
-  static const String deletetaccont = "Are you sure you want to delete your account?";
+  static const String deleteDescription = "Are you sure you want to permanently delete your account? This action cannot be undone, and all your data will be erased. Please note, any active subscriptions will remain in effect. Make sure to cancel them in your account settings to avoid future charges.";
+  static const String deleteAccount = "Are you sure you want to delete your account?";
 
   static const String usePin = "Use PIN";
   static const String touchTheFingerPrint = "Touch the fingerprint sensor";
