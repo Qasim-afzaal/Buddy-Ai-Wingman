@@ -22,10 +22,16 @@ class HomeController extends GetxController {
   // Use centralized constants from Constants class
   String get socketBaseUrl => Constants.socketBaseUrl;
   String get uploadFileEndpoint => "${Constants.baseUrl}${Constants.uploadFile}";
-  var isLoading = false.obs;
+  
+  // Observable state variables
+  final RxBool isLoading = false.obs;
+  
+  // Socket connection
   late io.Socket socket;
+  
+  // Data models
   List<MessageModelPickup>? messages;
-  ImageAnalyzerModel? model;
+  ImageAnalyzerModel? imageAnalyzerModel;
   @override
   void onInit() {
     super.onInit();
@@ -253,16 +259,16 @@ class HomeController extends GetxController {
         return;
       }
 
-      model = ImageAnalyzerModel.fromJson(data);
-      if (model!.success && model!.data.isNotEmpty) {
+      imageAnalyzerModel = ImageAnalyzerModel.fromJson(data);
+      if (imageAnalyzerModel!.success && imageAnalyzerModel!.data.isNotEmpty) {
         update();
 
         Get.toNamed(Routes.IMAGE_CHAT, arguments: {
-          HttpUtil.imageAnalyzer: model,
-          HttpUtil.conversationId: model!.data[0].conversationId
+          HttpUtil.imageAnalyzer: imageAnalyzerModel,
+          HttpUtil.conversationId: imageAnalyzerModel!.data[0].conversationId
         });
       } else {
-        final errorMsg = model?.message ?? 'Upload failed. Please try again.';
+        final errorMsg = imageAnalyzerModel?.message ?? 'Upload failed. Please try again.';
         debugPrint('❌ Image upload failed: $errorMsg');
         utils.showToast(message: errorMsg);
       }
