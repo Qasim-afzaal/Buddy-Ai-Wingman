@@ -8,10 +8,18 @@ import 'package:buddy/core/constants/imports.dart';
 import 'package:buddy/pages/home/home_controller.dart';
 import 'package:buddy/routes/app_pages.dart';
 
+/// Home page widget that displays the main screen for uploading screenshots
+/// and accessing chat features.
+/// 
+/// Features:
+/// - Upload screenshot of chat or bio
+/// - Manual chat entry
+/// - Get pickup lines
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   final HomeController controller = Get.put(HomeController());
+  
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
