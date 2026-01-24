@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 
 /// Application color constants
+/// 
+/// This class contains all color constants used throughout the application.
+/// All colors are defined as static const for better performance and consistency.
 class AppColors {
+  /// Primary brand color - Black
   static const Color primary = Color(0xff000000);
+  
+  /// Blue accent color
   static const Color blue = Color(0xFF1787E7);
+  
+  /// Light yellow accent color
   static const Color yellowLight = Color(0xFFF6CE42);
 
+  /// Grey color for text
   static const Color textGrey = Color(0xFF434343);
 
+  /// White color
   static const Color white = Color(0xFFffffff);
+  
+  /// Black color
   static const Color black = Color(0xFF000000);
+  
+  /// Red color for errors/warnings
   static const Color red = Color(0xFFFF0000);
-  static const Color gry = Color(0xFF8C93A3);
+  
+  /// Grey color for UI elements (fixed typo from 'gry')
+  static const Color grey = Color(0xFF8C93A3);
   static const Color lightBlack = Color(0xff161616);
   static const Color aqua = Color(0xff26DBDC);
   static const Color deepSkyBlue = Color(0xff1787E7);
@@ -34,7 +50,8 @@ class AppColors {
   static const Color indicatorColor = Color(0xffFDF9F2);
   static const Color indicatorForegroundColor = masterGradiantOne;
 
-    static const secondaryColor = Color(0xffCDFF49);
+  /// Secondary accent color - Lime green
+  static const Color secondaryColor = Color(0xffCDFF49);
 
   // static  Color secondaryColor = Colors.yellow.shade300;
   static const blackColor = Color(0xff000000);
