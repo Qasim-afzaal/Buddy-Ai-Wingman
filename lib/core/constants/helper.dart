@@ -111,7 +111,11 @@ class Utils {
     } catch (e) {
       debugPrint('Error picking image: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error selecting image: ${e.toString()}')),
+        SnackBar(
+          content: Text('Unable to select image. Please try again.'),
+          backgroundColor: AppColors.errorColor,
+          duration: const Duration(seconds: 3),
+        ),
       );
     }
   }
@@ -375,7 +379,7 @@ class Utils {
         }
       }
     } catch (err) {
-      printError("Cannot get download folder path");
+      printError("Cannot get download folder path: $err");
     }
     return directory?.path;
   }
@@ -454,8 +458,8 @@ class Utils {
         return '$sizeInBytes bytes';
       }
     } catch (e) {
-      print('Error getting file size: $e');
-      return 'Error'; // Return 'Error' to indicate an error
+      debugPrint('Error getting file size: $e');
+      return 'Unknown size'; // Return user-friendly message instead of 'Error'
     }
   }
 
