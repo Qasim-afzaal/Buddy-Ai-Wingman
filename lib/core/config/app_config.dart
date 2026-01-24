@@ -4,9 +4,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 /// All sensitive keys and API endpoints are loaded from .env file
 class AppConfig {
   // RevenueCat API Keys
+  
+  /// Gets the RevenueCat API key for Apple/iOS platform
+  /// Returns empty string if not found in environment variables
   static String get revenueCatAppleApiKey =>
       dotenv.env['REVENUECAT_APPLE_API_KEY'] ?? '';
 
+  /// Gets the RevenueCat API key for Google/Android platform
+  /// Returns empty string if not found in environment variables
   static String get revenueCatGoogleApiKey =>
       dotenv.env['REVENUECAT_GOOGLE_API_KEY'] ?? '';
 
@@ -51,11 +56,21 @@ class AppConfig {
 
   /// Initialize the environment variables
   /// Call this in main() before runApp()
+  /// 
+  /// Throws an exception if .env file is not found or cannot be loaded
   static Future<void> load() async {
     await dotenv.load(fileName: '.env');
   }
   
   /// Check if environment variables are loaded
+  /// Returns true if dotenv has been initialized, false otherwise
   static bool get isLoaded => dotenv.isInitialized;
+  
+  /// Validates that required API keys are not empty
+  /// Returns true if all required keys are present, false otherwise
+  static bool validateApiKeys() {
+    return revenueCatAppleApiKey.isNotEmpty && 
+           revenueCatGoogleApiKey.isNotEmpty;
+  }
 }
 
