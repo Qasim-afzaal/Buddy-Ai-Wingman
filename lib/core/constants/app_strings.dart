@@ -106,8 +106,8 @@ class AppStrings {
   static const String welcome = 'Welcome';
   static const String pay = 'Pay';
   static const String subscriptionWillRenewAnd = 'subscriptions will renew unless cancelled\nin your Google Play Settings';
-    static const String subscriptionWillRenewIOS = 'subscriptions will renew unless cancelled\nin your App Store Settings';
-  static const String freeTrial = 'Enjoy a 7-day Free Trial, then \njust \$19.99/month afterward!';
+  static const String subscriptionWillRenewIOS = 'subscriptions will renew unless cancelled\nin your App Store Settings';
+  static const String freeTrial = 'Enjoy a 7-day Free Trial, then\njust \$19.99/month afterward!';
   static const String unlockFreeTrial = 'Unlock Free Trial';
   static const String flameOn = 'Flame On, Game Strong';
   static const String unlimitedSparks = 'Unlimited\nsparks';
