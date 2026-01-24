@@ -33,6 +33,13 @@ void main() async {
   // Load environment variables from .env file
   try {
     await AppConfig.load();
+    if (!AppConfig.isLoaded) {
+      debugPrint("⚠️ Warning: AppConfig loaded but not initialized");
+    }
+    // Validate API keys after loading
+    if (!AppConfig.validateApiKeys()) {
+      debugPrint("⚠️ Warning: Some required API keys are missing");
+    }
   } catch (e, stackTrace) {
     debugPrint("❌ Error loading AppConfig: $e");
     debugPrint("Stack trace: $stackTrace");
