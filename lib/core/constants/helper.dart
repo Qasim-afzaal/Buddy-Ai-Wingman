@@ -69,6 +69,7 @@ class Utils {
   );
 
   /// <<< To get device type --------- >>>
+  /// Returns true if Android, false if iOS
   bool getDeviceType() {
     if (Platform.isAndroid) {
       return true;
@@ -475,7 +476,9 @@ class Utils {
   //   return info;
   // }
 
-  flutterDatePicker(
+  /// Shows a date picker dialog
+  /// Returns formatted date string or null if cancelled
+  Future<String?> flutterDatePicker(
       {String? dateFormat,
       DateTime? initialTime,
       DateTime? firstDate,
@@ -731,7 +734,9 @@ class Utils {
     return dateFormat.format(dateTime);
   }
 
-  flutterTimePicker({TimeOfDay? initialTime}) async {
+  /// Shows a time picker dialog
+  /// Returns formatted time string or null if cancelled
+  Future<String?> flutterTimePicker({TimeOfDay? initialTime}) async {
     TimeOfDay? pickedTime = await showTimePicker(
       initialTime: initialTime ?? TimeOfDay.now(),
       confirmText: (languageCodeDefault == "en") ? "OK" : "POTVRDI",
@@ -911,7 +916,8 @@ class Utils {
   }
 
   /// <<< To transfer time to milliSeconds --------- >>>
-  static transformMilliSeconds(int milliseconds) {
+  /// Converts milliseconds to formatted time string (HH:MM:SS or MM:SS)
+  static String transformMilliSeconds(int milliseconds) {
     int hundreds = (milliseconds / 10).truncate();
     int seconds = (hundreds / 100).truncate();
     int minutes = (seconds / 60).truncate();
