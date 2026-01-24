@@ -23,9 +23,22 @@ import 'package:buddy/core/constants/imports.dart';
 /// Utility class for common helper functions
 
 class Utils {
+  // Language constants
   static const String languageCodeEn = 'en';
   static const String languageCodeSr = 'sr';
   static String languageCodeDefault = languageCodeEn;
+  
+  // Image quality constants
+  static const int defaultImageQuality = 85;
+  
+  // Time constants for date calculations
+  static const int secondsInMilli = 1000;
+  static const int minutesInMilli = secondsInMilli * 60;
+  static const int hoursInMilli = minutesInMilli * 60;
+  static const int daysInMilli = hoursInMilli * 24;
+  
+  // Age validation constants
+  static const int minimumAge = 18;
 
   /// <<< To create dark status bar --------- >>>
   static void darkStatusBar() {
@@ -85,7 +98,7 @@ class Utils {
       // Directly open gallery - automatically selects when clicked (no checkmark needed)
       final XFile? image = await picker.pickImage(
         source: ImageSource.gallery,
-        imageQuality: 85, // Reduce quality slightly for better performance
+        imageQuality: defaultImageQuality, // Reduce quality slightly for better performance
       );
 
       if (image != null) {
@@ -612,24 +625,19 @@ class Utils {
 
     Duration difference = startDate.difference(endDate);
 
-    final int secondsInMilli = 1000;
-    final int minutesInMilli = secondsInMilli * 60;
-    final int hoursInMilli = minutesInMilli * 60;
-    final int daysInMilli = hoursInMilli * 24;
-
-    final int elapsedDays = difference.inMilliseconds ~/ daysInMilli;
+    final int elapsedDays = difference.inMilliseconds ~/ Utils.daysInMilli;
     difference =
-        Duration(milliseconds: difference.inMilliseconds % daysInMilli);
+        Duration(milliseconds: difference.inMilliseconds % Utils.daysInMilli);
 
-    final int elapsedHours = difference.inMilliseconds ~/ hoursInMilli;
+    final int elapsedHours = difference.inMilliseconds ~/ Utils.hoursInMilli;
     difference =
-        Duration(milliseconds: difference.inMilliseconds % hoursInMilli);
+        Duration(milliseconds: difference.inMilliseconds % Utils.hoursInMilli);
 
-    final int elapsedMinutes = difference.inMilliseconds ~/ minutesInMilli;
+    final int elapsedMinutes = difference.inMilliseconds ~/ Utils.minutesInMilli;
     difference =
-        Duration(milliseconds: difference.inMilliseconds % minutesInMilli);
+        Duration(milliseconds: difference.inMilliseconds % Utils.minutesInMilli);
 
-    final int elapsedSeconds = difference.inMilliseconds ~/ secondsInMilli;
+    final int elapsedSeconds = difference.inMilliseconds ~/ Utils.secondsInMilli;
 
     if (elapsedDays > 0 && elapsedDays < 7) {
       if (elapsedDays > 1) {
