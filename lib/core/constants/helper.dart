@@ -275,12 +275,21 @@ class Utils {
     }
   }*/
 
-  void urlLaunch(Uri url) async {
+  /// Launches a URL in an external application
+  /// 
+  /// [url] - The URI to launch
+  /// Throws an exception if the URL cannot be launched
+  Future<void> urlLaunch(Uri url) async {
     printAction("urlLaunchurlLaunch");
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Could not launch $url';
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      debugPrint('Error launching URL: $e');
+      rethrow;
     }
   }
 
