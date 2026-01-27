@@ -29,6 +29,7 @@ class Utils {
   static String languageCodeDefault = languageCodeEn;
   
   // Image quality constants
+  // Default quality for image compression (0-100, where 100 is highest quality)
   static const int defaultImageQuality = 85;
   
   // Time constants for date calculations
