@@ -150,6 +150,7 @@ class AppStrings {
   static const String allSetDescription = "Save this person’s name to keep\ntrack of all your conversations";
   static const String allSet = "You’re all set!";
   static const String listening = "Listening";
+  static const String retry = "Retry";
 
   ///Common String
   static const String errorFirstName = "Please enter first name";
