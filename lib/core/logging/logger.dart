@@ -15,5 +15,9 @@ class CustomLogger extends LogPrinter {
   }
 }
 
+/// Creates a logger instance with custom formatting
+/// 
+/// [className] - The name of the class using the logger for better context
+/// Returns a configured Logger instance
 Logger getLogger(String className) =>
     Logger(printer: CustomLogger(className: className));
