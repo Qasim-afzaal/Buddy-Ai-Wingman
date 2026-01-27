@@ -5,7 +5,7 @@ class AppStrings {
   static const String accountInformation = "Account Information";
   static const String add = "Add";
   static const String addUser = "Add user";
-  static const String appName = "SparkD";
+  static const String appName = "Buddy AI Wingman";
   static const String alreadyHaveAccount = "Are you already a member? ";
 
   static const String back = "Back";
