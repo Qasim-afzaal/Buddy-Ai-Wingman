@@ -381,6 +381,8 @@ class Utils {
       }
     } catch (err) {
       printError("Cannot get download folder path: $err");
+      // Return null on error to allow caller to handle gracefully
+      return null;
     }
     return directory?.path;
   }
