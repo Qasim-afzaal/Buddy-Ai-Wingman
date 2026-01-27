@@ -865,6 +865,17 @@ class Utils {
     return false;
   }
 
+  /// Validates if a string is a valid URL
+  /// Returns true if the string is a valid URL format
+  bool urlValidator(String url) {
+    try {
+      final uri = Uri.parse(url);
+      return uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https');
+    } catch (e) {
+      return false;
+    }
+  }
+
   /// <<< To check data, string, list, object are empty or not --------- >>>
   bool isValidationEmpty(String? val) {
     if (val == null ||
