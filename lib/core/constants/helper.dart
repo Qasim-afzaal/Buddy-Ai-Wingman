@@ -71,11 +71,7 @@ class Utils {
   /// <<< To get device type --------- >>>
   /// Returns true if Android, false if iOS
   bool getDeviceType() {
-    if (Platform.isAndroid) {
-      return true;
-    } else {
-      return false;
-    }
+    return Platform.isAndroid;
   }
 
 // Function to request permissions
