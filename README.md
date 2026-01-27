@@ -122,4 +122,8 @@ class RizzSuggestions extends StatelessWidget {
 
 **Lead Developer: Muhammad Qasim**  
 [![Email](https://img.shields.io/badge/-qasim.afzaal432%40gmail.com-EA4335?logo=gmail)](mailto:qasim.afzaal432@gmail.com)  
-[![GitHub](https://img.shields.io/badge/-Qasim--afzaal-181717?logo=github)](https://github.com/Qasim-afzaal)  
+[![GitHub](https://img.shields.io/badge/-Qasim--afzaal-181717?logo=github)](https://github.com/Qasim-afzaal)
+
+---
+
+**Note:** This project is actively maintained and regularly updated with new features and improvements.  
