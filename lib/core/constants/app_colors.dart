@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 /// All colors are defined as static const for better performance and consistency.
 class AppColors {
   /// Primary brand color - Black
+  /// Used for main UI elements and branding throughout the app
   static const Color primary = Color(0xff000000);
   
   /// Blue accent color
