@@ -64,5 +64,8 @@ class AppColors {
   static const errorColor = Color(0xffE33629);
   static const turquoiseColor = Color(0xffE6DFF1);
   static const grayColor = Color(0xff484848);
+  
+  /// Light gray color for subtle backgrounds
+  static const Color lightGray = Color(0xffF5F5F5);
 }
 
