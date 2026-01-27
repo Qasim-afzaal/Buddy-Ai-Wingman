@@ -68,5 +68,8 @@ class AppColors {
   
   /// Light gray color for subtle backgrounds
   static const Color lightGray = Color(0xffF5F5F5);
+  
+  /// Dark gray color for text and UI elements
+  static const Color darkGray = Color(0xff333333);
 }
 
