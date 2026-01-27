@@ -51,7 +51,7 @@ class Constants {
   static const String deleteSingle = 'chat/single/';
   static const String clearAll = 'chat/clear-all';
   static const String deleteUser = 'users/';
-  
+
   /// Default timeout duration for API requests (in seconds)
   static const int defaultTimeoutSeconds = 30;
 }
