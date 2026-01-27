@@ -1036,6 +1036,15 @@ class Utils {
   //   return '';
   // }
 
+  /// Formats a number with thousand separators
+  /// Returns formatted string (e.g., 1000 -> "1,000")
+  String formatNumberWithCommas(int number) {
+    return number.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]},',
+    );
+  }
+
   /// <<< To get Day Of Month Suffix --------- >>>
   String getDayOfMonthSuffix(int dayNum) {
     if (!(dayNum >= 1 && dayNum <= 31)) {
