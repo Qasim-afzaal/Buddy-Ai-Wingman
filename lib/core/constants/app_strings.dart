@@ -193,5 +193,6 @@ class AppStrings {
   static const String pleaseSelectTermsAndCondition = "Please select terms and condition";
   static const String pleaseEnterAccountNumber = "Please enter account number";
   static const String pleaseEnterValidAccountNumber = "Please enter valid account number";
+  static const String loading = "Loading...";
 }
 
