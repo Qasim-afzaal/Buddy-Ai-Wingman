@@ -878,6 +878,10 @@ class Utils {
     }
   }
 
+  /// Checks if a string value is empty or null
+  /// Returns true if the value is null, empty, or equals "null"/"NULL"
+  /// 
+  /// [val] - The string value to validate
   /// <<< To check data, string, list, object are empty or not --------- >>>
   bool isValidationEmpty(String? val) {
     if (val == null ||
