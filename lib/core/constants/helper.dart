@@ -966,6 +966,13 @@ class Utils {
     return formattedDate;
   }
 
+  /// Capitalizes the first letter of a string
+  /// Returns the string with first letter capitalized
+  String capitalizeFirst(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1).toLowerCase();
+  }
+
   List<String> fillSlots() {
     List<String> list = [];
     for (int i = 1; i <= 100; i++) {
