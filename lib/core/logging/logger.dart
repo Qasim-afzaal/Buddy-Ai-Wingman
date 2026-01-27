@@ -1,5 +1,7 @@
 import 'package:logger/logger.dart';
 
+/// Custom logger implementation for the application
+/// Provides contextual logging with class names for better debugging
 class CustomLogger extends LogPrinter {
   final String className;
 
