@@ -975,6 +975,13 @@ class Utils {
     return text[0].toUpperCase() + text.substring(1).toLowerCase();
   }
 
+  /// Truncates a string to a specified length with ellipsis
+  /// Returns the truncated string with "..." if longer than maxLength
+  String truncateString(String text, int maxLength) {
+    if (text.length <= maxLength) return text;
+    return '${text.substring(0, maxLength)}...';
+  }
+
   List<String> fillSlots() {
     List<String> list = [];
     for (int i = 1; i <= 100; i++) {
